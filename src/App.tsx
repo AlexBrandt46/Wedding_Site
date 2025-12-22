@@ -1,5 +1,5 @@
 import './App.css'
-import { AppBar, Box, Button, IconButton, Menu, MenuItem, Toolbar, Typography } from '@mui/material'
+import { AppBar, Box, Button, Toolbar } from '@mui/material'
 
 const pages = ['Main', 'Our Story', 'Event Info'];
 
