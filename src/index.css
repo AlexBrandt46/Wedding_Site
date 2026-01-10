@@ -5,7 +5,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: var(--yellow);
+  background-color: var(--gold);
   --text-color: #242424;
   --salmon: #CE8D93;
   --navy: #2E4670;
@@ -74,4 +74,8 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+body {
+  background-color: var(--gold);
 }

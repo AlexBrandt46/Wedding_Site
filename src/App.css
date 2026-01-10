@@ -3,7 +3,15 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-  --navy: #2E4670;
+  --navy: #2e4670;
+  background-color: var(--gold);
+  font-family: "Cangkem";
+}
+
+@font-face {
+  font-family: "Cangkem";
+  src: local("Cangkem-Regular"),
+    url("./assets/fonts/serif-keep/Cangkem-Regular.otf");
 }
 
 .logo {
