@@ -3,40 +3,63 @@ import { List, ListItem, Paper } from "@mui/material";
 export default function EventInfo() {
   return (
     <Paper sx={{ textAlign: "left", padding: "1rem" }}>
-      <b>Where:</b> 113 S Division St, Spring Lake, MI 49456
+      <p>
+        <b>Where:</b> 113 S Division St, Spring Lake, MI 49456
+      </p>
       <br />
-      <b>When:</b> TBD - Early Afternoon Start-Time
+      <p>
+        <b>When:</b> September 12th, TBD - Early Afternoon Start-Time
+      </p>
       <br />
-      <b>Dress Code:</b> Garden Party/Bridgerton (be fun/colorful/creative)
+      <p>
+        <b>Dress Code:</b> Garden Party/Bridgerton (be fun/colorful/creative)
+      </p>
       <br />
       <b>Schedule of Events:</b>
       <List>
         <ListItem>
-          <b>1 PM:</b> Pre-Ceremony Greeting Time
+          <p>
+            <b>1 PM: </b> Pre-Ceremony Greeting Time
+          </p>
         </ListItem>
         <ListItem>
-          <b>2 PM:</b> Ceremony
+          <p>
+            <b>2 PM: </b> Ceremony
+          </p>
         </ListItem>
         <ListItem>
-          <b>3 PM:</b> Cocktail Hour
+          <p>
+            <b>3 PM:</b> Cocktail Hour
+          </p>
         </ListItem>
         <ListItem>
-          <b>4 PM:</b> Reception
+          <p>
+            <b>4 PM: </b> Reception
+          </p>
         </ListItem>
         <ListItem>
-          <b>9 PM:</b> End of Reception
+          <p>
+            <b>9 PM: </b> End of Reception
+          </p>
         </ListItem>
         <ListItem>
-          <b>9:30 PM:</b> Bar-Hopping in Spring Lake and Grand Haven
+          <p>
+            <b>9:30 PM: </b> Bar-Hopping in Spring Lake and Grand Haven
+          </p>
         </ListItem>
       </List>
-      <b>Overnight Accomodations:</b> For those wishing to stay nearby, we have
-      reserved a block of rooms at the <code>HOTEL NAME HERE</code> under name:{" "}
-      <code>NAME</code>. The block is first come, first serve, but there are
-      several other hotels and numerous AirBnbs and VRBOs nearby.
+      <p>
+        <b>Overnight Accomodations:</b> For those wishing to stay nearby, we
+        have reserved a block of rooms at the <code>HOTEL NAME HERE</code> under
+        name: <code>NAME</code>. The block is first come, first serve, but there
+        are several other hotels and numerous AirBnbs and VRBOs nearby.
+      </p>
       <br />
-      <b>Age Limit:</b> The event is strictly <b>18+</b> by request of both the
-      venue and ourselves to keep the day stress-free and fun for everyone.
+      <p>
+        <b>Age Limit:</b> The event is strictly <b>18+</b> by request of both
+        the venue and ourselves to keep the day stress-free and fun for
+        everyone.
+      </p>
     </Paper>
   );
 }

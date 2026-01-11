@@ -51,15 +51,11 @@ function App() {
         </AppBar>
         <Box sx={{ width: "60vw" }}>
           <TabPanel value="1"></TabPanel>
-          <TabPanel value="2">
-            Item Two
-          </TabPanel>
+          <TabPanel value="2">Item Two</TabPanel>
           <TabPanel value="3">
             <EventInfo />
           </TabPanel>
-          <TabPanel value="4">
-            Item Three
-          </TabPanel>
+          <TabPanel value="4">Item Three</TabPanel>
         </Box>
       </TabContext>
     </>
