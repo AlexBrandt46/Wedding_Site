@@ -1,17 +1,15 @@
 import "./App.css";
-import { AppBar, Box, Button, Tab, Tabs, Toolbar } from "@mui/material";
+import { AppBar, Box, Tab, Toolbar } from "@mui/material";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import React from "react";
 import EventInfo from "./components/EventInfo";
 
-const pages = ["Main", "Our Story", "Event Info"];
-
 function App() {
   const [value, setValue] = React.useState("1");
 
-  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+  const handleChange = (_event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
 
