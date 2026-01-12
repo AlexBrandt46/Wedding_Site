@@ -1,7 +1,6 @@
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
   --navy: #2e4670;
   background-color: var(--gold);
@@ -53,4 +52,14 @@
 p {
   margin-top: 0;
   margin-bottom: 0;
+}
+
+.pagePanel {
+  width: 70vw;
+  max-width: 1280px;
+  padding: 0 24px;
+}
+
+.rsvp-input {
+  margin-top: 1vh !important;
 }

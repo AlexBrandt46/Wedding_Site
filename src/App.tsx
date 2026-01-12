@@ -5,6 +5,7 @@ import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import React from "react";
 import EventInfo from "./components/EventInfo";
+import RsvpForm from "./components/RsvpForm";
 
 function App() {
   const [value, setValue] = React.useState("1");
@@ -15,9 +16,38 @@ function App() {
 
   return (
     <>
-      <TabContext value={value}>
-        <AppBar>
-          <img id="usImage" height={"200"} />
+      <Box sx={{ width: "100%", top: 0 }}>
+        <TabContext value={value}>
+          <img id="usImage" style={{ height: "200px" }} />
+          <Box
+            sx={{
+              borderBottom: 1,
+              borderColor: "divider",
+              flexGrow: 1,
+              justifyContent: "center",
+              backgroundColor: "var(--blue)",
+              display: { xs: "none", md: "flex" },
+            }}
+          >
+            <TabList onChange={handleChange} aria-label="lab API tabs example">
+              <Tab label="Main" value="1" />
+              <Tab label="Our Story" value="2" />
+              <Tab label="Event Info" value="3" />
+              <Tab label="RSVP" value="4" />
+            </TabList>
+          </Box>
+          <TabPanel value="1" className="pagePanel" ></TabPanel>
+          <TabPanel value="2" className="pagePanel" >Item Two</TabPanel>
+          <TabPanel value="3" className="pagePanel" >
+            <EventInfo />
+          </TabPanel>
+          <TabPanel value="4" className="pagePanel" >
+            <RsvpForm />
+          </TabPanel>
+        </TabContext>
+      </Box>
+
+      {/* <AppBar>
           <Toolbar
             sx={{
               backgroundColor: "var(--blue)",
@@ -35,27 +65,12 @@ function App() {
                 display: { xs: "none", md: "flex" },
               }}
             >
-              <TabList
-                onChange={handleChange}
-                aria-label="lab API tabs example"
-              >
-                <Tab label="Main" value="1" />
-                <Tab label="Our Story" value="2" />
-                <Tab label="Event Info" value="3" />
-                <Tab label="RSVP" value="4" />
-              </TabList>
             </Box>
           </Toolbar>
         </AppBar>
         <Box sx={{ width: "60vw" }}>
-          <TabPanel value="1"></TabPanel>
-          <TabPanel value="2">Item Two</TabPanel>
-          <TabPanel value="3">
-            <EventInfo />
-          </TabPanel>
-          <TabPanel value="4">Item Three</TabPanel>
-        </Box>
-      </TabContext>
+          
+        </Box> */}
     </>
   );
 }
