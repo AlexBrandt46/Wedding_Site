@@ -4,13 +4,13 @@
   text-align: center;
   --navy: #2e4670;
   background-color: var(--gold);
-  font-family: "Cangkem";
+  font-family: "Butler";
 }
 
 @font-face {
-  font-family: "Cangkem";
-  src: local("Cangkem-Regular"),
-    url("./assets/fonts/serif-keep/Cangkem-Regular.otf");
+  font-family: "Butler";
+  src: local("Butler_Medium"),
+    url("./assets/fonts/serif-keep/Butler_Medium.otf");
 }
 
 .logo {
@@ -57,7 +57,7 @@ p {
 .pagePanel {
   width: 70vw;
   max-width: 1280px;
-  padding: 0 24px;
+  padding: 24px 0 !important;
 }
 
 .rsvp-input {
