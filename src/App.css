@@ -1,17 +1,16 @@
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
   --navy: #2e4670;
   background-color: var(--gold);
-  font-family: "Cangkem";
+  font-family: "Butler";
 }
 
 @font-face {
-  font-family: "Cangkem";
-  src: local("Cangkem-Regular"),
-    url("./assets/fonts/serif-keep/Cangkem-Regular.otf");
+  font-family: "Butler";
+  src: local("Butler_Medium"),
+    url("./assets/fonts/serif-keep/Butler_Medium.otf");
 }
 
 .logo {
@@ -48,4 +47,19 @@
 
 .read-the-docs {
   color: #888;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.pagePanel {
+  width: 70vw;
+  max-width: 1280px;
+  padding: 24px 0 !important;
+}
+
+.rsvp-input {
+  margin-top: 1vh !important;
 }
