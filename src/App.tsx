@@ -37,16 +37,17 @@ function App() {
               <Tab label="Event Info" value="3" />
               <Tab label="RSVP" value="4" />
             </TabList>
-          </Box><TabPanel value="1">
+          </Box>
+          <TabPanel value="1">
             <Main />
           </TabPanel>
           <TabPanel value="2">
             <OurStory />
           </TabPanel>
-          <TabPanel value="3" className="pagePanel" >
+          <TabPanel value="3" className="pagePanel">
             <EventInfo />
           </TabPanel>
-          <TabPanel value="4" className="pagePanel" >
+          <TabPanel value="4" className="pagePanel">
             <RsvpForm />
           </TabPanel>
         </TabContext>
