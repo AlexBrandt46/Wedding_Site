@@ -5,6 +5,8 @@ import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import React from "react";
 import EventInfo from "./components/EventInfo";
+import OurStory from "./components/OurStory";
+import Main from "./components/Main";
 
 const pages = ["Main", "Our Story", "Event Info"];
 
@@ -50,9 +52,11 @@ function App() {
           </Toolbar>
         </AppBar>
         <Box sx={{ width: "60vw" }}>
-          <TabPanel value="1"></TabPanel>
+          <TabPanel value="1">
+            <Main />
+          </TabPanel>
           <TabPanel value="2">
-            Item Two
+            <OurStory />
           </TabPanel>
           <TabPanel value="3">
             <EventInfo />
