@@ -11,7 +11,7 @@ export default function Main() {
     seconds: number;
   }
 
-  const [timeLeft, setTimeLeft] = useState({
+  const [timeLeft, _setTimeLeft] = useState({
     months: 0,
     weeks: 0,
     days: 0,
