@@ -21,7 +21,7 @@ export default function Main() {
   } as TimeLeft);
 
   return (
-    <Paper sx={{ padding: '1rem'}}>
+    <Paper sx={{ padding: "1rem" }}>
       <Stack direction="row">
         <Paper>
           <Paper>

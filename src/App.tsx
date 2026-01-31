@@ -1,5 +1,5 @@
 import "./App.css";
-import { Box, Tab } from "@mui/material";
+import { Box, createTheme, Tab } from "@mui/material";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
@@ -8,6 +8,7 @@ import EventInfo from "./components/EventInfo";
 import OurStory from "./components/OurStory";
 import Main from "./components/Main";
 import RsvpForm from "./components/RsvpForm";
+import { ThemeProvider } from "@mui/material/styles";
 
 function App() {
   const [value, setValue] = React.useState("1");
@@ -16,9 +17,35 @@ function App() {
     setValue(newValue);
   };
 
+  const theme = createTheme({
+    typography: {
+      fontFamily: "Butler",
+    },
+    components: {
+      MuiCssBaseline: {
+        styleOverrides: `
+          @font-face {
+            font-family: 'Butler';
+            font-style: bold;
+            font-display: swap;
+            font-weight: 400;
+            src: local("Butler-Bold"), url("./assets/fonts/serif/Butler-Bold.woff2") format();
+          }
+        `,
+      },
+    },
+  });
+
   return (
-    <>
-      <Box sx={{ width: "50vw", top: 0, justifyContent: 'center', fontFamily: 'Butler !important' }}>
+    <ThemeProvider theme={theme}>
+      <Box
+        sx={{
+          width: "50vw",
+          top: 0,
+          justifyContent: "center",
+          fontFamily: "Butler !important",
+        }}
+      >
         <TabContext value={value}>
           <img id="usImage" style={{ height: "200px" }} />
           <Box
@@ -52,32 +79,7 @@ function App() {
           </TabPanel>
         </TabContext>
       </Box>
-
-      {/* <AppBar>
-          <Toolbar
-            sx={{
-              backgroundColor: "var(--blue)",
-              padding: 0,
-              flexDirection: "column",
-            }}
-          >
-            <Box
-              sx={{
-                borderBottom: 1,
-                borderColor: "divider",
-                flexGrow: 1,
-                justifyContent: "center",
-                backgroundColor: "var(--blue)",
-                display: { xs: "none", md: "flex" },
-              }}
-            >
-            </Box>
-          </Toolbar>
-        </AppBar>
-        <Box sx={{ width: "60vw" }}>
-          
-        </Box> */}
-    </>
+    </ThemeProvider>
   );
 }
 
