@@ -5,6 +5,8 @@ import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import React from "react";
 import EventInfo from "./components/EventInfo";
+import OurStory from "./components/OurStory";
+import Main from "./components/Main";
 import RsvpForm from "./components/RsvpForm";
 
 function App() {
@@ -36,12 +38,16 @@ function App() {
               <Tab label="RSVP" value="4" sx={{ fontFamily: "Butler" }} />
             </TabList>
           </Box>
-          <TabPanel value="1" className="pagePanel" ></TabPanel>
-          <TabPanel value="2" className="pagePanel" >Item Two</TabPanel>
-          <TabPanel value="3" className="pagePanel" >
+          <TabPanel value="1">
+            <Main />
+          </TabPanel>
+          <TabPanel value="2">
+            <OurStory />
+          </TabPanel>
+          <TabPanel value="3" className="pagePanel">
             <EventInfo />
           </TabPanel>
-          <TabPanel value="4" className="pagePanel" >
+          <TabPanel value="4" className="pagePanel">
             <RsvpForm />
           </TabPanel>
         </TabContext>
