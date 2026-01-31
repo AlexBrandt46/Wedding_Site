@@ -1,5 +1,5 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Butler' sans-serif !important;
   line-height: 1.5;
   font-weight: 400;
 
@@ -49,7 +49,7 @@ button {
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
-  font-family: inherit;
+  font-family: 'Butler';
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
@@ -77,4 +77,10 @@ button:focus-visible {
 
 body {
   background-color: var(--gold);
+}
+
+@font-face {
+  font-family: "Butler";
+  src:
+    local("Butler_Medium"), url("./assets/fonts/serif-keep/Butler_Medium.otf");
 }
