@@ -18,7 +18,7 @@ function App() {
 
   return (
     <>
-      <Box sx={{ width: "100%", top: 0 }}>
+      <Box sx={{ width: "50vw", top: 0, justifyContent: 'center', fontFamily: 'Butler !important' }}>
         <TabContext value={value}>
           <img id="usImage" style={{ height: "200px" }} />
           <Box
@@ -31,17 +31,17 @@ function App() {
               display: { xs: "none", md: "flex" },
             }}
           >
-            <TabList onChange={handleChange} aria-label="lab API tabs example" sx={{ display: 'flex', width: '100%'}}>
+            <TabList onChange={handleChange}>
               <Tab label="Main" value="1" sx={{ fontFamily: "Butler" }} />
               <Tab label="Our Story" value="2" sx={{ fontFamily: "Butler" }} />
               <Tab label="Event Info" value="3" sx={{ fontFamily: "Butler" }} />
               <Tab label="RSVP" value="4" sx={{ fontFamily: "Butler" }} />
             </TabList>
           </Box>
-          <TabPanel value="1">
+          <TabPanel value="1" className="pagePanel">
             <Main />
           </TabPanel>
-          <TabPanel value="2">
+          <TabPanel value="2" className="pagePanel">
             <OurStory />
           </TabPanel>
           <TabPanel value="3" className="pagePanel">

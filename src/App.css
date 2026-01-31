@@ -53,7 +53,8 @@ p {
 
 .pagePanel {
   width: 100%;
-  padding: 24px 0 !important;
+  margin-top: 24px;
+  padding: 0 !important;
 }
 
 .rsvp-input {

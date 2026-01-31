@@ -21,7 +21,7 @@ export default function Main() {
   } as TimeLeft);
 
   return (
-    <Paper>
+    <Paper sx={{ padding: '1rem'}}>
       <Stack direction="row">
         <Paper>
           <Paper>
@@ -34,8 +34,8 @@ export default function Main() {
   );
 }
 
-const getTimeLeft = (): TimeLeft => {
-  let unitsLeft: Number[] = [];
+// const getTimeLeft = (): TimeLeft => {
+//   let unitsLeft: Number[] = [];
 
-  return {};
-};
+//   return {};
+// };
