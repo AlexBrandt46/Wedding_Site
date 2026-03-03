@@ -1,33 +1,53 @@
 import { Paper, Stack, Typography } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getTimeLeft } from "../utils/dateUtil";
 
 export default function Main() {
-  interface TimeLeft {
-    months: number;
-    weeks: number;
-    days: number;
-    hours: number;
-    minutes: number;
-    seconds: number;
-  }
+  
+  const timeLeft = getTimeLeft();
 
-  const [timeLeft, _setTimeLeft] = useState({
-    months: 0,
-    weeks: 0,
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
-  } as TimeLeft);
+  useEffect(() => {
+
+  })
 
   return (
     <Paper sx={{ padding: "1rem" }}>
-      <Stack direction="row">
-        <Paper>
+      <Stack direction="row" sx={{ justifySelf: 'center' }}>
+        <Paper sx={{ padding: "10px 15px", marginRight: "1vw" }}>
           <Paper>
             <Typography>{timeLeft.months}</Typography>
           </Paper>
-          <Typography>Months</Typography>
+          <Typography sx={{ paddingBottom: 0 }}>Months</Typography>
+        </Paper>
+        <Paper sx={{ padding: "5px 15px", marginRight: "1vw" }}>
+          <Paper>
+            <Typography>{timeLeft.weeks}</Typography>
+          </Paper>
+          <Typography sx={{ paddingBottom: 0 }}>Weeks</Typography>
+        </Paper>
+        <Paper sx={{ padding: "5px 15px", marginRight: "1vw" }}>
+          <Paper>
+            <Typography>{timeLeft.days}</Typography>
+          </Paper>
+          <Typography sx={{ paddingBottom: 0 }}>Days</Typography>
+        </Paper>
+        <Paper sx={{ padding: "5px 15px", marginRight: "1vw" }}>
+          <Paper>
+            <Typography>{timeLeft.hours}</Typography>
+          </Paper>
+          <Typography sx={{ paddingBottom: 0 }}>Hours</Typography>
+        </Paper>
+        <Paper sx={{ padding: "5px 15px", marginRight: "1vw" }}>
+          <Paper>
+            <Typography>{timeLeft.minutes}</Typography>
+          </Paper>
+          <Typography sx={{ paddingBottom: 0 }}>Minutes</Typography>
+        </Paper>
+        <Paper sx={{ padding: "5px 15px", marginRight: "1vw" }}>
+          <Paper>
+            <Typography>{timeLeft.seconds}</Typography>
+          </Paper>
+          <Typography sx={{ paddingBottom: 0 }}>Seconds</Typography>
         </Paper>
       </Stack>
     </Paper>
