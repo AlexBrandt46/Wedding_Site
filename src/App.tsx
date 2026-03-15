@@ -9,6 +9,7 @@ import OurStory from "./components/OurStory";
 import Main from "./components/Main/Main";
 import RsvpForm from "./components/RsvpForm";
 import { ThemeProvider } from "@mui/material/styles";
+import PhotoGallery from "./components/Photos/PhotoGallery";
 
 function App() {
   const [value, setValue] = React.useState("1");
@@ -63,6 +64,7 @@ function App() {
               <Tab label="Our Story" value="2" sx={{ fontFamily: "Butler" }} />
               <Tab label="Event Info" value="3" sx={{ fontFamily: "Butler" }} />
               <Tab label="RSVP" value="4" sx={{ fontFamily: "Butler" }} />
+              <Tab label="Photos" value="5" sx={{ fontFamily: "Butler" }} />
             </TabList>
           </Box>
           <TabPanel value="1" className="pagePanel">
@@ -76,6 +78,9 @@ function App() {
           </TabPanel>
           <TabPanel value="4" className="pagePanel">
             <RsvpForm />
+          </TabPanel>
+          <TabPanel value="5" className="pagePanel" >
+            <PhotoGallery />
           </TabPanel>
         </TabContext>
       </Box>

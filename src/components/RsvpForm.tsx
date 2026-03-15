@@ -10,12 +10,28 @@ import {
   Radio,
   RadioGroup,
   Snackbar,
+  styled,
   TextField,
+  Tooltip,
+  tooltipClasses,
   Typography,
+  type TooltipProps,
 } from '@mui/material';
-import { useState } from 'react';
+import { useState, Fragment } from 'react';
 import { supabase } from '../utils/supabaseUtil';
 import { createGuest, getFormattedDietary, type DietaryRestrictions } from '../types/Guest';
+
+const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
+  <Tooltip {...props} classes={{ popper: className }} />
+))(({ theme }) => ({
+  [`& .${tooltipClasses.tooltip}`]: {
+    backgroundColor: '#f5f5f9',
+    color: 'rgba(0, 0, 0, 0.87)',
+    maxWidth: 220,
+    fontSize: theme.typography.pxToRem(12),
+    border: '1px solid #dadde9',
+  },
+}));
 
 export default function RsvpForm() {
   const [guest, setGuest] = useState(createGuest());
@@ -71,15 +87,16 @@ export default function RsvpForm() {
 
   const closeEmailConfirmationAlert = () => {
     setShowEmailConfirmationAlert(false);
-  }
+  };
 
   return (
     <Paper sx={{ textAlign: 'center', padding: '1rem', fontFamily: 'Butler' }}>
-      <Snackbar open={showEmailConfirmationAlert} onClose={closeEmailConfirmationAlert}
-        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}>
-        <Alert>
-          Thank you for RSVPing! Expect a confirmation email shortly.
-        </Alert>
+      <Snackbar
+        open={showEmailConfirmationAlert}
+        onClose={closeEmailConfirmationAlert}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+      >
+        <Alert>Thank you for RSVPing! Expect a confirmation email shortly.</Alert>
       </Snackbar>
       <Typography variant="h5" fontFamily={'Butler'}>
         Event RSVP
@@ -181,21 +198,48 @@ export default function RsvpForm() {
           </FormGroup>
         </FormControl>
       </form>
-      <Button
-        type="submit"
-        variant="contained"
-        sx={{ marginTop: '1vh' }}
-        onClick={submitRsvp}
-        disabled={
-          attending === null ||
-          guest.firstName === '' ||
-          guest.lastName === '' ||
-          guest.emailAddress === '' ||
-          (!dietOtherDisabled && otherDescription === '')
+      <HtmlTooltip
+        title={
+          (attending === null ||
+            guest.firstName === '' ||
+            guest.lastName === '' ||
+            guest.emailAddress === '' ||
+            (!dietOtherDisabled && otherDescription === '')) && (
+            <Fragment>
+              {/* <Typography> */}
+              The following information must still be provided before you can submit your RSVP:
+              {/* </Typography> */}
+              <ul>
+                {attending === null && <li>Attendance</li>}
+                {guest.firstName === '' && <li>First Name</li>}
+                {guest.lastName === '' && <li>Last Name</li>}
+                {guest.emailAddress === '' && <li>Email Address</li>}
+                {!dietOtherDisabled && otherDescription === '' && (
+                  <li>Specific dietary restrictions if you checked "Other"</li>
+                )}
+              </ul>
+            </Fragment>
+          )
         }
       >
-        Submit RSVP
-      </Button>
+        <span>
+          <Button
+            type="submit"
+            variant="contained"
+            sx={{ marginTop: '1vh' }}
+            onClick={submitRsvp}
+            disabled={
+              attending === null ||
+              guest.firstName === '' ||
+              guest.lastName === '' ||
+              guest.emailAddress === '' ||
+              (!dietOtherDisabled && otherDescription === '')
+            }
+          >
+            Submit RSVP
+          </Button>
+        </span>
+      </HtmlTooltip>
     </Paper>
   );
 }
