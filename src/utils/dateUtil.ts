@@ -1,60 +1,24 @@
-import {
-  createCountdownDate,
-  type CountdownDate,
-} from "../types/CountdownDate";
+import { between, type Duration } from "duration-fns";
 
-const weddingDate = new Date(2026, 8, 12, 2, 0);
+const weddingDate = new Date(2026, 8, 27, 14);
 
-function getTimeDifference(): number {
-  const today = Date.now();
-  const timeDiff = weddingDate.getTime() - today;
+export function getTimeDifference(): Duration {
+  const today = new Date();
+  console.log(today);
+  const diff = between(weddingDate, today);
 
-  return timeDiff;
-}
+  console.log(diff)
 
-// export function monthsUntil(timeNum: number): number {
-//   let months = 0;
-//   let currentDate = Date.now();
+  // JS Dates use 0-based index of months, days, hours, minutes, and seconds
 
-//   return targetMonth - currentMonth;
-// }
-
-export function daysUntil(timeNum: number): number {
-  return Math.ceil(timeNum / (1000 * 60 * 60 * 24)); // Number of days
-}
-
-// export function weeksUntil(date: Date): number {
-//   const timeDiff = getTimeDifference(date);
-//   return Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-// }
-
-// export function daysUntil(date: Date): number {
-//   const timeDiff = getTimeDifference(date);
-//   return Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-// }
-
-// export function hoursUntil(date: Date): number {
-//   const timeDiff = getTimeDifference(date);
-//   return Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-// }
-
-// export function minutesUntil(date: Date): number {
-//   const timeDiff = getTimeDifference(date);
-//   return Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-// }
-
-// export function secondsUntil(date: Date): number {
-//   const timeDiff = getTimeDifference(date);
-//   return Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-// }
-
-export function getTimeLeft(): CountdownDate {
-  let countdownDate = createCountdownDate();
-  let timeDiff = getTimeDifference();
-
-  // const months = monthsUntil(timeDiff);
-  
-  // console.log(months);
-
-  return countdownDate;
+  return {
+    years: 0,
+    months: 11 + diff.months, // Month difference is negative for some dumb reason
+    weeks: diff.weeks,
+    days: diff.days,
+    hours: 23 - diff.hours,
+    minutes: 59 - diff.minutes,
+    seconds: 59 - diff.seconds,
+    milliseconds: 0
+  }
 }

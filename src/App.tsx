@@ -6,7 +6,7 @@ import TabPanel from "@mui/lab/TabPanel";
 import React from "react";
 import EventInfo from "./components/EventInfo";
 import OurStory from "./components/OurStory";
-import Main from "./components/Main";
+import Main from "./components/Main/Main";
 import RsvpForm from "./components/RsvpForm";
 import { ThemeProvider } from "@mui/material/styles";
 

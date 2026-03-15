@@ -1,4 +1,5 @@
 import {
+  Alert,
   Button,
   Checkbox,
   FormControl,
@@ -8,59 +9,78 @@ import {
   Paper,
   Radio,
   RadioGroup,
+  Snackbar,
   TextField,
   Typography,
 } from '@mui/material';
 import { useState } from 'react';
 import { supabase } from '../utils/supabaseUtil';
+import { createGuest, getFormattedDietary, type DietaryRestrictions } from '../types/Guest';
 
 export default function RsvpForm() {
+  const [guest, setGuest] = useState(createGuest());
   const [dietOtherDisabled, setDietOtherDisabled] = useState(true);
   const [attending, setAttending] = useState<boolean | null>(null);
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [emailAddress, setEmail] = useState('');
-  const [address, setAddress] = useState('');
-  const [dietState, setDietState] = useState({
-    gluten: false,
-    nut: false,
-    dairy: false,
-    vegetarian: false,
-    vegan: false,
-    other: false,
-    otherDescription: '',
-  });
+  const [dietState, setDietState] = useState(guest.dietaryRestrictions);
+  const [otherDescription, setOtherDescription] = useState('');
+  const [showEmailConfirmationAlert, setShowEmailConfirmationAlert] = useState(false);
 
-  const { gluten, nut, dairy, vegetarian, vegan, other, otherDescription } = dietState;
+  const { gluten, nut, dairy, vegetarian, vegan } = dietState;
 
   const submitRsvp = async () => {
+    const formattedDietary = getFormattedDietary(dietState);
+
     const { data, error } = await supabase.from('guests').insert({
-      firstName,
-      lastName,
-      address,
-      attending,
-      emailAddress
+      firstName: guest.firstName,
+      lastName: guest.lastName,
+      emailAddress: guest.emailAddress,
+      attending: guest.attending,
+      dietaryRestrictions: formattedDietary,
+      otherDescription: dietOtherDisabled ? '' : otherDescription,
     });
 
     console.log(data);
     console.log(error);
+
+    if (!error) {
+      setShowEmailConfirmationAlert(true);
+    }
   };
 
   const handleAttendingChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const attendingVal = (e.target as HTMLInputElement).value;
-    console.log(attendingVal);
     setAttending(attendingVal === 'attending');
+    setGuest({ ...guest, attending: attendingVal === 'attending' });
   };
 
+  /**
+   * Event handler for changing dietary restrictions checkboxes
+   * @param e
+   */
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dietState[e.target.name as keyof DietaryRestrictions] = e.target.checked;
+
+    if (e.target.name === 'other') {
+      setDietOtherDisabled(!dietOtherDisabled);
+    }
+
     setDietState({
       ...dietState,
-      [e.target.name]: e.target.checked,
     });
   };
 
+  const closeEmailConfirmationAlert = () => {
+    setShowEmailConfirmationAlert(false);
+  }
+
   return (
     <Paper sx={{ textAlign: 'center', padding: '1rem', fontFamily: 'Butler' }}>
+      <Snackbar open={showEmailConfirmationAlert} onClose={closeEmailConfirmationAlert}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}>
+        <Alert>
+          Thank you for RSVPing! Expect a confirmation email shortly.
+        </Alert>
+      </Snackbar>
       <Typography variant="h5" fontFamily={'Butler'}>
         Event RSVP
       </Typography>
@@ -77,24 +97,32 @@ export default function RsvpForm() {
           value={attending}
           onChange={handleAttendingChange}
         >
-          <FormControlLabel value="attending" control={<Radio />} label="Attending" checked={attending !== null && attending} />
-          <FormControlLabel value="notAttending" control={<Radio />} label="Not Attending" checked={attending !== null && !attending} />
+          <FormControlLabel
+            value="attending"
+            control={<Radio />}
+            label="Attending"
+            checked={attending !== null && attending}
+          />
+          <FormControlLabel
+            value="notAttending"
+            control={<Radio />}
+            label="Not Attending"
+            checked={attending !== null && !attending}
+          />
         </RadioGroup>
         <TextField
           className="rsvp-input"
           id="first-name-input"
           required
           label="First Name"
-          value={firstName}
-          onChange={(e) => setFirstName(e.target.value)}
+          onChange={(e) => setGuest({ ...guest, firstName: e.target.value })}
         />
         <TextField
           className="rsvp-input"
           id="last-name-input"
           required
           label="Last Name"
-          value={lastName}
-          onChange={(e) => setLastName(e.target.value)}
+          onChange={(e) => setGuest({ ...guest, lastName: e.target.value })}
         />
         <TextField
           className="rsvp-input"
@@ -103,17 +131,7 @@ export default function RsvpForm() {
           label="Email"
           type="email"
           helperText="We'll never share your email."
-          value={emailAddress}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <TextField
-          className="rsvp-input"
-          id="address-input"
-          required
-          label="Address"
-          helperText="We'll never share your address."
-          value={address}
-          onChange={(e) => setAddress(e.target.value)}
+          onChange={(e) => setGuest({ ...guest, emailAddress: e.target.value })}
         />
         <FormControl>
           <FormLabel>Dietary Restrictions</FormLabel>
@@ -146,11 +164,8 @@ export default function RsvpForm() {
                 control={
                   <Checkbox
                     name="other"
-                    checked={other}
-                    onChange={(e) => {
-                      handleCheckboxChange(e);
-                      setDietOtherDisabled(!dietOtherDisabled);
-                    }}
+                    checked={!dietOtherDisabled}
+                    onChange={() => setDietOtherDisabled(!dietOtherDisabled)}
                   />
                 }
               ></FormControlLabel>
@@ -160,12 +175,25 @@ export default function RsvpForm() {
                 label="Please Specify"
                 disabled={dietOtherDisabled}
                 value={otherDescription}
+                onChange={(e) => setOtherDescription(e.target.value)}
               />
             </FormGroup>
           </FormGroup>
         </FormControl>
       </form>
-      <Button type="submit" variant="contained" sx={{ marginTop: '1vh' }} onClick={submitRsvp}>
+      <Button
+        type="submit"
+        variant="contained"
+        sx={{ marginTop: '1vh' }}
+        onClick={submitRsvp}
+        disabled={
+          attending === null ||
+          guest.firstName === '' ||
+          guest.lastName === '' ||
+          guest.emailAddress === '' ||
+          (!dietOtherDisabled && otherDescription === '')
+        }
+      >
         Submit RSVP
       </Button>
     </Paper>

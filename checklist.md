@@ -28,7 +28,7 @@ Photos
 
 RSVP
 
-- [X] Attending/Not Attending
+- [x] Attending/Not Attending
 - [ ] Number of Guests
 - [ ] Mailing Address
 - [ ] Dietary Restrictions
@@ -37,7 +37,7 @@ FAQ
 
 - [ ] RSVP Deadline
 - [ ] Plus Ones
-- [X] Children Welcome?
+- [x] Children Welcome?
 - [ ] What to Wear
 - [ ] Parking
 - [ ] Indoors/Outdoors
@@ -51,7 +51,7 @@ Registry
 
 Maps
 
-- [X] Embed Venue Maps
+- [x] Embed Venue Maps
 
 Schedule
 
