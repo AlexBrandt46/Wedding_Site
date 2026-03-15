@@ -37,7 +37,7 @@ function createDietaryRestrictions(): DietaryRestrictions {
 }
 
 export function getFormattedDietary(dietaryRestrictions: DietaryRestrictions): string[] {
-  let dietaryRestricts: string[] = [];
+  const dietaryRestricts: string[] = [];
 
   for (const diet in dietaryRestrictions) {
     const key = diet as keyof DietaryRestrictions;
