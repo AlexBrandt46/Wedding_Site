@@ -9,14 +9,14 @@ export function getTimeDifference(): Duration {
   const dayDiff = SEPT_DAYS - diff.days;
 
   const dayPast =
-    diff.days > 0 ||
-    (diff.days === 0 && diff.hours > 0) ||
+    (diff.days === 0 && diff.hours === 0 && diff.minutes === 0 && diff.minutes > 0) ||
     (diff.days === 0 && diff.hours === 0 && diff.minutes > 0) ||
-    (diff.days === 0 && diff.hours === 0 && diff.minutes === 0 && diff.minutes > 0);
+    (diff.days === 0 && diff.hours > 0) ||
+    diff.days > 0;
 
   return {
     years: 0,
-    months: 11 + diff.months + (dayPast ? 1 : 0), // Month difference is relative to calendar and not actual date for some dumb reason
+    months: 12 + diff.months + (dayPast ? -1 : 0), // Month difference is relative to calendar and not actual date for some dumb reason
     weeks: Math.floor(dayDiff / 7),
     days: dayDiff % 7,
     hours: 23 - diff.hours,
