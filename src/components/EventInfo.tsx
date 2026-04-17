@@ -14,6 +14,7 @@ export default function EventInfo() {
         allowFullScreen={true}
         loading="lazy"
         referrerPolicy="no-referrer-when-downgrade"
+        title="Grand Haven Map"
       ></iframe>
       <br />
       <p>

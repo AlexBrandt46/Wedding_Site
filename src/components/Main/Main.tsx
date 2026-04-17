@@ -1,8 +1,7 @@
-import { Box, Paper, Typography } from "@mui/material";
-import CountDownTimer from "./CountDownTimer";
+import { Box, Paper, Typography } from '@mui/material';
+import CountDownTimer from './CountDownTimer';
 
 export default function Main() {
-
   return (
     <Paper className="pagePaper">
       <CountDownTimer />
