@@ -98,7 +98,7 @@ export default function RsvpForm() {
       >
         <Alert>Thank you for RSVPing! Expect a confirmation email shortly.</Alert>
       </Snackbar>
-      <Typography variant="h5" fontFamily={'Butler'}>
+      <Typography variant="h5" style={{ fontFamily: 'Butler' }}>
         Event RSVP
       </Typography>
       <form
