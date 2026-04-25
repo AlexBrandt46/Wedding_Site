@@ -41,7 +41,6 @@ function App() {
     <ThemeProvider theme={theme}>
       <Box
         sx={{
-          width: '50vw',
           top: 0,
           justifyContent: 'center',
           fontFamily: 'Butler !important',
@@ -50,6 +49,7 @@ function App() {
         <TabContext value={value}>
           <img id="usImage" style={{ height: '200px' }} />
           <Box
+            className="siteBox"
             sx={{
               borderBottom: 1,
               borderColor: 'divider',

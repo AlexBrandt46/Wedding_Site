@@ -1,5 +1,5 @@
 #root {
-  max-width: 1280px;
+  /*max-width: 1280px;*/
   margin: 0 auto;
   text-align: center;
   --navy: #2e4670;
@@ -45,4 +45,26 @@ p {
 .pagePaper {
   padding: 1rem;
   min-height: 1vh;
+}
+
+/* Desktop */
+@media (min-width: 767.01px) {
+  .siteBox {
+    width: 55vw;
+  }
+
+  .pagePanel {
+    width: 55vw;
+  }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  .siteBox {
+    width: 95vw;
+  }
+
+  .pagePanel {
+    width: 95vw;
+  }
 }
