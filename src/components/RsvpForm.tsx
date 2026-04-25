@@ -5,7 +5,6 @@ import {
   FormControl,
   FormControlLabel,
   FormGroup,
-  FormLabel,
   Paper,
   Radio,
   RadioGroup,
@@ -19,7 +18,7 @@ import {
 } from '@mui/material';
 import { useState, Fragment } from 'react';
 import { supabase } from '../utils/supabaseUtil';
-import { createGuest, getFormattedDietary, type DietaryRestrictions } from '../types/Guest';
+import { createGuest } from '../types/Guest';
 
 const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
   <Tooltip {...props} classes={{ popper: className }} />
@@ -35,24 +34,18 @@ const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
 
 export default function RsvpForm() {
   const [guest, setGuest] = useState(createGuest());
-  const [dietOtherDisabled, setDietOtherDisabled] = useState(true);
+  const [dietTextboxHidden, setDietTextboxHidden] = useState(true);
   const [attending, setAttending] = useState<boolean | null>(null);
-  const [dietState, setDietState] = useState(guest.dietaryRestrictions);
-  const [otherDescription, setOtherDescription] = useState('');
+  const [dietDescription, setDietDescription] = useState('');
   const [showEmailConfirmationAlert, setShowEmailConfirmationAlert] = useState(false);
 
-  const { gluten, nut, dairy, vegetarian, vegan } = dietState;
-
   const submitRsvp = async () => {
-    const formattedDietary = getFormattedDietary(dietState);
-
     const { data, error } = await supabase.from('guests').insert({
       firstName: guest.firstName,
       lastName: guest.lastName,
       emailAddress: guest.emailAddress,
       attending: guest.attending,
-      dietaryRestrictions: formattedDietary,
-      otherDescription: dietOtherDisabled ? '' : otherDescription,
+      otherDescription: dietTextboxHidden ? '' : dietDescription,
     });
 
     console.log(data);
@@ -73,16 +66,9 @@ export default function RsvpForm() {
    * Event handler for changing dietary restrictions checkboxes
    * @param e
    */
-  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dietState[e.target.name as keyof DietaryRestrictions] = e.target.checked;
-
-    if (e.target.name === 'other') {
-      setDietOtherDisabled(!dietOtherDisabled);
-    }
-
-    setDietState({
-      ...dietState,
-    });
+  const handleDietCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const dietIsChecked = e.target.checked;
+    setDietTextboxHidden(!dietIsChecked);
   };
 
   const closeEmailConfirmationAlert = () => {
@@ -151,38 +137,15 @@ export default function RsvpForm() {
           onChange={(e) => setGuest({ ...guest, emailAddress: e.target.value })}
         />
         <FormControl>
-          <FormLabel>Dietary Restrictions</FormLabel>
           <FormGroup>
-            <FormControlLabel
-              label="Gluten Free"
-              control={<Checkbox name="gluten" checked={gluten} onChange={handleCheckboxChange} />}
-            ></FormControlLabel>
-            <FormControlLabel
-              label="Nut Free"
-              control={<Checkbox name="nut" checked={nut} onChange={handleCheckboxChange} />}
-            ></FormControlLabel>
-            <FormControlLabel
-              label="Dairy Free"
-              control={<Checkbox name="dairy" checked={dairy} onChange={handleCheckboxChange} />}
-            ></FormControlLabel>
-            <FormControlLabel
-              label="Vegetarian"
-              control={
-                <Checkbox name="vegetarian" checked={vegetarian} onChange={handleCheckboxChange} />
-              }
-            ></FormControlLabel>
-            <FormControlLabel
-              label="Vegan"
-              control={<Checkbox name="vegan" checked={vegan} onChange={handleCheckboxChange} />}
-            ></FormControlLabel>
-            <FormGroup sx={{ flexDirection: 'row' }}>
+            <FormGroup>
               <FormControlLabel
-                label="Other"
+                label="Dietary Restrictions"
                 control={
                   <Checkbox
-                    name="other"
-                    checked={!dietOtherDisabled}
-                    onChange={() => setDietOtherDisabled(!dietOtherDisabled)}
+                    name="diet"
+                    checked={!dietTextboxHidden}
+                    onChange={(e) => handleDietCheckboxChange(e)}
                   />
                 }
               ></FormControlLabel>
@@ -190,9 +153,12 @@ export default function RsvpForm() {
                 className="rsvp-input"
                 id="other-diet-input"
                 label="Please Specify"
-                disabled={dietOtherDisabled}
-                value={otherDescription}
-                onChange={(e) => setOtherDescription(e.target.value)}
+                required={!dietTextboxHidden}
+                disabled={dietTextboxHidden}
+                sx={{ visibility: dietTextboxHidden ? 'hidden' : 'visible' }}
+                hidden={dietTextboxHidden ? true : undefined}
+                value={dietDescription}
+                onChange={(e) => setDietDescription(e.target.value)}
               />
             </FormGroup>
           </FormGroup>
@@ -204,7 +170,7 @@ export default function RsvpForm() {
             guest.firstName === '' ||
             guest.lastName === '' ||
             guest.emailAddress === '' ||
-            (!dietOtherDisabled && otherDescription === '')) && (
+            (!dietTextboxHidden && dietDescription === '')) && (
             <Fragment>
               {/* <Typography> */}
               The following information must still be provided before you can submit your RSVP:
@@ -214,7 +180,7 @@ export default function RsvpForm() {
                 {guest.firstName === '' && <li>First Name</li>}
                 {guest.lastName === '' && <li>Last Name</li>}
                 {guest.emailAddress === '' && <li>Email Address</li>}
-                {!dietOtherDisabled && otherDescription === '' && (
+                {!dietTextboxHidden && dietDescription === '' && (
                   <li>Specific dietary restrictions if you checked "Other"</li>
                 )}
               </ul>
@@ -233,7 +199,7 @@ export default function RsvpForm() {
               guest.firstName === '' ||
               guest.lastName === '' ||
               guest.emailAddress === '' ||
-              (!dietOtherDisabled && otherDescription === '')
+              (!dietTextboxHidden && dietDescription === '')
             }
           >
             Submit RSVP
