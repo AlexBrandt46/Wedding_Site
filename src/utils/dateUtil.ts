@@ -1,27 +1,70 @@
-import { between, normalize, type Duration } from 'duration-fns';
+import { type Duration } from 'duration-fns';
 
 const weddingDate = new Date(2026, 8, 12, 14);
 
-export function getTimeDifference(): Duration {
-  const today = new Date();
-  const diff = normalize(between(weddingDate, today));
-  const SEPT_DAYS = 30;
-  const dayDiff = SEPT_DAYS - diff.days;
+const MS_TO_SECS = 1000;
+const SECS_TO_MINS = MS_TO_SECS * 60;
+const MINS_TO_HRS = SECS_TO_MINS * 60;
+const HRS_TO_DAYS = MINS_TO_HRS * 24;
+const DAYS_TO_WKS = HRS_TO_DAYS * 7;
 
-  const dayPast =
-    (diff.days === 0 && diff.hours === 0 && diff.minutes === 0 && diff.minutes > 0) ||
-    (diff.days === 0 && diff.hours === 0 && diff.minutes > 0) ||
-    (diff.days === 0 && diff.hours > 0) ||
-    diff.days > 0;
+// export function oldGetTimeDifference(): Duration {
+//   const today = new Date();
+
+//   const otherDate = new Date(2026, 3, 12, 14); // April 11th, 2026 2PM
+
+//   const newTime = newGetTimeDifference(today);
+
+//   return {
+//     years: 0,
+//     months: 0, // Month difference is relative to calendar and not actual date for some dumb reason
+//     weeks: newTime.weeks,
+//     days: newTime.days,
+//     hours: newTime.hours,
+//     minutes: newTime.minutes,
+//     seconds: newTime.seconds,
+//     milliseconds: 0,
+//   };
+// }
+
+export function getTimeDifference(date: Date): Duration {
+
+  // Calculate difference in milliseconds
+  const diffInMs = weddingDate.getTime() - date.getTime();
+
+  // Convert to days (1000ms * 60s * 60m * 24h)
+  const actualDaysUntil = diffInMs / HRS_TO_DAYS; // There is a remainder with this
+  const wholeDaysUntil = Math.floor(actualDaysUntil)
+  const actualWeeksUntil = Math.floor(diffInMs / DAYS_TO_WKS);
+
+  const actualHoursUntil = diffInMs / MINS_TO_HRS
+  const wholeHoursUntil = Math.floor(actualHoursUntil);
+
+  const actualMinutesUntil = diffInMs / SECS_TO_MINS;
+  const wholeMinutesUntil = Math.floor(actualMinutesUntil);
+  const minutes = wholeMinutesUntil % 60;
+
+  const secUntil = diffInMs / MS_TO_SECS;
+  const wholeSecUntil = Math.ceil(secUntil);
+  let secs = wholeSecUntil % 60;
+
+  if (secs === 60) {
+    secs = 0;
+  }
+
+  const days = wholeDaysUntil % 7;
+  const hours = wholeHoursUntil % 24;
 
   return {
-    years: 0,
-    months: 12 + diff.months + (dayPast ? -1 : 0), // Month difference is relative to calendar and not actual date for some dumb reason
-    weeks: Math.floor(dayDiff / 7),
-    days: dayDiff % 7,
-    hours: 23 - diff.hours,
-    minutes: 59 - diff.minutes,
-    seconds: 59 - diff.seconds,
-    milliseconds: 0,
-  };
+    years: -1,
+    months: -1,
+    weeks: actualWeeksUntil,
+    days: days,
+    hours: hours,
+    minutes: minutes,
+    seconds: secs,
+    milliseconds: -1
+  }
 }
+
+// export function formatTimeDiffs(diff: Duration) { }

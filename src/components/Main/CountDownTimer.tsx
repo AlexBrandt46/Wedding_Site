@@ -3,11 +3,11 @@ import { getTimeDifference } from '../../utils/dateUtil';
 import { useEffect, useState } from 'react';
 
 export default function CountDownTimer() {
-  const [timeLeft, setTimeLeft] = useState(getTimeDifference());
+  const [timeLeft, setTimeLeft] = useState(getTimeDifference(new Date()));
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setTimeLeft(getTimeDifference());
+      setTimeLeft(getTimeDifference(new Date()));
     }, 1000); // In milliseconds (1000 ms = 1 sec)
 
     return () => clearInterval(interval);
@@ -15,12 +15,6 @@ export default function CountDownTimer() {
 
   return (
     <Stack direction="row" sx={{ justifySelf: 'center' }}>
-      <Paper sx={{ padding: '10px 15px', marginRight: '1vw' }}>
-        <Paper>
-          <Typography>{timeLeft.months}</Typography>
-        </Paper>
-        <Typography sx={{ paddingBottom: 0 }}>Months</Typography>
-      </Paper>
       <Paper sx={{ padding: '5px 15px', marginRight: '1vw' }}>
         <Paper>
           <Typography>{timeLeft.weeks}</Typography>
