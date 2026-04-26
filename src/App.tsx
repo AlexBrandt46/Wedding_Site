@@ -10,6 +10,7 @@ import Main from './components/Main/Main';
 import RsvpForm from './components/RsvpForm';
 import { ThemeProvider } from '@mui/material/styles';
 import PhotoGallery from './components/Photos/PhotoGallery';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 function App() {
   const [value, setValue] = React.useState('1');
@@ -17,6 +18,8 @@ function App() {
   const handleChange = (_event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
+
+  const minHeaderMatch = useMediaQuery('min-width: 515px');
 
   const theme = createTheme({
     typography: {
@@ -47,7 +50,7 @@ function App() {
         }}
       >
         <TabContext value={value}>
-          <img id="usImage" style={{ height: '200px' }} />
+          {/* <img id="usImage" style={{ height: '200px' }} /> */}
           <Box
             className="siteBox"
             sx={{
@@ -56,13 +59,17 @@ function App() {
               flexGrow: 1,
               justifyContent: 'center',
               backgroundColor: 'var(--blue)',
-              display: { xs: 'none', md: 'flex' },
+              display: { xs: 'flex', s: 'flex', md: 'flex' },
             }}
           >
-            <TabList onChange={handleChange}>
-              <Tab label="Main" value="1" sx={{ fontFamily: 'Butler' }} />
+            <TabList id="tabList" onChange={handleChange}>
+              <Tab label="Main" value="1" sx={{ fontFamily: 'Butler', wordWrap: 'break-word' }} />
               <Tab label="Our Story" value="2" sx={{ fontFamily: 'Butler' }} />
-              <Tab label="Event Info" value="3" sx={{ fontFamily: 'Butler' }} />
+              <Tab
+                label="Event Info"
+                value="3"
+                sx={{ fontFamily: 'Butler', wordWrap: 'break-word' }}
+              />
               <Tab label="RSVP" value="4" sx={{ fontFamily: 'Butler' }} />
               <Tab label="Photos" value="5" sx={{ fontFamily: 'Butler' }} />
             </TabList>

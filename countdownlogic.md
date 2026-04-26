@@ -1,0 +1,47 @@
+- [ ] Remove months
+- [ ] Refactor logic to be correct
+  - [ ] Weeks
+  - [ ] Days (less than 7 days at the exact time)
+  - [ ] Hours
+  - [ ] Minutes
+  - [ ] Seconds
+
+Timer should show:
+- 7 days becomes 1 wk
+  - Day Range: [0, 6]
+- 24 hours becomes 1 day
+  - Hour Range: [0, 23]
+- 60 minutes becomes 1 hour
+  - Minute Range: [0, 59]
+- 60 seconds becomes 1 minute
+  - Second Range: [0, 59]
+
+Assume wedding is at 2:00 EST:
+- At 2:00:00 PM EST every at X weeks out
+  - Saturday before that Saturday:
+    - X weeks, 0 days, 0 hours 0 minutes, 0 seconds
+  - Friday before that Saturday:
+    - X weeks, 1 day, 0 hours, 0 minutes, 0 seconds
+  - Thursday before that Saturday:
+    - X weeks, 2 days, 0 hours, 0 minutes, 0 seconds
+  - Wednesday before that Saturday:
+    - X weeks, 3 days, 0 hours, 0 minutes, 0 seconds
+  - Monday before that Saturday:
+    - X weeks, 5 days, 0 hours, 0 minutes, 0 seconds
+  - Tuesday before that Saturday:
+    - X weeks, 4 days, 0 hours, 0 minutes, 0 seconds
+  - Sunday after that Saturday:
+    - (X - 1) weeks, 6 days, 0 hours, 0 minutes, 0 seconds
+- If current time is 2:30:27 PM EST, on a Saturday, then there would be 6 days, 23 hours, 29 minutes, and 33 seconds until wedding
+  - If this is the saturday exactly one week before (09/05 at 2:00:00 PM EST), then the countdown timer would read: 1 week, 0 days, 0 hrs, 0 minutes, 0 seconds instead of 0 weeks, 7 days, 0 hours, 0, mins, 0, seconds
+- Friday at 1:30:35 PM EST
+  - W/ 1+ week until wedding (3 Fridays before for our example)
+    - 3 weeks, 1 day, 0 hours, 29 minutes, 25 seconds
+  - Week of wedding
+    - 0 weeks, 1 day, 0 hours, 29 minutes, 25 seconds
+- Saturday at 2:00:01 PM EST
+  - 1+ week until wedding (3 for our example)
+    - 2 weeks, 6 days, 23 hours, 59 minutes, 59 seconds
+- Saturday at 1:58:35 PM EST
+  - 1+ week until wedding (3 Saturdays before day of wedding for our example)
+    - 3 weeks, 0 days, 0 hours, 1 minute, 25 seconds

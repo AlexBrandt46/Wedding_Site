@@ -14,35 +14,25 @@ export default function CountDownTimer() {
   }, []);
 
   return (
-    <Stack direction="row" sx={{ justifySelf: 'center' }}>
-      <Paper sx={{ padding: '5px 15px', marginRight: '1vw' }}>
-        <Paper>
-          <Typography>{timeLeft.weeks}</Typography>
-        </Paper>
+    <Stack direction="row" sx={{ justifySelf: 'center', flexGrow: 1, flexBasis: 'auto' }}>
+      <Paper className="countDownPaper" sx={{ marginRight: '1vw' }}>
+        <Typography className="countDownNumber">{timeLeft.weeks}</Typography>
         <Typography sx={{ paddingBottom: 0 }}>Weeks</Typography>
       </Paper>
-      <Paper sx={{ padding: '5px 15px', marginRight: '1vw' }}>
-        <Paper>
-          <Typography>{timeLeft.days}</Typography>
-        </Paper>
+      <Paper className="countDownPaper" sx={{ marginRight: '1vw' }}>
+        <Typography className="countDownNumber">{timeLeft.days}</Typography>
         <Typography sx={{ paddingBottom: 0 }}>Days</Typography>
       </Paper>
-      <Paper sx={{ padding: '5px 15px', marginRight: '1vw' }}>
-        <Paper>
-          <Typography>{timeLeft.hours}</Typography>
-        </Paper>
+      <Paper className="countDownPaper" sx={{ marginRight: '1vw' }}>
+        <Typography className="countDownNumber">{timeLeft.hours}</Typography>
         <Typography sx={{ paddingBottom: 0 }}>Hours</Typography>
       </Paper>
-      <Paper sx={{ padding: '5px 15px', marginRight: '1vw' }}>
-        <Paper>
-          <Typography>{timeLeft.minutes}</Typography>
-        </Paper>
+      <Paper className="countDownPaper" sx={{ marginRight: '1vw' }}>
+        <Typography className="countDownNumber">{timeLeft.minutes}</Typography>
         <Typography sx={{ paddingBottom: 0 }}>Minutes</Typography>
       </Paper>
-      <Paper sx={{ padding: '5px 15px', marginRight: '1vw' }}>
-        <Paper>
-          <Typography>{timeLeft.seconds}</Typography>
-        </Paper>
+      <Paper className="countDownPaper">
+        <Typography className="countDownNumber">{timeLeft.seconds}</Typography>
         <Typography sx={{ paddingBottom: 0 }}>Seconds</Typography>
       </Paper>
     </Stack>
