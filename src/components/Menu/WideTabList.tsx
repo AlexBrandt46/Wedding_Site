@@ -2,7 +2,7 @@ import TabContext from '@mui/lab/TabContext';
 import React from 'react';
 import TabBox from './TabBox';
 import TabPanels from './TabPanels';
-import { Toolbar } from '@mui/material';
+import Box from '@mui/material/Box';
 
 // TODO: Update this to take in the value and setValue from App.tsx so that the state is lifted up and can be shared between the WideTabList and MobileTabList components. This will allow the selected tab to be consistent across both components when the screen size changes.
 export default function WideTabList() {
@@ -13,7 +13,7 @@ export default function WideTabList() {
   };
 
   return (
-    <Toolbar
+    <Box
       sx={{
         top: 0,
         justifyContent: 'center',
@@ -25,6 +25,6 @@ export default function WideTabList() {
         <TabBox handleChange={handleChange} />
         <TabPanels />
       </TabContext>
-    </Toolbar>
+    </Box>
   );
 }
