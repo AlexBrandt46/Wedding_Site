@@ -14,7 +14,7 @@ export default function CountDownTimer() {
   }, []);
 
   return (
-    <Stack direction="row" sx={{ justifySelf: 'center', flexGrow: 1, flexBasis: 'auto' }}>
+    <Stack direction="row" id="countDownStack">
       <Paper className="countDownPaper" sx={{ marginRight: '1vw' }}>
         <Typography className="countDownNumber">{timeLeft.weeks}</Typography>
         <Typography sx={{ paddingBottom: 0 }}>Weeks</Typography>

@@ -1,25 +1,19 @@
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import MenuIcon from '@mui/icons-material/Menu';
-import { TabContext, TabList, TabPanel } from '@mui/lab';
+import TabContext from '@mui/lab/TabContext';
 import type { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import MuiAppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
-import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
 import { styled } from '@mui/material/styles';
-import Tab from '@mui/material/Tab';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import React from 'react';
-import { MENU_TABS } from '../types/MenuTabs';
-import EventInfo from './EventInfo';
-import Main from './Main/Main';
-import OurStory from './OurStory';
-import PhotoGallery from './Photos/PhotoGallery';
-import RsvpForm from './RsvpForm';
-
-const drawerWidth = 100;
+import { MENU_TABS } from '../../types/MenuTabs';
+import TabPanels from './TabPanels';
+import TabBox from './TabBox';
+import { Icon } from '@mui/material';
 
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean;
@@ -45,8 +39,7 @@ const AppBar = styled(MuiAppBar, {
     {
       props: ({ open }) => open,
       style: {
-        width: `calc(100% - ${drawerWidth}px)`,
-        marginLeft: `${drawerWidth}px`,
+        width: `100%`,
         transition: theme.transitions.create(['margin', 'width'], {
           easing: theme.transitions.easing.easeOut,
           duration: theme.transitions.duration.enteringScreen,
@@ -66,9 +59,16 @@ export default function MobileTabList({
   setValue: (value: string) => void;
 }) {
   const [open, setOpen] = React.useState(false);
+  const [toolbarHeader, setToolbarHeader] = React.useState('A & B');
 
   const handleChange = (_event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
+    setOpen(false);
+    setToolbarHeader(
+      MENU_TABS[newValue as keyof typeof MENU_TABS] !== 'Main'
+        ? MENU_TABS[newValue as keyof typeof MENU_TABS]
+        : 'A & B'
+    );
   };
 
   const handleDrawerOpen = () => {
@@ -78,8 +78,6 @@ export default function MobileTabList({
   const handleDrawerClose = () => {
     setOpen(false);
   };
-
-  const currentTabLabel = MENU_TABS[value as keyof typeof MENU_TABS] || 'Menu';
 
   return (
     <TabContext value={value}>
@@ -100,34 +98,32 @@ export default function MobileTabList({
             background: 'var(--blue) !important',
           }}
         >
-          <Toolbar>
+          <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
             <IconButton
               color="inherit"
               aria-label="open drawer"
               onClick={handleDrawerOpen}
               edge="start"
-              sx={[
-                {
-                  mr: 2,
-                },
-                open && { display: 'none' },
-              ]}
+              sx={[open && { display: 'none' }]}
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" noWrap component="div">
-              {currentTabLabel}
+            <Typography variant="h6" component="div" sx={{ justifySelf: 'center' }}>
+              {toolbarHeader}
             </Typography>
+            <IconButton disabled>
+              <Icon />
+            </IconButton>
           </Toolbar>
         </AppBar>
         <Drawer
           sx={{
-            width: drawerWidth,
+            width: '100%',
             flexShrink: 0,
             '& .MuiDrawer-paper': {
-              width: drawerWidth,
+              width: '100%',
               boxSizing: 'border-box',
-              borderRight: '1px solid var(--text-color) !important',
+              borderRight: 'none',
             },
           }}
           variant="persistent"
@@ -143,51 +139,10 @@ export default function MobileTabList({
               <ChevronLeftIcon sx={{ color: 'var(--text-color) !important' }} />
             </IconButton>
           </DrawerHeader>
-          <Divider
-            sx={{
-              background: 'var(--text-color) !important',
-            }}
-          />
-          <Box
-            className="siteBox"
-            sx={{
-              borderBottom: 1,
-              borderColor: 'divider',
-              flexGrow: 1,
-              justifyContent: 'end',
-              backgroundColor: 'var(--blue)',
-              display: 'flex',
-            }}
-          >
-            <TabList id="tabList" onChange={handleChange} orientation="vertical">
-              <Tab label="Main" value="1" sx={{ fontFamily: 'Butler', wordWrap: 'break-word' }} />
-              <Tab label="Our Story" value="2" sx={{ fontFamily: 'Butler' }} />
-              <Tab
-                label="Event Info"
-                value="3"
-                sx={{ fontFamily: 'Butler', wordWrap: 'break-word' }}
-              />
-              <Tab label="RSVP" value="4" sx={{ fontFamily: 'Butler' }} />
-              <Tab label="Photos" value="5" sx={{ fontFamily: 'Butler' }} />
-            </TabList>
-          </Box>
+          <TabBox handleChange={handleChange} orientation="vertical" />
         </Drawer>
       </Box>
-      <TabPanel value="1" className="pagePanel">
-        <Main />
-      </TabPanel>
-      <TabPanel value="2" className="pagePanel">
-        <OurStory />
-      </TabPanel>
-      <TabPanel value="3" className="pagePanel">
-        <EventInfo />
-      </TabPanel>
-      <TabPanel value="4" className="pagePanel">
-        <RsvpForm />
-      </TabPanel>
-      <TabPanel value="5" className="pagePanel">
-        <PhotoGallery />
-      </TabPanel>
+      <TabPanels />
     </TabContext>
   );
 }

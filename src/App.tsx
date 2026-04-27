@@ -3,11 +3,11 @@ import { Box, createTheme } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import WideTabList from './components/WideTabList';
-import MobileTabList from './components/MobileMenuDrawer';
+import MobileTabList from './components/Menu/MobileMenuDrawer';
 import React from 'react';
 
 function App() {
-  const minHeaderMatch = useMediaQuery('(min-width:515px)');
+  const minHeaderMatch = useMediaQuery('(min-width:516px)');
 
   const theme = createTheme({
     typography: {

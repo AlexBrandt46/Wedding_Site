@@ -1,25 +1,9 @@
 #root {
-  /*max-width: 1280px;*/
-  margin: 0 auto;
   text-align: center;
   --navy: #2e4670;
   background-color: var(--gold);
   font-family: 'Butler';
-}
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-
-.logo:hover {
-  filter: drop-shadow(0 0 2em var(--navy));
-}
-
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  width: 100%;
 }
 
 .card {
@@ -32,10 +16,9 @@ p {
 }
 
 .pagePanel {
-  width: 100%;
-  margin-top: 1vh;
   padding: 0 !important;
   margin-bottom: 1vh;
+  margin: 1vh auto;
 }
 
 .rsvp-input {
@@ -48,7 +31,6 @@ p {
 }
 
 .countDownPaper {
-  flex-basis: 20vw;
   padding-right: 3vw;
   padding-left: 3vw;
 }
@@ -57,24 +39,36 @@ p {
   font-size: 1.5rem !important;
 }
 
-/* Desktop */
-/* @media (min-width: 767.01px) {
-  .siteBox {
-    width: 55vw;
-  }
+#countDownStack {
+  justify-content: center;
+  flex: 1;
+  justify-self: center;
+  flex-wrap: wrap;
+}
 
+/* Desktop */
+@media (min-width: 515px) {
   .pagePanel {
-    width: 55vw;
+    width: 95vw;
   }
-} */
+}
 
 /* Mobile */
-/* @media (max-width: 767px) {
-  .siteBox {
+@media (max-width: 515px) {
+  .pagePanel {
+    top: 56px;
+    position: relative;
     width: 95vw;
   }
 
-  .pagePanel {
-    width: 95vw;
+  #countDownStack {
+    justify-content: space-between;
   }
-} */
+}
+
+@media (max-width: 412px) {
+  #countDownStack {
+    gap: 16px; /* Sets both row and column spacing */
+    justify-content: center; /* Centers the items in the container */
+  }
+}
