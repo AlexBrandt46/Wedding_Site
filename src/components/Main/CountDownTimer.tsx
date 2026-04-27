@@ -14,6 +14,11 @@ export default function CountDownTimer() {
   }, []);
 
   return (
+    // TODO: Clean this up by:
+    // 1. Creating a list of time units (weeks, days, hours, minutes, seconds)
+    // 2. Mapping over that list to create the Paper components dynamically
+    // 3. Creating a class for the unit labels (Weeks, Days, etc.) to avoid duplicate inline styling
+    // 4. Creating a class for the countdown papers that have a margin-right of 1vw, and applying that class to all but the last Paper component
     <Stack direction="row" id="countDownStack">
       <Paper className="countDownPaper" sx={{ marginRight: '1vw' }}>
         <Typography className="countDownNumber">{timeLeft.weeks}</Typography>

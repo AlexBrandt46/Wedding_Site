@@ -5,6 +5,7 @@ import OurStory from '../OurStory';
 import PhotoGallery from '../Photos/PhotoGallery';
 import RsvpForm from '../RsvpForm';
 
+// TODO: Refactor this to loop over the MENU_ITEMS and render the appropriate component based on the value. This will make it easier to add/remove menu items in the future without having to modify this component.
 export default function TabPanels() {
   return (
     <>

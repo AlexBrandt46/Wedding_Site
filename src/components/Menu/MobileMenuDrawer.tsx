@@ -51,6 +51,7 @@ const AppBar = styled(MuiAppBar, {
   color: 'var(--text-color) !important',
 }));
 
+// TODO: Create a TabListProps interface and type the props for this component and WideTabList with it
 export default function MobileTabList({
   value,
   setValue,

@@ -27,17 +27,17 @@ const DAYS_TO_WKS = HRS_TO_DAYS * 7;
 //   };
 // }
 
+// TODO: Create unit tests for this function to verify that it is calculating the correct time difference
 export function getTimeDifference(date: Date): Duration {
-
   // Calculate difference in milliseconds
   const diffInMs = weddingDate.getTime() - date.getTime();
 
   // Convert to days (1000ms * 60s * 60m * 24h)
   const actualDaysUntil = diffInMs / HRS_TO_DAYS; // There is a remainder with this
-  const wholeDaysUntil = Math.floor(actualDaysUntil)
+  const wholeDaysUntil = Math.floor(actualDaysUntil);
   const actualWeeksUntil = Math.floor(diffInMs / DAYS_TO_WKS);
 
-  const actualHoursUntil = diffInMs / MINS_TO_HRS
+  const actualHoursUntil = diffInMs / MINS_TO_HRS;
   const wholeHoursUntil = Math.floor(actualHoursUntil);
 
   const actualMinutesUntil = diffInMs / SECS_TO_MINS;
@@ -63,8 +63,6 @@ export function getTimeDifference(date: Date): Duration {
     hours: hours,
     minutes: minutes,
     seconds: secs,
-    milliseconds: -1
-  }
+    milliseconds: -1,
+  };
 }
-
-// export function formatTimeDiffs(diff: Duration) { }

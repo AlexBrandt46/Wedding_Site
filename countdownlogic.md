@@ -7,6 +7,7 @@
   - [ ] Seconds
 
 Timer should show:
+
 - 7 days becomes 1 wk
   - Day Range: [0, 6]
 - 24 hours becomes 1 day
@@ -17,6 +18,7 @@ Timer should show:
   - Second Range: [0, 59]
 
 Assume wedding is at 2:00 EST:
+
 - At 2:00:00 PM EST every at X weeks out
   - Saturday before that Saturday:
     - X weeks, 0 days, 0 hours 0 minutes, 0 seconds

@@ -2,7 +2,7 @@ import './App.css';
 import { Box, createTheme } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import WideTabList from './components/WideTabList';
+import WideTabList from './components/Menu/WideTabList';
 import MobileTabList from './components/Menu/MobileMenuDrawer';
 import React from 'react';
 
@@ -28,6 +28,7 @@ function App() {
     },
   });
 
+  // TODO: Pass this into WideTabList
   const [value, setValue] = React.useState('1');
 
   return (
