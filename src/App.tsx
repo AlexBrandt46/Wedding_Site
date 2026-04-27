@@ -1,10 +1,11 @@
-import './App.css';
-import { Box, createTheme } from '@mui/material';
+import { createTheme } from '@mui/material';
+import Box from '@mui/material/Box';
 import { ThemeProvider } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import WideTabList from './components/Menu/WideTabList';
-import MobileTabList from './components/Menu/MobileMenuDrawer';
 import React from 'react';
+import './App.css';
+import MobileTabList from './components/Menu/MobileMenuDrawer';
+import WideTabList from './components/Menu/WideTabList';
 
 function App() {
   const minHeaderMatch = useMediaQuery('(min-width:516px)');
@@ -28,7 +29,6 @@ function App() {
     },
   });
 
-  // TODO: Pass this into WideTabList
   const [value, setValue] = React.useState('1');
 
   return (
@@ -40,7 +40,7 @@ function App() {
           fontFamily: 'Butler !important',
         }}
       >
-        {minHeaderMatch && <WideTabList />}
+        {minHeaderMatch && <WideTabList value={value} setValue={setValue} />}
         {!minHeaderMatch && <MobileTabList value={value} setValue={setValue} />}
       </Box>
     </ThemeProvider>

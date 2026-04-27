@@ -1,15 +1,13 @@
 import TabContext from '@mui/lab/TabContext';
+import Box from '@mui/material/Box';
 import React from 'react';
+import type TabListProps from '../../types/TabListProps';
 import TabBox from './TabBox';
 import TabPanels from './TabPanels';
-import Box from '@mui/material/Box';
 
-// TODO: Update this to take in the value and setValue from App.tsx so that the state is lifted up and can be shared between the WideTabList and MobileTabList components. This will allow the selected tab to be consistent across both components when the screen size changes.
-export default function WideTabList() {
-  const [value, setValue] = React.useState('1');
-
+export default function WideTabList(props: TabListProps) {
   const handleChange = (_event: React.SyntheticEvent, newValue: string) => {
-    setValue(newValue);
+    props.setValue(newValue);
   };
 
   return (
@@ -20,7 +18,7 @@ export default function WideTabList() {
         fontFamily: 'Butler !important',
       }}
     >
-      <TabContext value={value}>
+      <TabContext value={props.value}>
         {/* <img id="usImage" style={{ height: '200px' }} /> */}
         <TabBox handleChange={handleChange} />
         <TabPanels />

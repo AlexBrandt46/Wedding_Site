@@ -1,6 +1,10 @@
-import { Stack, Paper, Typography } from '@mui/material';
+import Stack from '@mui/material/Stack';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
 import { getTimeDifference } from '../../utils/dateUtil';
 import { useEffect, useState } from 'react';
+
+const TIME_UNITS = ['weeks', 'days', 'hours', 'minutes', 'seconds'] as const;
 
 export default function CountDownTimer() {
   const [timeLeft, setTimeLeft] = useState(getTimeDifference(new Date()));
@@ -14,32 +18,19 @@ export default function CountDownTimer() {
   }, []);
 
   return (
-    // TODO: Clean this up by:
-    // 1. Creating a list of time units (weeks, days, hours, minutes, seconds)
-    // 2. Mapping over that list to create the Paper components dynamically
-    // 3. Creating a class for the unit labels (Weeks, Days, etc.) to avoid duplicate inline styling
-    // 4. Creating a class for the countdown papers that have a margin-right of 1vw, and applying that class to all but the last Paper component
     <Stack direction="row" id="countDownStack">
-      <Paper className="countDownPaper" sx={{ marginRight: '1vw' }}>
-        <Typography className="countDownNumber">{timeLeft.weeks}</Typography>
-        <Typography sx={{ paddingBottom: 0 }}>Weeks</Typography>
-      </Paper>
-      <Paper className="countDownPaper" sx={{ marginRight: '1vw' }}>
-        <Typography className="countDownNumber">{timeLeft.days}</Typography>
-        <Typography sx={{ paddingBottom: 0 }}>Days</Typography>
-      </Paper>
-      <Paper className="countDownPaper" sx={{ marginRight: '1vw' }}>
-        <Typography className="countDownNumber">{timeLeft.hours}</Typography>
-        <Typography sx={{ paddingBottom: 0 }}>Hours</Typography>
-      </Paper>
-      <Paper className="countDownPaper" sx={{ marginRight: '1vw' }}>
-        <Typography className="countDownNumber">{timeLeft.minutes}</Typography>
-        <Typography sx={{ paddingBottom: 0 }}>Minutes</Typography>
-      </Paper>
-      <Paper className="countDownPaper">
-        <Typography className="countDownNumber">{timeLeft.seconds}</Typography>
-        <Typography sx={{ paddingBottom: 0 }}>Seconds</Typography>
-      </Paper>
+      {TIME_UNITS.map((unit, index) => (
+        <Paper
+          key={unit}
+          className="countDownPaper"
+          sx={{ marginRight: index === TIME_UNITS.length - 1 ? 0 : '1vw' }}
+        >
+          <Typography className="countDownNumber">{timeLeft[unit]}</Typography>
+          <Typography sx={{ paddingBottom: 0 }}>
+            {unit.charAt(0).toUpperCase() + unit.slice(1)}
+          </Typography>
+        </Paper>
+      ))}
     </Stack>
   );
 }

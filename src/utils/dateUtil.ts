@@ -28,6 +28,7 @@ const DAYS_TO_WKS = HRS_TO_DAYS * 7;
 // }
 
 // TODO: Create unit tests for this function to verify that it is calculating the correct time difference
+// TODO: Clean this up
 export function getTimeDifference(date: Date): Duration {
   // Calculate difference in milliseconds
   const diffInMs = weddingDate.getTime() - date.getTime();

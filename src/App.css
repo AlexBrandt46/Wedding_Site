@@ -3,13 +3,8 @@
 #root {
   text-align: center;
   --navy: #2e4670;
-  background-color: var(--gold);
   font-family: 'Butler';
   width: 100%;
-}
-
-.card {
-  padding: 2em;
 }
 
 p {
@@ -63,7 +58,7 @@ p {
 
 @media (max-width: 412px) {
   #countDownStack {
-    gap: 16px; /* Sets both row and column spacing */
-    justify-content: center; /* Centers the items in the container */
+    gap: 16px;
+    justify-content: center;
   }
 }

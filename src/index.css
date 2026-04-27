@@ -7,7 +7,6 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: var(--gold);
   --text-color: #242424;
   --salmon: #ce8d93;
   --navy: #2e4670;
@@ -22,6 +21,7 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--gold);
 }
 
 a {
@@ -37,8 +37,6 @@ a:hover {
 body {
   margin: 0;
   display: flex;
-  min-width: 320px;
-  min-height: 100vh;
 }
 
 h1 {
@@ -62,26 +60,12 @@ button:hover {
   border-color: var(--navy);
 }
 
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
-    background-color: #ffffff;
-  }
-
-  a:hover {
-    color: var(--navy);
   }
 
   button {
     background-color: #f9f9f9;
   }
-}
-
-body {
-  background-color: var(--gold) !important;
 }

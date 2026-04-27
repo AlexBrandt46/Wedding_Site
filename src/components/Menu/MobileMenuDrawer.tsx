@@ -1,6 +1,7 @@
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import MenuIcon from '@mui/icons-material/Menu';
 import TabContext from '@mui/lab/TabContext';
+import Icon from '@mui/material/Icon';
 import type { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import MuiAppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -11,9 +12,9 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import React from 'react';
 import { MENU_TABS } from '../../types/MenuTabs';
-import TabPanels from './TabPanels';
 import TabBox from './TabBox';
-import { Icon } from '@mui/material';
+import TabPanels from './TabPanels';
+import type TabListProps from '../../types/TabListProps';
 
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean;
@@ -51,22 +52,15 @@ const AppBar = styled(MuiAppBar, {
   color: 'var(--text-color) !important',
 }));
 
-// TODO: Create a TabListProps interface and type the props for this component and WideTabList with it
-export default function MobileTabList({
-  value,
-  setValue,
-}: {
-  value: string;
-  setValue: (value: string) => void;
-}) {
+export default function MobileTabList(props: TabListProps) {
   const [open, setOpen] = React.useState(false);
   const [toolbarHeader, setToolbarHeader] = React.useState('A & B');
 
   const handleChange = (_event: React.SyntheticEvent, newValue: string) => {
-    setValue(newValue);
+    props.setValue(newValue);
     setOpen(false);
     setToolbarHeader(
-      MENU_TABS[newValue as keyof typeof MENU_TABS] !== 'Main'
+      MENU_TABS[newValue as keyof typeof MENU_TABS] !== 'Home'
         ? MENU_TABS[newValue as keyof typeof MENU_TABS]
         : 'A & B'
     );
@@ -81,7 +75,7 @@ export default function MobileTabList({
   };
 
   return (
-    <TabContext value={value}>
+    <TabContext value={props.value}>
       <Box
         sx={{
           borderBottom: 1,

@@ -1,4 +1,6 @@
-import { List, ListItem, Paper } from '@mui/material';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import Paper from '@mui/material/Paper';
 
 export default function EventInfo() {
   return (

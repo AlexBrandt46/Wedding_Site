@@ -1,26 +1,20 @@
-// TODO: Separate each import into its own line for each individual import
-
-import {
-  Alert,
-  Button,
-  Checkbox,
-  FormControl,
-  FormControlLabel,
-  FormGroup,
-  Paper,
-  Radio,
-  RadioGroup,
-  Snackbar,
-  styled,
-  TextField,
-  Tooltip,
-  tooltipClasses,
-  Typography,
-  type TooltipProps,
-} from '@mui/material';
-import { useState, Fragment } from 'react';
-import { supabase } from '../utils/supabaseUtil';
+import Alert from '@mui/material/Alert';
+import Button from '@mui/material/Button';
+import Checkbox from '@mui/material/Checkbox';
+import FormControl from '@mui/material/FormControl';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormGroup from '@mui/material/FormGroup';
+import Paper from '@mui/material/Paper';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import Snackbar from '@mui/material/Snackbar';
+import TextField from '@mui/material/TextField';
+import Tooltip, { type TooltipProps, tooltipClasses } from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
+import { styled } from '@mui/material/styles';
+import { Fragment, useState } from 'react';
 import { createGuest } from '../types/Guest';
+import { supabase } from '../utils/supabaseUtil';
 
 const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
   <Tooltip {...props} classes={{ popper: className }} />
@@ -51,7 +45,6 @@ export default function RsvpForm() {
     });
 
     console.log(data);
-    console.log(error);
 
     if (!error) {
       setShowEmailConfirmationAlert(true);
@@ -64,24 +57,11 @@ export default function RsvpForm() {
     setGuest({ ...guest, attending: attendingVal === 'attending' });
   };
 
-  /**
-   * Event handler for changing dietary restrictions checkboxes
-   * @param e
-   */
-  const handleDietCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const dietIsChecked = e.target.checked;
-    setDietTextboxHidden(!dietIsChecked);
-  };
-
-  const closeEmailConfirmationAlert = () => {
-    setShowEmailConfirmationAlert(false);
-  };
-
   return (
     <Paper sx={{ textAlign: 'center', padding: '1rem', fontFamily: 'Butler' }}>
       <Snackbar
         open={showEmailConfirmationAlert}
-        onClose={closeEmailConfirmationAlert}
+        onClose={() => setShowEmailConfirmationAlert(false)}
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
       >
         <Alert>Thank you for RSVPing! Expect a confirmation email shortly.</Alert>
@@ -147,7 +127,7 @@ export default function RsvpForm() {
                   <Checkbox
                     name="diet"
                     checked={!dietTextboxHidden}
-                    onChange={(e) => handleDietCheckboxChange(e)}
+                    onChange={(e) => setDietTextboxHidden(!e.target.checked)}
                   />
                 }
               ></FormControlLabel>
@@ -158,7 +138,6 @@ export default function RsvpForm() {
                 required={!dietTextboxHidden}
                 disabled={dietTextboxHidden}
                 sx={{ visibility: dietTextboxHidden ? 'hidden' : 'visible' }}
-                hidden={dietTextboxHidden ? true : undefined}
                 value={dietDescription}
                 onChange={(e) => setDietDescription(e.target.value)}
               />

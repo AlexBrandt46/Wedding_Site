@@ -1,17 +1,14 @@
-import { Box, Paper, Typography } from '@mui/material';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
+import StorySection from './StorySection';
 
+// TODO: Add more content for each section.
+// TODO: Refactor this to loop over an array of story sections and render them dynamically instead of hardcoding each section. This will make it easier to add/remove sections in the future without having to modify the component.
 export default function OurStory() {
   return (
     <Paper className="pagePaper">
-      <Box>
-        <Typography variant="h6">How it Started</Typography>
-        <Typography variant="body1" align="left">
-          <b>His:</b>{' '}
-        </Typography>
-        <Typography variant="body1" align="left">
-          <b>Hers:</b>{' '}
-        </Typography>
-      </Box>
+      <StorySection header="How it Started" hisText="" hersText="" />
       <Box>
         <Typography variant="h6">The Proposal</Typography>
         <Typography variant="body1" align="left">
@@ -25,24 +22,8 @@ export default function OurStory() {
           <b>Hers:</b>{' '}
         </Typography>
       </Box>
-      <Box>
-        <Typography variant="h6">The Big Day</Typography>
-        <Typography variant="body1" align="left">
-          <b>His:</b>{' '}
-        </Typography>
-        <Typography variant="body1" align="left">
-          <b>Hers:</b>{' '}
-        </Typography>
-      </Box>
-      <Box>
-        <Typography variant="h6">Happily Ever After</Typography>
-        <Typography variant="body1" align="left">
-          <b>His:</b>{' '}
-        </Typography>
-        <Typography variant="body1" align="left">
-          <b>Hers:</b>{' '}
-        </Typography>
-      </Box>
+      <StorySection header="The Big Day" hisText="" hersText="" />
+      <StorySection header="Happily Ever After" hisText="" hersText="" />
     </Paper>
   );
 }
