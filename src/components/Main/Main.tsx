@@ -1,9 +1,11 @@
-import { Box, Paper, Typography } from '@mui/material';
+import Paper from '@mui/material/Paper';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 import CountDownTimer from './CountDownTimer';
 
 export default function Main() {
   return (
-    <Paper className="pagePaper">
+    <Paper className="pagePaper" sx={{ display: 'flex', flexDirection: 'column' }}>
       <CountDownTimer />
       <Box>
         <Typography variant="h6">Our Registry</Typography>
