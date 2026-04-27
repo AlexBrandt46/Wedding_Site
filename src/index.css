@@ -1,5 +1,5 @@
 :root {
-  font-family: "Butler" sans-serif !important;
+  font-family: 'Butler' sans-serif !important;
   line-height: 1.5;
   font-weight: 400;
 
@@ -50,7 +50,7 @@ button {
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
-  font-family: "Butler";
+  font-family: 'Butler';
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
@@ -81,5 +81,5 @@ button:focus-visible {
 }
 
 body {
-  background-color: var(--gold);
+  background-color: var(--gold) !important;
 }

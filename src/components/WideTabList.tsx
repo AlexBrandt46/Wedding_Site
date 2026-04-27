@@ -1,12 +1,20 @@
 import { TabContext, TabList, TabPanel } from '@mui/lab';
-import { Box, Tab } from '@mui/material';
+import Tab from '@mui/material/Tab';
+import Box from '@mui/material/Box';
+import React from 'react';
 import EventInfo from './EventInfo';
 import Main from './Main/Main';
 import OurStory from './OurStory';
 import PhotoGallery from './Photos/PhotoGallery';
 import RsvpForm from './RsvpForm';
 
-export default function WideTabList({ onTabChange: (React.SyntheticEvent, any) => void)}) {
+export default function WideTabList() {
+  const [value, setValue] = React.useState('1');
+
+  const handleChange = (_event: React.SyntheticEvent, newValue: string) => {
+    setValue(newValue);
+  };
+
   return (
     <Box
       sx={{
@@ -28,7 +36,7 @@ export default function WideTabList({ onTabChange: (React.SyntheticEvent, any) =
             display: { xs: 'flex', s: 'flex', md: 'flex' },
           }}
         >
-          <TabList id="tabList" onChange={onTabChange}>
+          <TabList id="tabList" onChange={handleChange}>
             <Tab label="Main" value="1" sx={{ fontFamily: 'Butler', wordWrap: 'break-word' }} />
             <Tab label="Our Story" value="2" sx={{ fontFamily: 'Butler' }} />
             <Tab
