@@ -19,7 +19,6 @@ export default function WideTabList(props: TabListProps) {
       }}
     >
       <TabContext value={props.value}>
-        {/* <img id="usImage" style={{ height: '200px' }} /> */}
         <TabBox handleChange={handleChange} />
         <TabPanels />
       </TabContext>
