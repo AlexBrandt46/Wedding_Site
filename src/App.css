@@ -44,6 +44,14 @@ p {
   flex-wrap: wrap;
 }
 
+/* Desktop */
+@media (min-width: 515px) {
+  #usImage {
+    height: 60vh;
+    width: 50vw;
+  }
+}
+
 /* Mobile */
 @media (max-width: 515px) {
   .pagePanel {
@@ -53,6 +61,10 @@ p {
 
   #countDownStack {
     justify-content: space-between;
+  }
+
+  #usImage {
+    width: -webkit-fill-available !important;
   }
 }
 
