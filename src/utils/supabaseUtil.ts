@@ -1,7 +1,8 @@
 import { createClient } from '@supabase/supabase-js';
+import type { StoryEntry } from '../types/SupabaseTypes';
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseKey = import.meta.env.VITE_SUPABASE_SECRET_KEY;
+const supabaseKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
 
 export const supabase = createClient(supabaseUrl, supabaseKey);
 
@@ -27,6 +28,17 @@ export async function getImageURL(imgName: string) {
   }
 
   return data.signedUrl;
+}
+
+export async function getStoryEntries(): Promise<StoryEntry[]> {
+  const { data, error } = await supabase.from('story_entries').select('*');
+
+  if (error) {
+    console.error('Error fetching story entries:', error);
+    return [];
+  }
+
+  return data ?? [];
 }
 
 // export function getImage(imgName: string) {
