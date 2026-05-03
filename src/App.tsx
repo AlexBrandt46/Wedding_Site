@@ -23,8 +23,38 @@ function App() {
             font-display: swap;
             font-weight: 400;
             src: local("Butler-Bold"), url("./assets/fonts/serif/Butler-Bold.woff2") format();
-          }
+          },
+
         `,
+      },
+      MuiAlert: {
+        styleOverrides: {
+          root: {
+            variants: [
+              {
+                props: { severity: 'error' },
+                style: {
+                  color: 'var(--red)',
+                  backgroundColor: 'var(--salmon)',
+                },
+              },
+              {
+                props: { severity: 'warning' },
+                style: {
+                  color: 'var(--yellow)',
+                  backgroundColor: 'var(--gold)',
+                },
+              },
+            ],
+          },
+          // standardError: {
+          //   color: var(--salmon);
+          // },
+          // standardWarning: {
+          //   color: var(--yellow);
+          //   background-color: var(--gold);
+          // },
+        },
       },
     },
   });

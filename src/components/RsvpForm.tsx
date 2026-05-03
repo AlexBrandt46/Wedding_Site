@@ -15,6 +15,7 @@ import { styled } from '@mui/material/styles';
 import { Fragment, useState } from 'react';
 import { createGuest } from '../types/Guest';
 import { supabase } from '../utils/supabaseUtil';
+import RsvpAlert from './EventInfo/RsvpAlert';
 
 const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
   <Tooltip {...props} classes={{ popper: className }} />
@@ -66,9 +67,10 @@ export default function RsvpForm() {
       >
         <Alert>Thank you for RSVPing! Expect a confirmation email shortly.</Alert>
       </Snackbar>
-      <Typography variant="h5" style={{ fontFamily: 'Butler' }}>
+      <Typography variant="h5" sx={{ marginBottom: '1rem' }}>
         Event RSVP
       </Typography>
+      <RsvpAlert />
       <form
         style={{
           display: 'flex',
