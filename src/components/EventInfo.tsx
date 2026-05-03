@@ -62,7 +62,7 @@ export default function EventInfo() {
       </List>
       <p>
         <b>Overnight Accomodations:</b> For those wishing to stay nearby, there are several hotels
-        and numerous AirBnbs and VRBOs within a short distance of the venue.
+        and numerous AirBnbs, bed and breakfasts, and VRBOs within a short distance of the venue.
       </p>
       <br />
       <p>
