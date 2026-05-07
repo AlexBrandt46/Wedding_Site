@@ -15,6 +15,8 @@ import { styled } from '@mui/material/styles';
 import { Fragment, useState } from 'react';
 import { createGuest } from '../types/Guest';
 import { supabase } from '../utils/supabaseUtil';
+import RsvpAlert from './EventInfo/RsvpAlert';
+import { isPastRsvpDeadline } from '../utils/dateUtil';
 
 const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
   <Tooltip {...props} classes={{ popper: className }} />
@@ -34,6 +36,8 @@ export default function RsvpForm() {
   const [attending, setAttending] = useState<boolean | null>(null);
   const [dietDescription, setDietDescription] = useState('');
   const [showEmailConfirmationAlert, setShowEmailConfirmationAlert] = useState(false);
+
+  const pastRsvpDeadline: boolean = isPastRsvpDeadline();
 
   const submitRsvp = async () => {
     const { data, error } = await supabase.from('guests').insert({
@@ -66,9 +70,10 @@ export default function RsvpForm() {
       >
         <Alert>Thank you for RSVPing! Expect a confirmation email shortly.</Alert>
       </Snackbar>
-      <Typography variant="h5" style={{ fontFamily: 'Butler' }}>
+      <Typography variant="h5" sx={{ marginBottom: '1rem' }}>
         Event RSVP
       </Typography>
+      <RsvpAlert />
       <form
         style={{
           display: 'flex',
@@ -176,6 +181,7 @@ export default function RsvpForm() {
             sx={{ marginTop: '1vh' }}
             onClick={submitRsvp}
             disabled={
+              pastRsvpDeadline ||
               attending === null ||
               guest.firstName === '' ||
               guest.lastName === '' ||

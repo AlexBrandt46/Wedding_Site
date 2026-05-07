@@ -1,5 +1,5 @@
 import TabPanel from '@mui/lab/TabPanel';
-import EventInfo from '../EventInfo';
+import EventInfo from '../EventInfo/EventInfo';
 import Main from '../Main/Main';
 import OurStory from '../OurStory/OurStory';
 import PhotoGallery from '../Photos/PhotoGallery';
