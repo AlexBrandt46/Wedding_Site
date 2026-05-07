@@ -39,21 +39,13 @@ function App() {
                 },
               },
               {
-                props: { severity: 'warning' },
+                props: { severity: 'info' },
                 style: {
-                  color: 'var(--yellow)',
                   backgroundColor: 'var(--gold)',
                 },
               },
             ],
           },
-          // standardError: {
-          //   color: var(--salmon);
-          // },
-          // standardWarning: {
-          //   color: var(--yellow);
-          //   background-color: var(--gold);
-          // },
         },
       },
     },

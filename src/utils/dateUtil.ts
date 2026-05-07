@@ -1,31 +1,13 @@
 import { type Duration } from 'duration-fns';
 
 const weddingDate = new Date(2026, 8, 12, 14);
+const rsvpDeadline = new Date('2026-08-10T23:59:59'); // Set the RSVP deadline date and time
 
 const MS_TO_SECS = 1000;
 const SECS_TO_MINS = MS_TO_SECS * 60;
 const MINS_TO_HRS = SECS_TO_MINS * 60;
 const HRS_TO_DAYS = MINS_TO_HRS * 24;
 const DAYS_TO_WKS = HRS_TO_DAYS * 7;
-
-// export function oldGetTimeDifference(): Duration {
-//   const today = new Date();
-
-//   const otherDate = new Date(2026, 3, 12, 14); // April 11th, 2026 2PM
-
-//   const newTime = newGetTimeDifference(today);
-
-//   return {
-//     years: 0,
-//     months: 0, // Month difference is relative to calendar and not actual date for some dumb reason
-//     weeks: newTime.weeks,
-//     days: newTime.days,
-//     hours: newTime.hours,
-//     minutes: newTime.minutes,
-//     seconds: newTime.seconds,
-//     milliseconds: 0,
-//   };
-// }
 
 // TODO: Create unit tests for this function to verify that it is calculating the correct time difference
 // TODO: Clean this up
@@ -66,4 +48,9 @@ export function getTimeDifference(date: Date): Duration {
     seconds: secs,
     milliseconds: -1,
   };
+}
+
+export function isPastRsvpDeadline(): boolean {
+  const currentDate = new Date();
+  return currentDate > rsvpDeadline;
 }

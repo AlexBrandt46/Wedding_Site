@@ -1,12 +1,19 @@
-import { Alert } from '@mui/material';
+import Alert from '@mui/material/Alert';
+import InfoOutlined from '@mui/icons-material/InfoOutlined';
+import WarningAmberOutlinedIcon from '@mui/icons-material/WarningAmberOutlined';
+import { isPastRsvpDeadline } from '../../utils/dateUtil';
 
 export default function RsvpAlert() {
-  const currentDate = new Date();
-  const rsvpDeadline = new Date('2026-08-10T23:59:59'); // Set the RSVP deadline date and time
-  const isPastDeadline = currentDate > rsvpDeadline;
+  const isPastDeadline = isPastRsvpDeadline();
   let alertMessage = 'Please RSVP by August 10th, 2026.';
   let alertSeverity: 'info' | 'error' = 'info';
   let alertColor: 'warning' | 'error' = 'warning';
+
+  const alertSymbol = !isPastDeadline ? (
+    <InfoOutlined htmlColor="var(--dark-gold)" />
+  ) : (
+    <WarningAmberOutlinedIcon htmlColor="var(--dark-salmon)" />
+  );
 
   if (isPastDeadline) {
     alertMessage =
@@ -18,6 +25,7 @@ export default function RsvpAlert() {
   return (
     <Alert
       id="rsvpAlert"
+      icon={alertSymbol}
       severity={alertSeverity}
       color={alertColor}
       sx={{

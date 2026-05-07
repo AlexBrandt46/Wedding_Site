@@ -9,6 +9,7 @@
   color: rgba(255, 255, 255, 0.87);
   --text-color: #242424;
   --salmon: #ce8d93;
+  --dark-salmon: #962b38;
   --navy: #2e4670;
   --lightBlue: #b4d3df;
   --lightGreen: #bec4be;
@@ -16,6 +17,7 @@
   --blue: #a7bcca;
   --gold: #f6e6c2;
   --yellow: #fff8cb;
+  --dark-gold: #957636;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
