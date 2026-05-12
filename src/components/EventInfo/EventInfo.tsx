@@ -61,39 +61,53 @@ export default function EventInfo() {
         <Typography variant="h6">Schedule of Events</Typography>
         <List>
           <ListItem>
-            <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
-              <Typography variant="body1">1 PM:</Typography>
+            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+              <Typography variant="body1" sx={{ marginRight: '1rem' }}>
+                4:00 PM:
+              </Typography>
               <Typography variant="body1">Pre-Ceremony Greeting Time</Typography>
             </Box>
           </ListItem>
           <ListItem>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
-              <Typography variant="body1">2 PM:</Typography>
+              <Typography variant="body1" sx={{ marginRight: '1rem' }}>
+                4:30 PM:
+              </Typography>
               <Typography variant="body1">Ceremony</Typography>
             </Box>
           </ListItem>
           <ListItem>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
-              <Typography variant="body1">3 PM:</Typography>
+              <Typography variant="body1" sx={{ marginRight: '1rem' }}>
+                5:30 PM:
+              </Typography>
               <Typography variant="body1">Cocktail Hour</Typography>
             </Box>
           </ListItem>
           <ListItem>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
-              <Typography variant="body1">4 PM:</Typography>
+              <Typography variant="body1" sx={{ marginRight: '1rem' }}>
+                6:30 PM:
+              </Typography>
               <Typography variant="body1">Reception</Typography>
             </Box>
           </ListItem>
           <ListItem>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
-              <Typography variant="body1">9 PM:</Typography>
+              <Typography variant="body1" sx={{ marginRight: '1rem' }}>
+                9:00 PM:
+              </Typography>
               <Typography variant="body1">End of Reception</Typography>
             </Box>
           </ListItem>
           <ListItem>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
-              <Typography variant="body1">9:30 PM:</Typography>
-              <Typography variant="body1">Bar-Hopping in Spring Lake and Grand Haven</Typography>
+              <Typography variant="body1" sx={{ marginRight: '1rem' }}>
+                9:30 PM:
+              </Typography>
+              <Typography variant="body1">
+                Post-Wedding Celebrations in Spring Lake and Grand Haven
+              </Typography>
             </Box>
           </ListItem>
         </List>
