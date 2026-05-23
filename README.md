@@ -1,5 +1,7 @@
 # React + TypeScript + Vite
 
+[![Made with Supabase](https://supabase.com/badge-made-with-supabase.svg)](https://supabase.com)
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
