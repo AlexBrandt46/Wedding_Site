@@ -17,6 +17,7 @@ import { createGuest } from '../types/Guest';
 import { supabase } from '../utils/supabaseUtil';
 import RsvpAlert from './EventInfo/RsvpAlert';
 import { isPastRsvpDeadline } from '../utils/dateUtil';
+import { isValidEmail } from '../utils/rsvpValidationUtil';
 
 const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
   <Tooltip {...props} classes={{ popper: className }} />
@@ -36,16 +37,29 @@ export default function RsvpForm() {
   const [attending, setAttending] = useState<boolean | null>(null);
   const [dietDescription, setDietDescription] = useState('');
   const [showEmailConfirmationAlert, setShowEmailConfirmationAlert] = useState(false);
+  const [emailError, setEmailError] = useState('');
 
   const pastRsvpDeadline: boolean = isPastRsvpDeadline();
 
   const submitRsvp = async () => {
+    const trimmedFirstName = guest.firstName.trim();
+    const trimmedLastName = guest.lastName.trim();
+    const trimmedEmail = guest.emailAddress.trim();
+    const trimmedDietDescription = dietDescription.trim();
+
+    if (!isValidEmail(trimmedEmail)) {
+      setEmailError('Please enter a valid email address.');
+      return;
+    }
+
+    setEmailError('');
+
     const { data, error } = await supabase.from('guests').insert({
-      firstName: guest.firstName,
-      lastName: guest.lastName,
-      emailAddress: guest.emailAddress,
+      firstName: trimmedFirstName,
+      lastName: trimmedLastName,
+      emailAddress: trimmedEmail,
       attending: guest.attending,
-      otherDescription: dietTextboxHidden ? '' : dietDescription,
+      otherDescription: dietTextboxHidden ? '' : trimmedDietDescription,
     });
 
     console.log(data);
@@ -120,8 +134,12 @@ export default function RsvpForm() {
           required
           label="Email"
           type="email"
-          helperText="We'll never share your email."
-          onChange={(e) => setGuest({ ...guest, emailAddress: e.target.value })}
+          helperText={emailError || "We'll never share your email."}
+          error={!!emailError}
+          onChange={(e) => {
+            setGuest({ ...guest, emailAddress: e.target.value });
+            setEmailError('');
+          }}
         />
         <FormControl>
           <FormGroup>
@@ -156,6 +174,7 @@ export default function RsvpForm() {
             guest.firstName === '' ||
             guest.lastName === '' ||
             guest.emailAddress === '' ||
+            emailError !== '' ||
             (!dietTextboxHidden && dietDescription === '')) && (
             <Fragment>
               {/* <Typography> */}
@@ -166,6 +185,7 @@ export default function RsvpForm() {
                 {guest.firstName === '' && <li>First Name</li>}
                 {guest.lastName === '' && <li>Last Name</li>}
                 {guest.emailAddress === '' && <li>Email Address</li>}
+                {emailError !== '' && <li>{emailError}</li>}
                 {!dietTextboxHidden && dietDescription === '' && (
                   <li>Specific dietary restrictions if you checked "Other"</li>
                 )}
@@ -186,6 +206,7 @@ export default function RsvpForm() {
               guest.firstName === '' ||
               guest.lastName === '' ||
               guest.emailAddress === '' ||
+              emailError !== '' ||
               (!dietTextboxHidden && dietDescription === '')
             }
           >
