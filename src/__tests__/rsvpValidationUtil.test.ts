@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { isValidEmail } from '../utils/rsvpValidationUtil';
+import { isValidEmail, isNotEmptyString, isValidName } from '../utils/rsvpValidationUtil';
 
 describe('rsvpValidationUtil', () => {
   describe('isValidEmail', () => {
@@ -132,6 +132,212 @@ describe('rsvpValidationUtil', () => {
         expect(isValidEmail('verylonglocalpart@verylongdomainname.verylongextension.com')).toBe(
           true
         );
+      });
+    });
+  });
+
+  describe('isNotEmptyString', () => {
+    describe('valid non-empty strings', () => {
+      it('should accept a simple string', () => {
+        expect(isNotEmptyString('hello')).toBe(true);
+      });
+
+      it('should accept a single character', () => {
+        expect(isNotEmptyString('a')).toBe(true);
+      });
+
+      it('should accept a string with spaces', () => {
+        expect(isNotEmptyString('hello world')).toBe(true);
+      });
+
+      it('should accept a string with leading space and content', () => {
+        expect(isNotEmptyString(' hello')).toBe(true);
+      });
+
+      it('should accept a string with trailing space and content', () => {
+        expect(isNotEmptyString('hello ')).toBe(true);
+      });
+
+      it('should accept a string with numbers', () => {
+        expect(isNotEmptyString('123')).toBe(true);
+      });
+
+      it('should accept a string with special characters', () => {
+        expect(isNotEmptyString('hello@world!')).toBe(true);
+      });
+    });
+
+    describe('invalid empty strings', () => {
+      it('should reject an empty string', () => {
+        expect(isNotEmptyString('')).toBe(false);
+      });
+
+      it('should reject a string with only spaces', () => {
+        expect(isNotEmptyString('   ')).toBe(false);
+      });
+
+      it('should reject a string with only tabs', () => {
+        expect(isNotEmptyString('\t\t')).toBe(false);
+      });
+
+      it('should reject a string with only newlines', () => {
+        expect(isNotEmptyString('\n\n')).toBe(false);
+      });
+
+      it('should reject a string with mixed whitespace', () => {
+        expect(isNotEmptyString(' \t\n ')).toBe(false);
+      });
+    });
+  });
+
+  describe('isValidName', () => {
+    describe('valid names', () => {
+      it('should accept a simple first name', () => {
+        expect(isValidName('John')).toBe(true);
+      });
+
+      it('should accept a simple last name', () => {
+        expect(isValidName('Smith')).toBe(true);
+      });
+
+      it('should accept a name with all lowercase letters', () => {
+        expect(isValidName('alice')).toBe(true);
+      });
+
+      it('should accept a name with all uppercase letters', () => {
+        expect(isValidName('BOB')).toBe(true);
+      });
+
+      it('should accept a full name with space', () => {
+        expect(isValidName('John Doe')).toBe(true);
+      });
+
+      it('should accept a name with apostrophe', () => {
+        expect(isValidName("O'Brien")).toBe(true);
+      });
+
+      it('should accept a name with hyphen', () => {
+        expect(isValidName('Mary-Jane')).toBe(true);
+      });
+
+      it('should accept a name with multiple words separated by spaces', () => {
+        expect(isValidName('Mary Anne Smith')).toBe(true);
+      });
+
+      it('should accept a name with multiple apostrophes', () => {
+        expect(isValidName("O'Neal O'Brien")).toBe(true);
+      });
+
+      it('should accept a name with multiple hyphens', () => {
+        expect(isValidName('Jean-Claude-Marie')).toBe(true);
+      });
+
+      it('should accept a name with mixed special characters', () => {
+        expect(isValidName("Mary-Anne O'Connor")).toBe(true);
+      });
+
+      it('should accept a single character name', () => {
+        expect(isValidName('X')).toBe(true);
+      });
+
+      it('should accept a name with leading apostrophe', () => {
+        expect(isValidName("'Brien")).toBe(true);
+      });
+
+      it('should accept a name with leading hyphen', () => {
+        expect(isValidName('-Smith')).toBe(true);
+      });
+    });
+
+    describe('invalid names', () => {
+      it('should reject an empty string', () => {
+        expect(isValidName('')).toBe(false);
+      });
+
+      it('should reject a string with only spaces', () => {
+        expect(isValidName('   ')).toBe(false);
+      });
+
+      it('should reject a name with numbers', () => {
+        expect(isValidName('John123')).toBe(false);
+      });
+
+      it('should reject a name with single number', () => {
+        expect(isValidName('5')).toBe(false);
+      });
+
+      it('should reject a name with period', () => {
+        expect(isValidName('John.')).toBe(false);
+      });
+
+      it('should reject a name with comma', () => {
+        expect(isValidName('Smith, John')).toBe(false);
+      });
+
+      it('should reject a name with @ symbol', () => {
+        expect(isValidName('John@Doe')).toBe(false);
+      });
+
+      it('should reject a name with exclamation mark', () => {
+        expect(isValidName('John!')).toBe(false);
+      });
+
+      it('should reject a name with parentheses', () => {
+        expect(isValidName('John (Johnny)')).toBe(false);
+      });
+
+      it('should reject a name with brackets', () => {
+        expect(isValidName('John [Jr]')).toBe(false);
+      });
+
+      it('should reject a name with backslash', () => {
+        expect(isValidName('John\\Doe')).toBe(false);
+      });
+
+      it('should reject a name with forward slash', () => {
+        expect(isValidName('John/Doe')).toBe(false);
+      });
+
+      it('should reject a name with colon', () => {
+        expect(isValidName('John: Doe')).toBe(false);
+      });
+
+      it('should reject a name with semicolon', () => {
+        expect(isValidName('John; Doe')).toBe(false);
+      });
+
+      it('should reject a name with question mark', () => {
+        expect(isValidName('John?')).toBe(false);
+      });
+
+      it('should reject a name with asterisk', () => {
+        expect(isValidName('John*Doe')).toBe(false);
+      });
+    });
+
+    describe('edge cases', () => {
+      it('should reject a name with only apostrophe', () => {
+        expect(isValidName("'")).toBe(true);
+      });
+
+      it('should reject a name with only hyphen', () => {
+        expect(isValidName('-')).toBe(true);
+      });
+
+      it('should reject a name with consecutive apostrophes', () => {
+        expect(isValidName("O''Brien")).toBe(true);
+      });
+
+      it('should reject a name with consecutive hyphens', () => {
+        expect(isValidName('Mary--Jane')).toBe(true);
+      });
+
+      it('should accept very long valid name', () => {
+        expect(isValidName('Alexander-Christopher-Wilhelm-Frederick')).toBe(true);
+      });
+
+      it('should accept name with leading and trailing spaces after trim', () => {
+        expect(isValidName('  John  ')).toBe(true);
       });
     });
   });
