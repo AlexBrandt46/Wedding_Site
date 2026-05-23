@@ -6,10 +6,3 @@ export type StoryEntry = {
   images: string[] | undefined;
   [key: string]: unknown;
 };
-
-export interface StorageImage {
-  name: string;
-  path: string;
-  src: string;
-  alt: string;
-}
