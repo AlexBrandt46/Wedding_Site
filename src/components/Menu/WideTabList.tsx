@@ -20,7 +20,7 @@ export default function WideTabList(props: TabListProps) {
     >
       <TabContext value={props.value}>
         <TabBox handleChange={handleChange} />
-        <TabPanels />
+        <TabPanels setValue={props.setValue} />
       </TabContext>
     </Box>
   );

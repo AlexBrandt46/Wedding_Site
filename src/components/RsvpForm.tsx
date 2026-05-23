@@ -16,6 +16,7 @@ import { Fragment, useState } from 'react';
 import { createGuest } from '../types/Guest';
 import { supabase } from '../utils/supabaseUtil';
 import RsvpAlert from './EventInfo/RsvpAlert';
+import RsvpConfirmation from './RsvpConfirmation';
 import { isPastRsvpDeadline } from '../utils/dateUtil';
 
 const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
@@ -30,12 +31,17 @@ const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
   },
 }));
 
-export default function RsvpForm() {
+interface RsvpFormProps {
+  setValue?: (value: string) => void;
+}
+
+export default function RsvpForm({ setValue }: RsvpFormProps) {
   const [guest, setGuest] = useState(createGuest());
   const [dietTextboxHidden, setDietTextboxHidden] = useState(true);
   const [attending, setAttending] = useState<boolean | null>(null);
   const [dietDescription, setDietDescription] = useState('');
-  const [showEmailConfirmationAlert, setShowEmailConfirmationAlert] = useState(false);
+  const [showErrorAlert, setShowErrorAlert] = useState(false);
+  const [isRsvpSubmitted, setIsRsvpSubmitted] = useState(false);
 
   const pastRsvpDeadline: boolean = isPastRsvpDeadline();
 
@@ -50,8 +56,14 @@ export default function RsvpForm() {
 
     console.log(data);
 
-    if (!error) {
-      setShowEmailConfirmationAlert(true);
+    // TODO: improve error handling to give more specific feedback to user on what went wrong with their submission
+    // TODO: Refactor this to simplify logic and reduce number of state variables if possible
+    if (error) {
+      setShowErrorAlert(true);
+      setIsRsvpSubmitted(false);
+    } else {
+      setShowErrorAlert(false);
+      setIsRsvpSubmitted(true);
     }
   };
 
@@ -61,14 +73,34 @@ export default function RsvpForm() {
     setGuest({ ...guest, attending: attendingVal === 'attending' });
   };
 
+  const handleBackToForm = () => {
+    setIsRsvpSubmitted(false);
+    setGuest(createGuest());
+    setAttending(null);
+    setDietDescription('');
+    setDietTextboxHidden(true);
+  };
+
+  const handleBackToHome = () => {
+    if (setValue) {
+      setValue('1');
+    }
+  };
+
+  if (isRsvpSubmitted) {
+    return <RsvpConfirmation onBackToForm={handleBackToForm} onBackToHome={handleBackToHome} />;
+  }
+
   return (
     <Paper sx={{ textAlign: 'center', padding: '1rem', fontFamily: 'Butler' }}>
       <Snackbar
-        open={showEmailConfirmationAlert}
-        onClose={() => setShowEmailConfirmationAlert(false)}
+        open={showErrorAlert}
+        onClose={() => setShowErrorAlert(false)}
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
       >
-        <Alert>Thank you for RSVPing! Expect a confirmation email shortly.</Alert>
+        <Alert severity="error">
+          There was an issue with your RSVP submission. Please try again.
+        </Alert>
       </Snackbar>
       <Typography variant="h5" sx={{ marginBottom: '1rem' }}>
         Event RSVP

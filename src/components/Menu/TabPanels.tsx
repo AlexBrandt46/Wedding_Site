@@ -3,9 +3,10 @@ import EventInfo from '../EventInfo/EventInfo';
 import Main from '../Main/Main';
 import OurStory from '../OurStory/OurStory';
 import RsvpForm from '../RsvpForm';
+import type TabListProps from '../../types/TabListProps';
 
 // TODO: Refactor this to loop over the MENU_ITEMS and render the appropriate component based on the value. This will make it easier to add/remove menu items in the future without having to modify this component.
-export default function TabPanels() {
+export default function TabPanels({ setValue }: Partial<TabListProps>) {
   return (
     <>
       <TabPanel value="1" className="pagePanel">
@@ -18,7 +19,7 @@ export default function TabPanels() {
         <EventInfo />
       </TabPanel>
       <TabPanel value="4" className="pagePanel">
-        <RsvpForm />
+        <RsvpForm setValue={setValue} />
       </TabPanel>
     </>
   );
