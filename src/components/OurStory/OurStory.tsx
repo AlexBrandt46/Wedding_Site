@@ -24,16 +24,13 @@ export default function OurStory() {
           header={entry.header}
           hisText={String(entry.his_text)}
           hersText={String(entry.hers_text)}
+          images={entry.story_images as string[] | undefined}
         />
       ))}
     </Paper>
   );
 }
-//
-// <Typography variant="body1" align="left">
-{
-  /* <b>His: </b> */
-}
+
 {
   /* { */
 }
