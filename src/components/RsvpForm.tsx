@@ -17,6 +17,9 @@ import { createGuest } from '../types/Guest';
 import { supabase } from '../utils/supabaseUtil';
 import RsvpAlert from './EventInfo/RsvpAlert';
 import { isPastRsvpDeadline } from '../utils/dateUtil';
+import { isNotEmptyString, isValidEmail, isValidName } from '../utils/rsvpValidationUtil';
+
+// TODO: Fix issue with
 
 const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
   <Tooltip {...props} classes={{ popper: className }} />
@@ -36,16 +39,60 @@ export default function RsvpForm() {
   const [attending, setAttending] = useState<boolean | null>(null);
   const [dietDescription, setDietDescription] = useState('');
   const [showEmailConfirmationAlert, setShowEmailConfirmationAlert] = useState(false);
+  const [emailError, setEmailError] = useState('');
+  const [firstNameError, setFirstNameError] = useState('');
+  const [lastNameError, setLastNameError] = useState('');
+  const [dietDescriptionError, setDietDescriptionError] = useState('');
 
   const pastRsvpDeadline: boolean = isPastRsvpDeadline();
 
   const submitRsvp = async () => {
+    const trimmedFirstName = guest.firstName.trim();
+    const trimmedLastName = guest.lastName.trim();
+    const trimmedEmail = guest.emailAddress.trim();
+    const trimmedDietDescription = dietDescription.trim();
+    let validInput = true;
+
+    if (!isValidEmail(trimmedEmail)) {
+      setEmailError('Please enter a valid email address.');
+      validInput = false;
+    } else {
+      setEmailError('');
+    }
+
+    if (!isValidName(trimmedFirstName)) {
+      setFirstNameError('Please enter a non-empty first name.');
+      validInput = false;
+    } else {
+      setFirstNameError('');
+    }
+
+    if (!isValidName(trimmedLastName)) {
+      setLastNameError('Please enter a non-empty last name.');
+      validInput = false;
+    } else {
+      setLastNameError('');
+    }
+
+    if (!dietTextboxHidden && !isNotEmptyString(trimmedDietDescription)) {
+      setDietDescriptionError(
+        'Please enter a non-empty dietary restriction if the "Dietary Restrictions" option is selected.'
+      );
+      validInput = false;
+    } else {
+      setDietDescriptionError('');
+    }
+
+    if (!validInput) {
+      return;
+    }
+
     const { data, error } = await supabase.from('guests').insert({
-      firstName: guest.firstName,
-      lastName: guest.lastName,
-      emailAddress: guest.emailAddress,
+      firstName: trimmedFirstName,
+      lastName: trimmedLastName,
+      emailAddress: trimmedEmail,
       attending: guest.attending,
-      otherDescription: dietTextboxHidden ? '' : dietDescription,
+      otherDescription: dietTextboxHidden ? '' : trimmedDietDescription,
     });
 
     console.log(data);
@@ -105,14 +152,24 @@ export default function RsvpForm() {
           id="first-name-input"
           required
           label="First Name"
-          onChange={(e) => setGuest({ ...guest, firstName: e.target.value })}
+          helperText={firstNameError}
+          error={!!firstNameError}
+          onChange={(e) => {
+            setGuest({ ...guest, firstName: e.target.value });
+            setFirstNameError('');
+          }}
         />
         <TextField
           className="rsvp-input"
           id="last-name-input"
           required
           label="Last Name"
-          onChange={(e) => setGuest({ ...guest, lastName: e.target.value })}
+          helperText={lastNameError}
+          error={!!lastNameError}
+          onChange={(e) => {
+            setGuest({ ...guest, lastName: e.target.value });
+            setLastNameError('');
+          }}
         />
         <TextField
           className="rsvp-input"
@@ -120,8 +177,12 @@ export default function RsvpForm() {
           required
           label="Email"
           type="email"
-          helperText="We'll never share your email."
-          onChange={(e) => setGuest({ ...guest, emailAddress: e.target.value })}
+          helperText={emailError || "We'll never share your email."}
+          error={!!emailError}
+          onChange={(e) => {
+            setGuest({ ...guest, emailAddress: e.target.value });
+            setEmailError('');
+          }}
         />
         <FormControl>
           <FormGroup>
@@ -144,7 +205,12 @@ export default function RsvpForm() {
                 disabled={dietTextboxHidden}
                 sx={{ visibility: dietTextboxHidden ? 'hidden' : 'visible' }}
                 value={dietDescription}
-                onChange={(e) => setDietDescription(e.target.value)}
+                helperText={dietDescriptionError}
+                error={!!dietDescriptionError}
+                onChange={(e) => {
+                  setDietDescription(e.target.value);
+                  setDietDescriptionError('');
+                }}
               />
             </FormGroup>
           </FormGroup>
@@ -156,6 +222,7 @@ export default function RsvpForm() {
             guest.firstName === '' ||
             guest.lastName === '' ||
             guest.emailAddress === '' ||
+            emailError !== '' ||
             (!dietTextboxHidden && dietDescription === '')) && (
             <Fragment>
               {/* <Typography> */}
@@ -166,8 +233,11 @@ export default function RsvpForm() {
                 {guest.firstName === '' && <li>First Name</li>}
                 {guest.lastName === '' && <li>Last Name</li>}
                 {guest.emailAddress === '' && <li>Email Address</li>}
+                {firstNameError !== '' && <li>{firstNameError}</li>}
+                {lastNameError !== '' && <li>{lastNameError}</li>}
+                {emailError !== '' && <li>{emailError}</li>}
                 {!dietTextboxHidden && dietDescription === '' && (
-                  <li>Specific dietary restrictions if you checked "Other"</li>
+                  <li>Specific dietary restrictions if you checked "Other".</li>
                 )}
               </ul>
             </Fragment>
@@ -186,6 +256,7 @@ export default function RsvpForm() {
               guest.firstName === '' ||
               guest.lastName === '' ||
               guest.emailAddress === '' ||
+              emailError !== '' ||
               (!dietTextboxHidden && dietDescription === '')
             }
           >
