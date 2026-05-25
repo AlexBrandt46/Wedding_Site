@@ -7,6 +7,10 @@ const supabaseKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
 export const supabase = createClient(supabaseUrl, supabaseKey);
 export const supabasePrivate = createClient(supabaseUrl, import.meta.env.VITE_SUPABASE_SECRET_KEY);
 
+const emailRoutes = {
+  confirmation: 'send-confirmation-email',
+};
+
 export async function getStoryEntries(): Promise<StoryEntry[]> {
   const { data, error } = await supabase
     .from('story_entries')
@@ -19,4 +23,22 @@ export async function getStoryEntries(): Promise<StoryEntry[]> {
   }
 
   return data ?? [];
+}
+
+export async function sendEmail(topic: string, to: string): Promise<void> {
+  const emailFunction: string = emailRoutes[topic as keyof typeof emailRoutes];
+
+  // TODO: Handle SSRF for this function, as it is currently vulnerable to SSRF attacks. We should validate the `to` parameter to ensure it is a valid email address and does not allow for arbitrary URL access.
+  // TODO: Handle the case where the `topic` parameter does not match any of the defined routes in `emailRoutes`. We should return an error or throw an exception if the topic is invalid..
+  const { data, error } = await supabase.functions.invoke(emailFunction, {
+    body: JSON.stringify({
+      to,
+      subject: 'RSVP Confirmation - Alexander Brandt and Breann Stahl Wedding',
+      html: '<h1>Hello World - Email Test</h1>',
+    }),
+  });
+
+  if (error) {
+    console.error('Error sending email:', error);
+  }
 }
