@@ -30,7 +30,7 @@ export async function sendEmail(topic: string, to: string): Promise<void> {
 
   // TODO: Handle SSRF for this function, as it is currently vulnerable to SSRF attacks. We should validate the `to` parameter to ensure it is a valid email address and does not allow for arbitrary URL access.
   // TODO: Handle the case where the `topic` parameter does not match any of the defined routes in `emailRoutes`. We should return an error or throw an exception if the topic is invalid..
-  const { data, error } = await supabase.functions.invoke(emailFunction, {
+  const { error } = await supabase.functions.invoke(emailFunction, {
     body: JSON.stringify({
       to,
       subject: 'RSVP Confirmation - Alexander Brandt and Breann Stahl Wedding',
