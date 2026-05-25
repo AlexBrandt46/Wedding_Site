@@ -18,7 +18,7 @@ export default defineConfig({
     },
   },
   test: {
-    dir: './__tests__',
+    dir: 'src/__tests__',
     coverage: {
       enabled: true,
     },

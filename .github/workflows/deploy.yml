@@ -1,6 +1,10 @@
 # Simple workflow for deploying static content to GitHub Pages
 name: Deploy static content to Pages
 
+# TODO: Add a job that runs on non-main branches that will lint the code, run tests, and generate a coverage report, but not deploy to GitHub Pages whenever a commit is pushed or a PR is opened. This will help ensure that the code is in good shape before it gets merged into main and deployed to GitHub Pages.
+# TODO: Require that all unit tests pass and code coverage is 100% before PR can be approved
+# TODO: Add a job that will validate and require that the code will build properly without saving the artifacts after the lint and test job(s) are done running.
+
 on:
   # Runs on pushes targeting the default branch
   push:
@@ -29,15 +33,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v6.0.2
       - name: Set up Node
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v6.4.0
         with:
           node-version: lts/*
       - name: Setup pnpm
-        uses: pnpm/action-setup@v6.0.7
+        uses: pnpm/action-setup@v6.0.8
         with:
-          version: 11.1.0
+          version: 11.1.1
       - name: Install dependencies
         run: pnpm ci
       - name: Build
