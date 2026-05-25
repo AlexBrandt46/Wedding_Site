@@ -14,7 +14,7 @@ import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 import { Fragment, useState } from 'react';
 import { createGuest } from '../types/Guest';
-import { supabase } from '../utils/supabaseUtil';
+import { supabasePrivate } from '../utils/supabaseUtil';
 import RsvpAlert from './EventInfo/RsvpAlert';
 import RsvpConfirmation from './RsvpConfirmation';
 import { isPastRsvpDeadline } from '../utils/dateUtil';
@@ -93,7 +93,7 @@ export default function RsvpForm({ setValue }: RsvpFormProps) {
       return;
     }
 
-    const { data, error } = await supabase.from('guests').insert({
+    const { data, error } = await supabasePrivate.from('guests').insert({
       firstName: trimmedFirstName,
       lastName: trimmedLastName,
       emailAddress: trimmedEmail,
