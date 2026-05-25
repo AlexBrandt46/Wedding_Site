@@ -2,7 +2,7 @@ import TabPanel from '@mui/lab/TabPanel';
 import EventInfo from '../EventInfo/EventInfo';
 import Main from '../Main/Main';
 import OurStory from '../OurStory/OurStory';
-import RsvpForm from '../RsvpForm';
+import RsvpForm from '../Rsvp/RsvpForm';
 import type TabListProps from '../../types/TabListProps';
 
 // TODO: Refactor this to loop over the MENU_ITEMS and render the appropriate component based on the value. This will make it easier to add/remove menu items in the future without having to modify this component.

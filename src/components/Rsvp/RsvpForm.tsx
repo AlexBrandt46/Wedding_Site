@@ -13,12 +13,12 @@ import Tooltip, { type TooltipProps, tooltipClasses } from '@mui/material/Toolti
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 import { Fragment, useState } from 'react';
-import { createGuest } from '../types/Guest';
-import { sendEmail, supabase } from '../utils/supabaseUtil';
-import RsvpAlert from './EventInfo/RsvpAlert';
+import { createGuest } from '../../types/Guest';
+import { sendEmail, supabase } from '../../utils/supabaseUtil';
+import RsvpAlert from '../EventInfo/RsvpAlert';
 import RsvpConfirmation from './RsvpConfirmation';
-import { isPastRsvpDeadline } from '../utils/dateUtil';
-import { isNotEmptyString, isValidEmail, isValidName } from '../utils/rsvpValidationUtil';
+import { isPastRsvpDeadline } from '../../utils/dateUtil';
+import { isNotEmptyString, isValidEmail, isValidName } from '../../utils/rsvpValidationUtil';
 
 // TODO: Fix issue with
 
