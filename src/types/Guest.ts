@@ -3,7 +3,7 @@ export interface Guest {
   lastName: string;
   emailAddress: string;
   attending: boolean;
-  otherDescription: string;
+  dietRestrictions?: string;
 }
 
 export function createGuest(): Guest {
@@ -12,6 +12,5 @@ export function createGuest(): Guest {
     lastName: '',
     emailAddress: '',
     attending: false,
-    otherDescription: ''
   };
 }

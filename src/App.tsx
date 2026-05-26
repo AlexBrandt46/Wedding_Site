@@ -7,7 +7,7 @@ import './App.css';
 import MobileTabList from './components/Menu/MobileMenuDrawer';
 import WideTabList from './components/Menu/WideTabList';
 
-function App() {
+function App(props: { tab: string }) {
   const minHeaderMatch = useMediaQuery('(min-width:516px)');
 
   const theme = createTheme({
@@ -52,6 +52,14 @@ function App() {
   });
 
   const [value, setValue] = React.useState('1');
+
+  React.useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const tabParam = params.get('tab');
+    if (tabParam) {
+      setValue(tabParam);
+    }
+  }, []);
 
   return (
     <ThemeProvider theme={theme}>

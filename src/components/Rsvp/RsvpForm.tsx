@@ -19,8 +19,7 @@ import RsvpAlert from '../EventInfo/RsvpAlert';
 import RsvpConfirmation from './RsvpConfirmation';
 import { isPastRsvpDeadline } from '../../utils/dateUtil';
 import { isNotEmptyString, isValidEmail, isValidName } from '../../utils/rsvpValidationUtil';
-
-// TODO: Fix issue with
+import type { ResendTemplateVar } from '../../types/ResendTemplateVar';
 
 const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
   <Tooltip {...props} classes={{ popper: className }} />
@@ -93,13 +92,18 @@ export default function RsvpForm({ setValue }: RsvpFormProps) {
       return;
     }
 
-    const { data, error } = await supabase.from('guests').insert({
+    let guestInputs: ResendTemplateVar = {
+      attending: guest.attending,
       firstName: trimmedFirstName,
       lastName: trimmedLastName,
       emailAddress: trimmedEmail,
-      attending: guest.attending,
-      otherDescription: dietTextboxHidden ? '' : trimmedDietDescription,
-    });
+    };
+
+    if (!dietTextboxHidden) {
+      guestInputs.dietRestrictions = trimmedDietDescription;
+    }
+
+    const { data, error } = await supabase.from('guests').upsert(guestInputs);
 
     console.log(data);
 
@@ -111,7 +115,7 @@ export default function RsvpForm({ setValue }: RsvpFormProps) {
     } else {
       setShowErrorAlert(false);
       setIsRsvpSubmitted(true);
-      await sendEmail('confirmation', trimmedEmail);
+      await sendEmail('confirmation', guestInputs);
     }
   };
 

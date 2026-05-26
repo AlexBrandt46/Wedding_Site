@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background: #f6f2ed;
+        color: #2f2416;
+        font-family: 'Butler', Georgia, serif;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+      }
+      table {
+        border-collapse: collapse;
+      }
+      .container {
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+        background: #ffffff;
+        border: 1px solid #e8dfd4;
+      }
+      .header {
+        padding: 32px 24px 16px;
+        background: #fbf1dc;
+        text-align: center;
+      }
+      .title {
+        margin: 0;
+        font-size: 28px;
+        line-height: 1.2;
+        color: #3c2d1f;
+        font-weight: 700;
+      }
+      .subtitle {
+        margin: 12px 0 0;
+        color: #8f6b40;
+        font-size: 16px;
+        line-height: 1.5;
+      }
+      .section {
+        padding: 24px;
+      }
+      .section h2 {
+        margin: 0 0 16px;
+        font-size: 20px;
+        color: #3c2d1f;
+      }
+      .section p {
+        margin: 0 0 16px;
+        font-size: 16px;
+        line-height: 1.6;
+        color: #4a3d30;
+      }
+      .detail-table td {
+        padding: 10px 0;
+        border-bottom: 1px solid #ebe2d6;
+        font-size: 15px;
+        color: #4a3d30;
+      }
+      .detail-label {
+        width: 35%;
+        font-weight: 700;
+        color: #3c2d1f;
+      }
+      .button {
+        display: inline-block;
+        padding: 14px 24px;
+        background: #c2863d;
+        color: #ffffff;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: 700;
+      }
+      .alert {
+        margin: 20px 0 0;
+        padding: 16px;
+        border-radius: 10px;
+        background: #f7e2d9;
+        color: #7a3c33;
+        border: 1px solid #ebc3bb;
+      }
+      .footer {
+        padding: 24px;
+        text-align: center;
+        font-size: 13px;
+        color: #8a7b6e;
+      }
+    </style>
+  </head>
+  <body>
+    <table
+      role="presentation"
+      width="100%"
+      cellpadding="0"
+      cellspacing="0"
+      style="background: #f6f2ed; width: 100%; min-width: 100%"
+    >
+      <tr>
+        <td align="center">
+          <table role="presentation" class="container" cellpadding="0" cellspacing="0">
+            <tr>
+              <td class="header">
+                <h1 class="title">RSVP Confirmed</h1>
+                <p class="subtitle">
+                  Thank you for letting us know - we can't wait to celebrate with you.
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td class="section">
+                <p>
+                  Hello <strong>{{GUEST_FIRST_NAME}}</strong> <strong>{{GUEST_LAST_NAME}}</strong>,
+                </p>
+                <p>
+                  Your RSVP has been successfully received for our wedding celebration on
+                  <strong>September 12th</strong>, at <strong>4:30 PM EST</strong>. We have the
+                  following details on file:
+                </p>
+                <table class="detail-table" width="100%" role="presentation">
+                  <tr>
+                    <td class="detail-label">Guest First Name</td>
+                    <td>{{GUEST_FIRST_NAME}}</td>
+                  </tr>
+                  <tr>
+                    <td class="detail-label">Guest Last Name</td>
+                    <td>{{GUEST_LAST_NAME}}</td>
+                  </tr>
+                  <tr>
+                    <td class="detail-label">Attending</td>
+                    <td>{{GUEST_IS_ATTENDING}}</td>
+                  </tr>
+                  <tr>
+                    <td class="detail-label">Dietary Restrictions</td>
+                    <td>{{GUEST_DIET_RESTRICTIONS}}</td>
+                  </tr>
+                </table>
+                <p>If anything changes before the big day, feel free to update your RSVP.</p>
+                <p style="text-align: center">
+                  <a href="http://localhost:5173?tab=4" class="button">Manage your RSVP</a>
+                </p>
+                <div class="alert">
+                  <strong>Need help?</strong> Reply to this email or visit our RSVP page for updates
+                  and additional details.
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="footer">
+                <p>With love,</p>
+                <p><strong>Alex &amp; Bre</strong></p>
+                <p>If this wasn't you, please ignore this message.</p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
