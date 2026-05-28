@@ -1,6 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
 import type { StoryEntry } from '../types/SupabaseTypes';
 import type { ResendTemplateVar } from '../types/ResendTemplateVar';
+import { createGuest, type Guest } from '../types/Guest';
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
@@ -11,6 +12,22 @@ export const supabasePrivate = createClient(supabaseUrl, import.meta.env.VITE_SU
 const emailRoutes = {
   confirmation: 'send-confirmation-email',
 };
+
+export async function getGuest(uid: string): Promise<Guest> {
+  const { data, error } = await supabase.from('guests').select('*').eq('uid', uid);
+
+  if (error) {
+    console.error('Error fetching story entries:', error);
+    return createGuest();
+  }
+
+  if (data && data.length > 0) {
+    const guestData = data[0];
+    return guestData as Guest;
+  }
+
+  return createGuest();
+}
 
 export async function getStoryEntries(): Promise<StoryEntry[]> {
   const { data, error } = await supabase

@@ -7,7 +7,7 @@ import TabPanels from './TabPanels';
 
 export default function WideTabList(props: TabListProps) {
   const handleChange = (_event: React.SyntheticEvent, newValue: string) => {
-    props.setValue(newValue);
+    props.setTab(newValue);
   };
 
   return (
@@ -18,9 +18,9 @@ export default function WideTabList(props: TabListProps) {
         fontFamily: 'Butler !important',
       }}
     >
-      <TabContext value={props.value}>
+      <TabContext value={props.tab}>
         <TabBox handleChange={handleChange} />
-        <TabPanels setValue={props.setValue} />
+        <TabPanels setTab={props.setTab} setUid={props.setUid} uid={props.uid} />
       </TabContext>
     </Box>
   );

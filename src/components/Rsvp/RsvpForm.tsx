@@ -12,9 +12,9 @@ import TextField from '@mui/material/TextField';
 import Tooltip, { type TooltipProps, tooltipClasses } from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { createGuest } from '../../types/Guest';
-import { sendEmail, supabase } from '../../utils/supabaseUtil';
+import { getGuest, sendEmail, supabase } from '../../utils/supabaseUtil';
 import RsvpAlert from '../EventInfo/RsvpAlert';
 import RsvpConfirmation from './RsvpConfirmation';
 import { isPastRsvpDeadline } from '../../utils/dateUtil';
@@ -34,11 +34,14 @@ const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
 }));
 
 interface RsvpFormProps {
-  setValue?: (value: string) => void;
+  setTab?: (value: string) => void;
+  setUid?: (value: string) => void;
+  uid?: string;
 }
 
-export default function RsvpForm({ setValue }: RsvpFormProps) {
-  const [guest, setGuest] = useState(createGuest());
+export default function RsvpForm({ setTab: setTab, setUid: setUid, uid }: RsvpFormProps) {
+  const [guest, setGuest] = useState(uid !== '' ? undefined : createGuest());
+  const [uidFromUrl, setUidFromUrl] = useState(uid ?? '');
   const [dietTextboxHidden, setDietTextboxHidden] = useState(true);
   const [attending, setAttending] = useState<boolean | null>(null);
   const [dietDescription, setDietDescription] = useState('');
@@ -51,10 +54,21 @@ export default function RsvpForm({ setValue }: RsvpFormProps) {
 
   const pastRsvpDeadline: boolean = isPastRsvpDeadline();
 
+  useEffect(() => {
+    if (uidFromUrl && uidFromUrl !== '' && guest === undefined) {
+      getGuest(uidFromUrl).then((guestData) => {
+        setGuest(guestData);
+        setAttending(guestData.attending);
+      });
+    } else if (uid && uid !== '' && uid !== uidFromUrl) {
+      setUidFromUrl(uid);
+    }
+  }, [uidFromUrl]);
+
   const submitRsvp = async () => {
-    const trimmedFirstName = guest.firstName.trim();
-    const trimmedLastName = guest.lastName.trim();
-    const trimmedEmail = guest.emailAddress.trim();
+    const trimmedFirstName = guest!.firstName.trim();
+    const trimmedLastName = guest!.lastName.trim();
+    const trimmedEmail = guest!.emailAddress.trim();
     const trimmedDietDescription = dietDescription.trim();
     let validInput = true;
 
@@ -93,7 +107,8 @@ export default function RsvpForm({ setValue }: RsvpFormProps) {
     }
 
     let guestInputs: ResendTemplateVar = {
-      attending: guest.attending,
+      uid: guest!.uid,
+      attending: guest!.attending,
       firstName: trimmedFirstName,
       lastName: trimmedLastName,
       emailAddress: trimmedEmail,
@@ -104,8 +119,6 @@ export default function RsvpForm({ setValue }: RsvpFormProps) {
     }
 
     const { data, error } = await supabase.from('guests').upsert(guestInputs);
-
-    console.log(data);
 
     // TODO: improve error handling to give more specific feedback to user on what went wrong with their submission
     // TODO: Refactor this to simplify logic and reduce number of state variables if possible
@@ -122,7 +135,7 @@ export default function RsvpForm({ setValue }: RsvpFormProps) {
   const handleAttendingChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const attendingVal = (e.target as HTMLInputElement).value;
     setAttending(attendingVal === 'attending');
-    setGuest({ ...guest, attending: attendingVal === 'attending' });
+    setGuest({ ...guest!, attending: attendingVal === 'attending' });
   };
 
   const handleBackToForm = () => {
@@ -134,8 +147,8 @@ export default function RsvpForm({ setValue }: RsvpFormProps) {
   };
 
   const handleBackToHome = () => {
-    if (setValue) {
-      setValue('1');
+    if (setTab) {
+      setTab('1');
     }
   };
 
@@ -144,163 +157,166 @@ export default function RsvpForm({ setValue }: RsvpFormProps) {
   }
 
   return (
-    <Paper sx={{ textAlign: 'center', padding: '1rem', fontFamily: 'Butler' }}>
-      <Snackbar
-        open={showErrorAlert}
-        onClose={() => setShowErrorAlert(false)}
-        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-      >
-        <Alert severity="error">
-          There was an issue with your RSVP submission. Please try again.
-        </Alert>
-      </Snackbar>
-      <Typography variant="h5" sx={{ marginBottom: '1rem' }}>
-        Event RSVP
-      </Typography>
-      <RsvpAlert />
-      <form
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          fontFamily: 'Butler',
-        }}
-      >
-        <RadioGroup
-          name="attending-radio-buttons-group"
-          sx={{ justifyContent: 'center', flexDirection: 'row' }}
-          value={attending}
-          onChange={handleAttendingChange}
+    guest && (
+      <Paper sx={{ textAlign: 'center', padding: '1rem', fontFamily: 'Butler' }}>
+        <Snackbar
+          open={showErrorAlert}
+          onClose={() => setShowErrorAlert(false)}
+          anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
         >
-          <FormControlLabel
-            value="attending"
-            control={<Radio />}
-            label="Attending"
-            checked={attending !== null && attending}
-          />
-          <FormControlLabel
-            value="notAttending"
-            control={<Radio />}
-            label="Not Attending"
-            checked={attending !== null && !attending}
-          />
-        </RadioGroup>
-        <TextField
-          className="rsvp-input"
-          id="first-name-input"
-          required
-          label="First Name"
-          helperText={firstNameError}
-          error={!!firstNameError}
-          onChange={(e) => {
-            setGuest({ ...guest, firstName: e.target.value });
-            setFirstNameError('');
+          <Alert severity="error">
+            There was an issue with your RSVP submission. Please try again.
+          </Alert>
+        </Snackbar>
+        <Typography variant="h5" sx={{ marginBottom: '1rem' }}>
+          Event RSVP
+        </Typography>
+        <RsvpAlert />
+        <form
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            fontFamily: 'Butler',
           }}
-        />
-        <TextField
-          className="rsvp-input"
-          id="last-name-input"
-          required
-          label="Last Name"
-          helperText={lastNameError}
-          error={!!lastNameError}
-          onChange={(e) => {
-            setGuest({ ...guest, lastName: e.target.value });
-            setLastNameError('');
-          }}
-        />
-        <TextField
-          className="rsvp-input"
-          id="email-input"
-          required
-          label="Email"
-          type="email"
-          helperText={emailError || "We'll never share your email."}
-          error={!!emailError}
-          onChange={(e) => {
-            setGuest({ ...guest, emailAddress: e.target.value });
-            setEmailError('');
-          }}
-        />
-        <FormControl>
-          <FormGroup>
-            <FormGroup>
-              <FormControlLabel
-                label="Dietary Restrictions"
-                control={
-                  <Checkbox
-                    name="diet"
-                    checked={!dietTextboxHidden}
-                    onChange={(e) => setDietTextboxHidden(!e.target.checked)}
-                  />
-                }
-              ></FormControlLabel>
-              <TextField
-                className="rsvp-input"
-                id="other-diet-input"
-                label="Please Specify"
-                required={!dietTextboxHidden}
-                disabled={dietTextboxHidden}
-                sx={{ visibility: dietTextboxHidden ? 'hidden' : 'visible' }}
-                value={dietDescription}
-                helperText={dietDescriptionError}
-                error={!!dietDescriptionError}
-                onChange={(e) => {
-                  setDietDescription(e.target.value);
-                  setDietDescriptionError('');
-                }}
-              />
-            </FormGroup>
-          </FormGroup>
-        </FormControl>
-      </form>
-      <HtmlTooltip
-        title={
-          (attending === null ||
-            guest.firstName === '' ||
-            guest.lastName === '' ||
-            guest.emailAddress === '' ||
-            emailError !== '' ||
-            (!dietTextboxHidden && dietDescription === '')) && (
-            <Fragment>
-              {/* <Typography> */}
-              The following information must still be provided before you can submit your RSVP:
-              {/* </Typography> */}
-              <ul>
-                {attending === null && <li>Attendance</li>}
-                {guest.firstName === '' && <li>First Name</li>}
-                {guest.lastName === '' && <li>Last Name</li>}
-                {guest.emailAddress === '' && <li>Email Address</li>}
-                {firstNameError !== '' && <li>{firstNameError}</li>}
-                {lastNameError !== '' && <li>{lastNameError}</li>}
-                {emailError !== '' && <li>{emailError}</li>}
-                {!dietTextboxHidden && dietDescription === '' && (
-                  <li>Specific dietary restrictions if you checked "Other".</li>
-                )}
-              </ul>
-            </Fragment>
-          )
-        }
-      >
-        <span>
-          <Button
-            type="submit"
-            variant="contained"
-            sx={{ marginTop: '1vh' }}
-            onClick={submitRsvp}
-            disabled={
-              pastRsvpDeadline ||
-              attending === null ||
-              guest.firstName === '' ||
-              guest.lastName === '' ||
-              guest.emailAddress === '' ||
-              emailError !== '' ||
-              (!dietTextboxHidden && dietDescription === '')
-            }
+        >
+          <RadioGroup
+            name="attending-radio-buttons-group"
+            sx={{ justifyContent: 'center', flexDirection: 'row' }}
+            value={attending}
+            onChange={handleAttendingChange}
           >
-            Submit RSVP
-          </Button>
-        </span>
-      </HtmlTooltip>
-    </Paper>
+            <FormControlLabel
+              value="attending"
+              control={<Radio />}
+              label="Attending"
+              checked={attending !== null && attending}
+            />
+            <FormControlLabel
+              value="notAttending"
+              control={<Radio />}
+              label="Not Attending"
+              checked={attending !== null && !attending}
+            />
+          </RadioGroup>
+          <TextField
+            className="rsvp-input"
+            id="first-name-input"
+            required
+            label="First Name"
+            helperText={firstNameError}
+            error={!!firstNameError}
+            value={guest.firstName}
+            onChange={(e) => {
+              setGuest({ ...guest!, firstName: e.target.value });
+              setFirstNameError('');
+            }}
+          />
+          <TextField
+            className="rsvp-input"
+            id="last-name-input"
+            required
+            label="Last Name"
+            helperText={lastNameError}
+            error={!!lastNameError}
+            onChange={(e) => {
+              setGuest({ ...guest!, lastName: e.target.value });
+              setLastNameError('');
+            }}
+          />
+          <TextField
+            className="rsvp-input"
+            id="email-input"
+            required
+            label="Email"
+            type="email"
+            helperText={emailError || "We'll never share your email."}
+            error={!!emailError}
+            onChange={(e) => {
+              setGuest({ ...guest!, emailAddress: e.target.value });
+              setEmailError('');
+            }}
+          />
+          <FormControl>
+            <FormGroup>
+              <FormGroup>
+                <FormControlLabel
+                  label="Dietary Restrictions"
+                  control={
+                    <Checkbox
+                      name="diet"
+                      checked={!dietTextboxHidden}
+                      onChange={(e) => setDietTextboxHidden(!e.target.checked)}
+                    />
+                  }
+                ></FormControlLabel>
+                <TextField
+                  className="rsvp-input"
+                  id="other-diet-input"
+                  label="Please Specify"
+                  required={!dietTextboxHidden}
+                  disabled={dietTextboxHidden}
+                  sx={{ visibility: dietTextboxHidden ? 'hidden' : 'visible' }}
+                  value={dietDescription}
+                  helperText={dietDescriptionError}
+                  error={!!dietDescriptionError}
+                  onChange={(e) => {
+                    setDietDescription(e.target.value);
+                    setDietDescriptionError('');
+                  }}
+                />
+              </FormGroup>
+            </FormGroup>
+          </FormControl>
+        </form>
+        <HtmlTooltip
+          title={
+            (attending === null ||
+              guest!.firstName === '' ||
+              guest!.lastName === '' ||
+              guest!.emailAddress === '' ||
+              emailError !== '' ||
+              (!dietTextboxHidden && dietDescription === '')) && (
+              <Fragment>
+                {/* <Typography> */}
+                The following information must still be provided before you can submit your RSVP:
+                {/* </Typography> */}
+                <ul>
+                  {attending === null && <li>Attendance</li>}
+                  {guest!.firstName === '' && <li>First Name</li>}
+                  {guest!.lastName === '' && <li>Last Name</li>}
+                  {guest!.emailAddress === '' && <li>Email Address</li>}
+                  {firstNameError !== '' && <li>{firstNameError}</li>}
+                  {lastNameError !== '' && <li>{lastNameError}</li>}
+                  {emailError !== '' && <li>{emailError}</li>}
+                  {!dietTextboxHidden && dietDescription === '' && (
+                    <li>Specific dietary restrictions if you checked "Other".</li>
+                  )}
+                </ul>
+              </Fragment>
+            )
+          }
+        >
+          <span>
+            <Button
+              type="submit"
+              variant="contained"
+              sx={{ marginTop: '1vh' }}
+              onClick={submitRsvp}
+              disabled={
+                pastRsvpDeadline ||
+                attending === null ||
+                guest!.firstName === '' ||
+                guest!.lastName === '' ||
+                guest!.emailAddress === '' ||
+                emailError !== '' ||
+                (!dietTextboxHidden && dietDescription === '')
+              }
+            >
+              Submit RSVP
+            </Button>
+          </span>
+        </HtmlTooltip>
+      </Paper>
+    )
   );
 }

@@ -1,4 +1,5 @@
 export interface ResendTemplateVar {
+  uid: string;
   attending: boolean;
   firstName: string;
   lastName: string;

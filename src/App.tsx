@@ -7,7 +7,7 @@ import './App.css';
 import MobileTabList from './components/Menu/MobileMenuDrawer';
 import WideTabList from './components/Menu/WideTabList';
 
-function App(props: { tab: string }) {
+function App() {
   const minHeaderMatch = useMediaQuery('(min-width:516px)');
 
   const theme = createTheme({
@@ -51,13 +51,20 @@ function App(props: { tab: string }) {
     },
   });
 
-  const [value, setValue] = React.useState('1');
+  const [tab, setTab] = React.useState('1');
+  const [uid, setUid] = React.useState('');
 
   React.useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const tabParam = params.get('tab');
+    const uidParam = params.get('uid');
+
     if (tabParam) {
-      setValue(tabParam);
+      setTab(tabParam);
+    }
+
+    if (uidParam) {
+      setUid(uidParam);
     }
   }, []);
 
@@ -70,8 +77,8 @@ function App(props: { tab: string }) {
           fontFamily: 'Butler !important',
         }}
       >
-        {minHeaderMatch && <WideTabList value={value} setValue={setValue} />}
-        {!minHeaderMatch && <MobileTabList value={value} setValue={setValue} />}
+        {minHeaderMatch && <WideTabList tab={tab} uid={uid} setTab={setTab} setUid={setUid} />}
+        {!minHeaderMatch && <MobileTabList tab={tab} uid={uid} setTab={setTab} setUid={setUid} />}
       </Box>
     </ThemeProvider>
   );

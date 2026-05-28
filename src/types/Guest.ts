@@ -1,4 +1,5 @@
 export interface Guest {
+  readonly uid: string;
   firstName: string;
   lastName: string;
   emailAddress: string;
@@ -7,7 +8,10 @@ export interface Guest {
 }
 
 export function createGuest(): Guest {
+  console.log('create new guest');
+
   return {
+    uid: crypto.randomUUID(),
     firstName: '',
     lastName: '',
     emailAddress: '',
