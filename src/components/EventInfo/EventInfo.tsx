@@ -4,6 +4,7 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import Paper from '@mui/material/Paper';
 import RsvpAlert from './RsvpAlert';
+import Divider from '@mui/material/Divider';
 
 export default function EventInfo() {
   return (
@@ -14,6 +15,7 @@ export default function EventInfo() {
       <Typography variant="h5" sx={{ marginBottom: '1rem' }}>
         Event Info
       </Typography>
+      <Divider sx={{ margin: '1rem 0' }} />
       <Box
         sx={{
           display: 'flex',
@@ -27,18 +29,24 @@ export default function EventInfo() {
         </Typography>
         <RsvpAlert />
       </Box>
+      <Divider sx={{ margin: '1rem 0' }} />
       <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
         <Typography variant="h6">When</Typography>
         <Typography variant="body1">September 12th, 4:30 PM EST</Typography>
       </Box>
-      <br />
+      <Divider sx={{ margin: '1rem 0' }} />
       <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
         <Typography variant="h6">Where</Typography>
         <Typography variant="body1" gutterBottom>
-          113 S Division St, Spring Lake, MI 49456
+          <b>The Lilley Mansion Bed and Breakfast</b>
+        </Typography>
+        <Typography variant="body1" gutterBottom>
+          113 S. Division St.
+        </Typography>
+        <Typography variant="body1" gutterBottom>
+          Spring Lake, MI 49456
         </Typography>
       </Box>
-      <br />
       <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'row' }}>
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2914.357936109817!2d-86.2034736228249!3d43.07596968957139!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88198152002a1cb3%3A0x9fc82a6170eb75d2!2sThe%20Lilley%20Mansion%20Bed%20and%20Breakfast!5e0!3m2!1sen!2sus!4v1768167177460!5m2!1sen!2sus"
@@ -51,12 +59,12 @@ export default function EventInfo() {
           title="Grand Haven Map"
         />
       </Box>
-      <br />
+      <Divider sx={{ margin: '1rem 0' }} />
       <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
         <Typography variant="h6">Dress Code</Typography>
         <Typography variant="body1">Garden Party/Bridgerton (be fun/colorful/creative)</Typography>
       </Box>
-      <br />{' '}
+      <Divider sx={{ margin: '1rem 0' }} />
       <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
         <Typography variant="h6">Schedule of Events</Typography>
         <List>
@@ -112,6 +120,7 @@ export default function EventInfo() {
           </ListItem>
         </List>
       </Box>
+      <Divider sx={{ margin: '1rem 0' }} />
       <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
         <Typography variant="h6">Overnight Accommodations</Typography>
         <Typography variant="body1" gutterBottom>
@@ -144,7 +153,7 @@ export default function EventInfo() {
           </Box>
         </Box>
       </Box>
-      <br />
+      <Divider sx={{ margin: '1rem 0' }} />
       <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
         <Typography variant="h6">Age Limit</Typography>
         <Typography variant="body1">
