@@ -51,7 +51,22 @@ function App() {
     },
   });
 
-  const [value, setValue] = React.useState('1');
+  const [tab, setTab] = React.useState('1');
+  const [uid, setUid] = React.useState('');
+
+  React.useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const tabParam = params.get('tab');
+    const uidParam = params.get('uid');
+
+    if (tabParam) {
+      setTab(tabParam);
+    }
+
+    if (uidParam) {
+      setUid(uidParam);
+    }
+  }, []);
 
   return (
     <ThemeProvider theme={theme}>
@@ -62,8 +77,8 @@ function App() {
           fontFamily: 'Butler !important',
         }}
       >
-        {minHeaderMatch && <WideTabList value={value} setValue={setValue} />}
-        {!minHeaderMatch && <MobileTabList value={value} setValue={setValue} />}
+        {minHeaderMatch && <WideTabList tab={tab} uid={uid} setTab={setTab} setUid={setUid} />}
+        {!minHeaderMatch && <MobileTabList tab={tab} uid={uid} setTab={setTab} setUid={setUid} />}
       </Box>
     </ThemeProvider>
   );

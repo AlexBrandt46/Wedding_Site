@@ -1,4 +1,6 @@
 export default interface TabListProps {
-  value: string;
-  setValue: (value: string) => void;
+  tab: string;
+  uid: string;
+  setTab: (value: string) => void;
+  setUid: (value: string) => void;
 }

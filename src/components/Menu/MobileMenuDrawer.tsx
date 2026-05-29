@@ -57,7 +57,7 @@ export default function MobileTabList(props: TabListProps) {
   const [toolbarHeader, setToolbarHeader] = React.useState('A & B');
 
   const handleChange = (_event: React.SyntheticEvent, newValue: string) => {
-    props.setValue(newValue);
+    props.setTab(newValue);
     setOpen(false);
     setToolbarHeader(
       MENU_TABS[newValue as keyof typeof MENU_TABS] !== 'Home'
@@ -75,7 +75,7 @@ export default function MobileTabList(props: TabListProps) {
   };
 
   return (
-    <TabContext value={props.value}>
+    <TabContext value={props.tab}>
       <Box
         sx={{
           borderBottom: 1,
@@ -137,7 +137,7 @@ export default function MobileTabList(props: TabListProps) {
           <TabBox handleChange={handleChange} orientation="vertical" />
         </Drawer>
       </Box>
-      <TabPanels />
+      <TabPanels setTab={props.setTab} setUid={props.setUid} uid={props.uid} />
     </TabContext>
   );
 }

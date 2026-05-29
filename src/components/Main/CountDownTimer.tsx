@@ -29,7 +29,9 @@ export default function CountDownTimer() {
           >
             <Typography className="countDownNumber">{timeLeft[unit]}</Typography>
             <Typography sx={{ paddingBottom: 0 }}>
-              {unit.charAt(0).toUpperCase() + unit.slice(1)}
+              {unit.charAt(0).toUpperCase() +
+                unit.slice(1, -1) +
+                (timeLeft[unit] === 1 ? ' ' : 's')}
             </Typography>
           </Paper>
         ))}
