@@ -45,12 +45,14 @@ export default function RsvpForm({ setTab: setTab, setUid: setUid, uid }: RsvpFo
   const [dietTextboxHidden, setDietTextboxHidden] = useState(true);
   const [attending, setAttending] = useState<boolean | null>(null);
   const [dietDescription, setDietDescription] = useState('');
+  const [address, setAddress] = useState('');
   const [showErrorAlert, setShowErrorAlert] = useState(false);
   const [emailError, setEmailError] = useState('');
   const [firstNameError, setFirstNameError] = useState('');
   const [lastNameError, setLastNameError] = useState('');
   const [dietDescriptionError, setDietDescriptionError] = useState('');
   const [isRsvpSubmitted, setIsRsvpSubmitted] = useState(false);
+  const [addressError, setAddressError] = useState('');
 
   const pastRsvpDeadline: boolean = isPastRsvpDeadline();
 
@@ -70,6 +72,7 @@ export default function RsvpForm({ setTab: setTab, setUid: setUid, uid }: RsvpFo
     const trimmedLastName = guest!.lastName.trim();
     const trimmedEmail = guest!.emailAddress.trim();
     const trimmedDietDescription = dietDescription.trim();
+    const trimmedAddress = address.trim();
     let validInput = true;
 
     if (!isValidEmail(trimmedEmail)) {
@@ -93,6 +96,13 @@ export default function RsvpForm({ setTab: setTab, setUid: setUid, uid }: RsvpFo
       setLastNameError('');
     }
 
+    if (!isNotEmptyString(trimmedAddress)) {
+      setAddressError('Please enter a non-empty address.');
+      validInput = false;
+    } else {
+      setAddressError('');
+    }
+
     if (!dietTextboxHidden && !isNotEmptyString(trimmedDietDescription)) {
       setDietDescriptionError(
         'Please enter a non-empty dietary restriction if the "Dietary Restrictions" option is selected.'
@@ -112,6 +122,7 @@ export default function RsvpForm({ setTab: setTab, setUid: setUid, uid }: RsvpFo
       firstName: trimmedFirstName,
       lastName: trimmedLastName,
       emailAddress: trimmedEmail,
+      address: trimmedAddress,
     };
 
     if (!dietTextboxHidden) {
@@ -236,6 +247,19 @@ export default function RsvpForm({ setTab: setTab, setUid: setUid, uid }: RsvpFo
               setEmailError('');
             }}
           />
+          <TextField
+            className="rsvp-input"
+            id="address-input"
+            required
+            label="Address"
+            type="address"
+            helperText={addressError || "We'll never share your address."}
+            error={!!addressError}
+            onChange={(e) => {
+              setGuest({ ...guest, address: e.target.value });
+              setAddressError('');
+            }}
+          />
           <FormControl>
             <FormGroup>
               <FormGroup>
@@ -274,6 +298,7 @@ export default function RsvpForm({ setTab: setTab, setUid: setUid, uid }: RsvpFo
               guest!.firstName === '' ||
               guest!.lastName === '' ||
               guest!.emailAddress === '' ||
+              guest!.address === '' ||
               emailError !== '' ||
               (!dietTextboxHidden && dietDescription === '')) && (
               <Fragment>
@@ -285,9 +310,11 @@ export default function RsvpForm({ setTab: setTab, setUid: setUid, uid }: RsvpFo
                   {guest!.firstName === '' && <li>First Name</li>}
                   {guest!.lastName === '' && <li>Last Name</li>}
                   {guest!.emailAddress === '' && <li>Email Address</li>}
+                  {guest!.address === '' && <li>Address</li>}
                   {firstNameError !== '' && <li>{firstNameError}</li>}
                   {lastNameError !== '' && <li>{lastNameError}</li>}
                   {emailError !== '' && <li>{emailError}</li>}
+                  {addressError !== '' && <li>{addressError}</li>}
                   {!dietTextboxHidden && dietDescription === '' && (
                     <li>Specific dietary restrictions if you checked "Other".</li>
                   )}
@@ -308,6 +335,7 @@ export default function RsvpForm({ setTab: setTab, setUid: setUid, uid }: RsvpFo
                 guest!.firstName === '' ||
                 guest!.lastName === '' ||
                 guest!.emailAddress === '' ||
+                guest!.address === '' ||
                 emailError !== '' ||
                 (!dietTextboxHidden && dietDescription === '')
               }

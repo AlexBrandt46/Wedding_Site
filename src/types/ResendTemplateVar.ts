@@ -5,4 +5,5 @@ export interface ResendTemplateVar {
   lastName: string;
   emailAddress: string;
   dietRestrictions?: string;
+  address: string;
 }

@@ -5,16 +5,16 @@ export interface Guest {
   emailAddress: string;
   attending: boolean;
   dietRestrictions?: string;
+  address: string;
 }
 
 export function createGuest(): Guest {
-  console.log('create new guest');
-
   return {
     uid: crypto.randomUUID(),
     firstName: '',
     lastName: '',
     emailAddress: '',
     attending: false,
+    address: '',
   };
 }
