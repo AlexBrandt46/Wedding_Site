@@ -4,6 +4,7 @@ export interface Guest {
   emailAddress: string;
   attending: boolean;
   otherDescription: string;
+  address: string;
 }
 
 export function createGuest(): Guest {
@@ -12,6 +13,7 @@ export function createGuest(): Guest {
     lastName: '',
     emailAddress: '',
     attending: false,
-    otherDescription: ''
+    otherDescription: '',
+    address: '',
   };
 }
