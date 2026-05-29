@@ -38,11 +38,13 @@ export default function RsvpForm() {
   const [dietTextboxHidden, setDietTextboxHidden] = useState(true);
   const [attending, setAttending] = useState<boolean | null>(null);
   const [dietDescription, setDietDescription] = useState('');
+  const [address, setAddress] = useState('');
   const [showEmailConfirmationAlert, setShowEmailConfirmationAlert] = useState(false);
   const [emailError, setEmailError] = useState('');
   const [firstNameError, setFirstNameError] = useState('');
   const [lastNameError, setLastNameError] = useState('');
   const [dietDescriptionError, setDietDescriptionError] = useState('');
+  const [addressError, setAddressError] = useState('');
 
   const pastRsvpDeadline: boolean = isPastRsvpDeadline();
 
@@ -74,6 +76,13 @@ export default function RsvpForm() {
       setLastNameError('');
     }
 
+    if (!isNotEmptyString(guest.address)) {
+      setAddressError('Please enter a non-empty address.');
+      validInput = false;
+    } else {
+      setAddressError('');
+    }
+
     if (!dietTextboxHidden && !isNotEmptyString(trimmedDietDescription)) {
       setDietDescriptionError(
         'Please enter a non-empty dietary restriction if the "Dietary Restrictions" option is selected.'
@@ -93,9 +102,8 @@ export default function RsvpForm() {
       emailAddress: trimmedEmail,
       attending: guest.attending,
       otherDescription: dietTextboxHidden ? '' : trimmedDietDescription,
+      address: guest.address,
     });
-
-    console.log(data);
 
     if (!error) {
       setShowEmailConfirmationAlert(true);
@@ -184,6 +192,19 @@ export default function RsvpForm() {
             setEmailError('');
           }}
         />
+        <TextField
+          className="rsvp-input"
+          id="address-input"
+          required
+          label="Address"
+          type="address"
+          helperText={addressError || "We'll never share your address."}
+          error={!!addressError}
+          onChange={(e) => {
+            setGuest({ ...guest, address: e.target.value });
+            setAddressError('');
+          }}
+        />
         <FormControl>
           <FormGroup>
             <FormGroup>
@@ -222,6 +243,7 @@ export default function RsvpForm() {
             guest.firstName === '' ||
             guest.lastName === '' ||
             guest.emailAddress === '' ||
+            guest.address === '' ||
             emailError !== '' ||
             (!dietTextboxHidden && dietDescription === '')) && (
             <Fragment>
@@ -233,8 +255,10 @@ export default function RsvpForm() {
                 {guest.firstName === '' && <li>First Name</li>}
                 {guest.lastName === '' && <li>Last Name</li>}
                 {guest.emailAddress === '' && <li>Email Address</li>}
+                {guest.address === '' && <li>Address</li>}
                 {firstNameError !== '' && <li>{firstNameError}</li>}
                 {lastNameError !== '' && <li>{lastNameError}</li>}
+                {emailError !== '' && <li>{emailError}</li>}
                 {emailError !== '' && <li>{emailError}</li>}
                 {!dietTextboxHidden && dietDescription === '' && (
                   <li>Specific dietary restrictions if you checked "Other".</li>
@@ -256,6 +280,7 @@ export default function RsvpForm() {
               guest.firstName === '' ||
               guest.lastName === '' ||
               guest.emailAddress === '' ||
+              guest.address === '' ||
               emailError !== '' ||
               (!dietTextboxHidden && dietDescription === '')
             }
