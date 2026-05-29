@@ -45,7 +45,6 @@ export default function RsvpForm({ setTab: setTab, setUid: setUid, uid }: RsvpFo
   const [dietTextboxHidden, setDietTextboxHidden] = useState(true);
   const [attending, setAttending] = useState<boolean | null>(null);
   const [dietDescription, setDietDescription] = useState('');
-  const [address, setAddress] = useState('');
   const [showErrorAlert, setShowErrorAlert] = useState(false);
   const [emailError, setEmailError] = useState('');
   const [firstNameError, setFirstNameError] = useState('');
@@ -72,7 +71,7 @@ export default function RsvpForm({ setTab: setTab, setUid: setUid, uid }: RsvpFo
     const trimmedLastName = guest!.lastName.trim();
     const trimmedEmail = guest!.emailAddress.trim();
     const trimmedDietDescription = dietDescription.trim();
-    const trimmedAddress = address.trim();
+    const trimmedAddress = guest!.address.trim();
     let validInput = true;
 
     if (!isValidEmail(trimmedEmail)) {
