@@ -60,6 +60,10 @@ export default function RsvpForm({ setTab: setTab, setUid: setUid, uid }: RsvpFo
       getGuest(uidFromUrl).then((guestData) => {
         setGuest(guestData);
         setAttending(guestData.attending);
+        setDietDescription(guestData.dietRestrictions ?? '');
+        setDietTextboxHidden(
+          guestData.dietRestrictions === undefined || guestData.dietRestrictions === ''
+        );
       });
     } else if (uid && uid !== '' && uid !== uidFromUrl) {
       setUidFromUrl(uid);
@@ -82,6 +86,7 @@ export default function RsvpForm({ setTab: setTab, setUid: setUid, uid }: RsvpFo
     }
 
     if (!isValidName(trimmedFirstName)) {
+      console.log('Invalid first name:', trimmedFirstName);
       setFirstNameError('Please enter a non-empty first name.');
       validInput = false;
     } else {
@@ -226,6 +231,7 @@ export default function RsvpForm({ setTab: setTab, setUid: setUid, uid }: RsvpFo
             id="last-name-input"
             required
             label="Last Name"
+            value={guest.lastName}
             helperText={lastNameError}
             error={!!lastNameError}
             onChange={(e) => {
@@ -239,6 +245,7 @@ export default function RsvpForm({ setTab: setTab, setUid: setUid, uid }: RsvpFo
             required
             label="Email"
             type="email"
+            value={guest.emailAddress}
             helperText={emailError || "We'll never share your email."}
             error={!!emailError}
             onChange={(e) => {
@@ -252,6 +259,7 @@ export default function RsvpForm({ setTab: setTab, setUid: setUid, uid }: RsvpFo
             required
             label="Address"
             type="address"
+            value={guest.address}
             helperText={addressError || "We'll never share your address."}
             error={!!addressError}
             onChange={(e) => {

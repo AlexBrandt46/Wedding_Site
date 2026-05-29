@@ -63,6 +63,10 @@ p {
     justify-content: space-between;
   }
 
+  #countDownStack:nth-child(5) {
+    min-width: 12vw;
+  }
+
   #usImage {
     width: -webkit-fill-available !important;
   }
