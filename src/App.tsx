@@ -77,8 +77,8 @@ function App() {
           fontFamily: 'Butler !important',
         }}
       >
-        {minHeaderMatch && <WideTabList tab={tab} uid={uid} setTab={setTab} setUid={setUid} />}
-        {!minHeaderMatch && <MobileTabList tab={tab} uid={uid} setTab={setTab} setUid={setUid} />}
+        {minHeaderMatch && <WideTabList tab={tab} uid={uid} setTab={setTab} />}
+        {!minHeaderMatch && <MobileTabList tab={tab} uid={uid} setTab={setTab} />}
       </Box>
     </ThemeProvider>
   );

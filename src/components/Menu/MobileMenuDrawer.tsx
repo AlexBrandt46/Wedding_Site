@@ -137,7 +137,7 @@ export default function MobileTabList(props: TabListProps) {
           <TabBox handleChange={handleChange} orientation="vertical" />
         </Drawer>
       </Box>
-      <TabPanels setTab={props.setTab} setUid={props.setUid} uid={props.uid} />
+      <TabPanels setTab={props.setTab} uid={props.uid} />
     </TabContext>
   );
 }

@@ -6,7 +6,7 @@ import RsvpForm from '../Rsvp/RsvpForm';
 import type TabListProps from '../../types/TabListProps';
 
 // TODO: Refactor this to loop over the MENU_ITEMS and render the appropriate component based on the value. This will make it easier to add/remove menu items in the future without having to modify this component.
-export default function TabPanels({ setTab, setUid, uid }: Partial<TabListProps>) {
+export default function TabPanels({ setTab, uid }: Partial<TabListProps>) {
   return (
     <>
       <TabPanel value="1" className="pagePanel">
@@ -19,7 +19,7 @@ export default function TabPanels({ setTab, setUid, uid }: Partial<TabListProps>
         <EventInfo />
       </TabPanel>
       <TabPanel value="4" className="pagePanel">
-        <RsvpForm setTab={setTab} setUid={setUid} uid={uid} />
+        <RsvpForm setTab={setTab} uid={uid} />
       </TabPanel>
     </>
   );
