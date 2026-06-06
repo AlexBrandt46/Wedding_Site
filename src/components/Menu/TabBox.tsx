@@ -1,7 +1,8 @@
 import TabList from '@mui/lab/TabList';
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
-import { MENU_TABS } from '../../types/MenuTabs';
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+import { MENU_TABS, REGISTRY_LINK } from '../../types/MenuTabs';
 
 interface TabBoxProps {
   handleChange: (event: React.SyntheticEvent, newValue: string) => void;
@@ -9,6 +10,15 @@ interface TabBoxProps {
 }
 
 export default function TabBox({ handleChange, orientation }: TabBoxProps) {
+  const handleChangeWithRedirect = (event: React.SyntheticEvent, newValue: string) => {
+    if (newValue === '5') {
+      // Registry tab
+      window.location.href = REGISTRY_LINK;
+      return;
+    }
+    handleChange(event, newValue);
+  };
+
   return (
     <Box
       className="siteBox"
@@ -21,11 +31,24 @@ export default function TabBox({ handleChange, orientation }: TabBoxProps) {
         display: 'flex',
       }}
     >
-      <TabList id="tabList" onChange={handleChange} orientation={orientation ?? 'horizontal'}>
+      <TabList
+        id="tabList"
+        onChange={handleChangeWithRedirect}
+        orientation={orientation ?? 'horizontal'}
+      >
         {Object.entries(MENU_TABS).map(([value, label]) => (
           <Tab
             key={value}
-            label={label}
+            label={
+              value === '5' ? (
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+                  {label}
+                  <OpenInNewIcon sx={{ fontSize: 16 }} />
+                </Box>
+              ) : (
+                label
+              )
+            }
             value={value}
             sx={{ fontFamily: 'Butler', wordWrap: 'break-word' }}
           />
