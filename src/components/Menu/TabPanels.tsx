@@ -21,6 +21,7 @@ export default function TabPanels({ setTab, uid }: Partial<TabListProps>) {
       <TabPanel value="4" className="pagePanel">
         <RsvpForm setTab={setTab} uid={uid} />
       </TabPanel>
+      <TabPanel value="5" className="pagePanel" style={{ display: 'none' }} />
     </>
   );
 }
