@@ -11,7 +11,7 @@ import { styled } from '@mui/material/styles';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import React from 'react';
-import { MENU_TABS } from '../../types/MenuTabs';
+import { MENU_TABS, REGISTRY_LINK } from '../../types/MenuTabs';
 import TabBox from './TabBox';
 import TabPanels from './TabPanels';
 import type TabListProps from '../../types/TabListProps';
@@ -57,6 +57,11 @@ export default function MobileTabList(props: TabListProps) {
   const [toolbarHeader, setToolbarHeader] = React.useState('A & B');
 
   const handleChange = (_event: React.SyntheticEvent, newValue: string) => {
+    if (newValue === '5') {
+      // Registry tab
+      window.location.href = REGISTRY_LINK;
+      return;
+    }
     props.setTab(newValue);
     setOpen(false);
     setToolbarHeader(
@@ -137,7 +142,7 @@ export default function MobileTabList(props: TabListProps) {
           <TabBox handleChange={handleChange} orientation="vertical" />
         </Drawer>
       </Box>
-      <TabPanels setTab={props.setTab} setUid={props.setUid} uid={props.uid} />
+      <TabPanels setTab={props.setTab} uid={props.uid} />
     </TabContext>
   );
 }

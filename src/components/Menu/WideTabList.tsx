@@ -20,7 +20,7 @@ export default function WideTabList(props: TabListProps) {
     >
       <TabContext value={props.tab}>
         <TabBox handleChange={handleChange} />
-        <TabPanels setTab={props.setTab} setUid={props.setUid} uid={props.uid} />
+        <TabPanels setTab={props.setTab} uid={props.uid} />
       </TabContext>
     </Box>
   );

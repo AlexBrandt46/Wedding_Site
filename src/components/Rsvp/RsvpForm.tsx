@@ -35,11 +35,10 @@ const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
 
 interface RsvpFormProps {
   setTab?: (value: string) => void;
-  setUid?: (value: string) => void;
   uid?: string;
 }
 
-export default function RsvpForm({ setTab: setTab, setUid: setUid, uid }: RsvpFormProps) {
+export default function RsvpForm({ setTab: setTab, uid }: RsvpFormProps) {
   const [guest, setGuest] = useState(uid !== '' ? undefined : createGuest());
   const [uidFromUrl, setUidFromUrl] = useState(uid ?? '');
   const [dietTextboxHidden, setDietTextboxHidden] = useState(true);
@@ -133,7 +132,7 @@ export default function RsvpForm({ setTab: setTab, setUid: setUid, uid }: RsvpFo
       guestInputs.dietRestrictions = trimmedDietDescription;
     }
 
-    const { data, error } = await supabase.from('guests').upsert(guestInputs);
+    const { error } = await supabase.from('guests').upsert(guestInputs);
 
     // TODO: improve error handling to give more specific feedback to user on what went wrong with their submission
     // TODO: Refactor this to simplify logic and reduce number of state variables if possible

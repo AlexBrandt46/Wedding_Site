@@ -128,24 +128,44 @@ export default function EventInfo() {
           breakfasts, and VRBOs within a short distance of the venue. A few have been included
           below!
         </Typography>
-        <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'row', gap: '1rem' }}>
-          <Box>
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            flexDirection: { xs: 'column', md: 'row' },
+            gap: '1rem',
+            width: '100%',
+          }}
+        >
+          <Box sx={{ width: '100%' }}>
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5828.752856111001!2d-86.21604776013719!3d43.07558086502502!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x881981abb73111b1%3A0x75dce87e973abba4!2sHoliday%20Inn%20Grand%20Haven%20-%20Muskegon%20by%20IHG!5e0!3m2!1sen!2sus!4v1778553832599!5m2!1sen!2sus"
-              width="600"
+              width="100%"
               height="450"
-              style={{ border: 0, borderRadius: '4px' }}
+              style={{
+                border: 0,
+                borderRadius: '4px',
+                display: 'block',
+                maxWidth: '600px',
+                width: '100%',
+              }}
               allowFullScreen={true}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             ></iframe>
           </Box>
-          <Box>
+          <Box sx={{ width: '100%' }}>
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d5369.527957250377!2d-86.23367462866109!3d43.062040559753136!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sHotels!5e0!3m2!1sen!2sus!4v1778554090993!5m2!1sen!2sus"
-              width="600"
+              width="100%"
               height="450"
-              style={{ border: 0, borderRadius: '4px' }}
+              style={{
+                border: 0,
+                borderRadius: '4px',
+                display: 'block',
+                maxWidth: '600px',
+                width: '100%',
+              }}
               allowFullScreen={true}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
