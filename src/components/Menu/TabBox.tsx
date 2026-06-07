@@ -50,7 +50,11 @@ export default function TabBox({ handleChange, orientation }: TabBoxProps) {
               )
             }
             value={value}
-            sx={{ fontFamily: 'Butler', wordWrap: 'break-word' }}
+            sx={{
+              fontFamily: 'Butler',
+              wordWrap: 'break-word',
+              fontSize: { xs: '1.5rem', md: '1rem' },
+            }}
           />
         ))}
       </TabList>

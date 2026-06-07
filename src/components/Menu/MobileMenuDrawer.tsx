@@ -108,7 +108,11 @@ export default function MobileTabList(props: TabListProps) {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" component="div" sx={{ justifySelf: 'center' }}>
+            <Typography
+              variant="h6"
+              component="div"
+              sx={{ justifySelf: 'center', fontSize: { xs: '1.5rem', md: '1rem' } }}
+            >
               {toolbarHeader}
             </Typography>
             <IconButton disabled>

@@ -18,12 +18,11 @@ function App() {
         styleOverrides: `
           @font-face {
             font-family: 'Butler';
-            font-style: bold;
+            font-style: normal;
             font-display: swap;
-            font-weight: 400;
-            src: local("Butler-Bold"), url("./assets/fonts/serif/Butler-Bold.woff2") format();
-          },
-
+            font-weight: 700;
+            src: local("Butler-Bold"), url("./assets/fonts/serif/Butler-Bold.woff2") format("woff2");
+          }
         `,
       },
       MuiAlert: {
