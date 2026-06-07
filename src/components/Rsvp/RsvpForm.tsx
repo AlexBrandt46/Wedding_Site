@@ -17,7 +17,7 @@ import { createGuest } from '../../types/Guest';
 import { getGuest, sendEmail, supabase } from '../../utils/supabaseUtil';
 import RsvpAlert from '../EventInfo/RsvpAlert';
 import RsvpConfirmation from './RsvpConfirmation';
-import { isPastRsvpDeadline } from '../../utils/dateUtil';
+import { isDatePastRsvpDeadline } from '../../utils/dateUtil';
 import { isNotEmptyString, isValidEmail, isValidName } from '../../utils/rsvpValidationUtil';
 import type { ResendTemplateVar } from '../../types/ResendTemplateVar';
 import styles from './RsvpForm.module.css';
@@ -53,7 +53,7 @@ export default function RsvpForm({ setTab: setTab, uid }: RsvpFormProps) {
   const [isRsvpSubmitted, setIsRsvpSubmitted] = useState(false);
   const [addressError, setAddressError] = useState('');
 
-  const pastRsvpDeadline: boolean = isPastRsvpDeadline();
+  const pastRsvpDeadline: boolean = isDatePastRsvpDeadline(new Date());
 
   useEffect(() => {
     if (uidFromUrl && uidFromUrl !== '' && guest === undefined) {
@@ -186,7 +186,7 @@ export default function RsvpForm({ setTab: setTab, uid }: RsvpFormProps) {
         <Typography variant="h5" sx={{ marginBottom: '1rem' }}>
           Event RSVP
         </Typography>
-        <RsvpAlert />
+        <RsvpAlert alertMessage="Please RSVP by August 10th, 2026." />
         <form
           style={{
             display: 'flex',

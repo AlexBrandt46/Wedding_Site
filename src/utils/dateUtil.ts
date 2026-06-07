@@ -1,6 +1,6 @@
 import { type Duration } from 'duration-fns';
 
-const weddingDate = new Date(2026, 8, 12, 14);
+const weddingDate = new Date(2026, 8, 12, 16, 30); // Set the wedding date and time (month is 0-indexed, so 8 = September)
 const rsvpDeadline = new Date('2026-08-10T23:59:59'); // Set the RSVP deadline date and time
 
 const MS_TO_SECS = 1000;
@@ -50,7 +50,6 @@ export function getTimeDifference(date: Date): Duration {
   };
 }
 
-export function isPastRsvpDeadline(): boolean {
-  const currentDate = new Date();
-  return currentDate > rsvpDeadline;
+export function isDatePastRsvpDeadline(date: Date): boolean {
+  return date > rsvpDeadline;
 }
