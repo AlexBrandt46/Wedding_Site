@@ -27,7 +27,10 @@ export default function EventInfo() {
         <Typography variant="h6" noWrap>
           RSVP Deadline
         </Typography>
-        <RsvpAlert />
+        <RsvpAlert
+          alertMessage="Please RSVP by August 10th, 2026."
+          showPastDeadlineMessage={true}
+        />
       </Box>
       <Divider sx={{ margin: '1rem 0' }} />
       <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>

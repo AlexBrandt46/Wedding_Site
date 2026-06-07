@@ -14,7 +14,7 @@ import React from 'react';
 import { MENU_TABS, REGISTRY_LINK } from '../../types/MenuTabs';
 import TabBox from './TabBox';
 import TabPanels from './TabPanels';
-import type TabListProps from '../../types/TabListProps';
+import type { TabListProps } from '../../types/Props';
 
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean;

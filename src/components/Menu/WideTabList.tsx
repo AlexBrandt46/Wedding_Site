@@ -1,7 +1,7 @@
 import TabContext from '@mui/lab/TabContext';
 import Box from '@mui/material/Box';
 import React from 'react';
-import type TabListProps from '../../types/TabListProps';
+import type { TabListProps } from '../../types/Props';
 import TabBox from './TabBox';
 import TabPanels from './TabPanels';
 

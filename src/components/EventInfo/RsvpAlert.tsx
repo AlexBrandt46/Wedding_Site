@@ -1,11 +1,12 @@
 import Alert from '@mui/material/Alert';
 import InfoOutlined from '@mui/icons-material/InfoOutlined';
 import WarningAmberOutlinedIcon from '@mui/icons-material/WarningAmberOutlined';
-import { isPastRsvpDeadline } from '../../utils/dateUtil';
+import { isDatePastRsvpDeadline } from '../../utils/dateUtil';
+import type { RsvpAlertProps } from '../../types/Props';
 
-export default function RsvpAlert() {
-  const isPastDeadline = isPastRsvpDeadline();
-  let alertMessage = 'Please RSVP by August 10th, 2026.';
+export default function RsvpAlert(props: RsvpAlertProps) {
+  const isPastDeadline = isDatePastRsvpDeadline(new Date());
+  let alertMessage = props.alertMessage;
   let alertSeverity: 'info' | 'error' = 'info';
   let alertColor: 'warning' | 'error' = 'warning';
 
