@@ -1,5 +1,3 @@
-/* TODO: See what can be consolidated between this and App.css and if this is even needed */
-
 :root {
   font-family: 'Butler' sans-serif !important;
   line-height: 1.5;
@@ -24,6 +22,12 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--gold);
+}
+
+#root {
+  text-align: center;
+  font-family: 'Butler';
+  width: 100%;
 }
 
 a {

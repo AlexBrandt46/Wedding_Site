@@ -1,0 +1,33 @@
+.countDownPaper {
+  padding-right: 3vw;
+  padding-left: 3vw;
+}
+
+.countDownNumber {
+  font-size: 1.5rem !important;
+}
+
+.countDownStack {
+  justify-content: center;
+  flex: 1;
+  justify-self: center;
+  flex-wrap: wrap;
+}
+
+/* Mobile */
+@media (max-width: 515px) {
+  .countDownStack {
+    justify-content: space-between;
+  }
+
+  .countDownStack:nth-child(5) {
+    min-width: 12vw;
+  }
+}
+
+@media (max-width: 412px) {
+  .countDownStack {
+    gap: 16px;
+    justify-content: center;
+  }
+}

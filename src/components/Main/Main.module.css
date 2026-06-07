@@ -1,0 +1,19 @@
+.pagePaper {
+  padding: 1rem;
+  min-height: 1vh;
+}
+
+/* Desktop */
+@media (min-width: 515px) {
+  .usImage {
+    height: 60vh;
+    width: 50vw;
+  }
+}
+
+/* Mobile */
+@media (max-width: 515px) {
+  .usImage {
+    width: -webkit-fill-available !important;
+  }
+}

@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography';
 import { getTimeDifference } from '../../utils/dateUtil';
 import { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
+import styles from './CountDownTimer.module.css';
 
 const TIME_UNITS = ['weeks', 'days', 'hours', 'minutes', 'seconds'] as const;
 
@@ -20,14 +21,14 @@ export default function CountDownTimer() {
 
   return (
     <Box>
-      <Stack direction="row" id="countDownStack">
+      <Stack direction="row" className={styles.countDownStack}>
         {TIME_UNITS.map((unit, index) => (
           <Paper
             key={unit}
-            className="countDownPaper"
+            className={styles.countDownPaper}
             sx={{ marginRight: index === TIME_UNITS.length - 1 ? 0 : '1vw' }}
           >
-            <Typography className="countDownNumber">{timeLeft[unit]}</Typography>
+            <Typography className={styles.countDownNumber}>{timeLeft[unit]}</Typography>
             <Typography sx={{ paddingBottom: 0 }}>
               {unit.charAt(0).toUpperCase() +
                 unit.slice(1, -1) +

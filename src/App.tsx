@@ -3,7 +3,6 @@ import Box from '@mui/material/Box';
 import { ThemeProvider } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import React from 'react';
-import './App.css';
 import MobileTabList from './components/Menu/MobileMenuDrawer';
 import WideTabList from './components/Menu/WideTabList';
 

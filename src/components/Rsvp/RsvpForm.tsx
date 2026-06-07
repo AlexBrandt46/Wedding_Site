@@ -20,6 +20,7 @@ import RsvpConfirmation from './RsvpConfirmation';
 import { isPastRsvpDeadline } from '../../utils/dateUtil';
 import { isNotEmptyString, isValidEmail, isValidName } from '../../utils/rsvpValidationUtil';
 import type { ResendTemplateVar } from '../../types/ResendTemplateVar';
+import styles from './RsvpForm.module.css';
 
 const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
   <Tooltip {...props} classes={{ popper: className }} />
@@ -213,7 +214,7 @@ export default function RsvpForm({ setTab: setTab, uid }: RsvpFormProps) {
             />
           </RadioGroup>
           <TextField
-            className="rsvp-input"
+            className={styles.rsvpInput}
             id="first-name-input"
             required
             label="First Name"
@@ -226,7 +227,7 @@ export default function RsvpForm({ setTab: setTab, uid }: RsvpFormProps) {
             }}
           />
           <TextField
-            className="rsvp-input"
+            className={styles.rsvpInput}
             id="last-name-input"
             required
             label="Last Name"
@@ -239,7 +240,7 @@ export default function RsvpForm({ setTab: setTab, uid }: RsvpFormProps) {
             }}
           />
           <TextField
-            className="rsvp-input"
+            className={styles.rsvpInput}
             id="email-input"
             required
             label="Email"
@@ -253,7 +254,7 @@ export default function RsvpForm({ setTab: setTab, uid }: RsvpFormProps) {
             }}
           />
           <TextField
-            className="rsvp-input"
+            className={styles.rsvpInput}
             id="address-input"
             required
             label="Address"
@@ -280,7 +281,7 @@ export default function RsvpForm({ setTab: setTab, uid }: RsvpFormProps) {
                   }
                 ></FormControlLabel>
                 <TextField
-                  className="rsvp-input"
+                  className={styles.rsvpInput}
                   id="other-diet-input"
                   label="Please Specify"
                   required={!dietTextboxHidden}
