@@ -149,7 +149,6 @@ export default function EventInfo() {
                 border: 0,
                 borderRadius: '4px',
                 display: 'block',
-                maxWidth: '600px',
                 width: '100%',
               }}
               allowFullScreen={true}
@@ -166,7 +165,6 @@ export default function EventInfo() {
                 border: 0,
                 borderRadius: '4px',
                 display: 'block',
-                maxWidth: '600px',
                 width: '100%',
               }}
               allowFullScreen={true}
