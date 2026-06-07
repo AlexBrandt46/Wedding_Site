@@ -186,7 +186,14 @@ export default function RsvpForm({ setTab: setTab, uid }: RsvpFormProps) {
         <Typography variant="h5" sx={{ marginBottom: '1rem' }}>
           Event RSVP
         </Typography>
-        <RsvpAlert alertMessage="Please RSVP by August 10th, 2026." />
+        <RsvpAlert
+          alertMessage="Please RSVP by August 10th, 2026."
+          showPastDeadlineMessage={true}
+        />
+        <RsvpAlert
+          alertMessage="Please submit a separate RSVP for each guest in your party. You may use the same email address for each guest if needed."
+          showPastDeadlineMessage={false}
+        />
         <form
           style={{
             display: 'flex',
