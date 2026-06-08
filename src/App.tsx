@@ -74,7 +74,6 @@ function App() {
 				sx={{
 					top: 0,
 					justifyContent: 'center',
-					fontFamily: 'Baskerville !important',
 				}}
 			>
 				{minHeaderMatch && <WideTabList tab={tab} uid={uid} setTab={setTab} />}

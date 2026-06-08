@@ -13,7 +13,6 @@ import Tooltip, {
 	type TooltipProps,
 	tooltipClasses,
 } from '@mui/material/Tooltip';
-import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 import { Fragment, useEffect, useState } from 'react';
 import { createGuest } from '../../types/Guest';
@@ -68,10 +67,7 @@ export default function RsvpForm({ setTab: setTab, uid }: RsvpFormProps) {
 				setGuest(guestData);
 				setAttending(guestData.attending);
 				setDietDescription(guestData.dietRestrictions ?? '');
-				setDietTextboxHidden(
-					guestData.dietRestrictions === undefined ||
-						guestData.dietRestrictions === ''
-				);
+				setDietTextboxHidden(!guestData.dietRestrictions);
 			});
 		} else if (uid && uid !== '' && uid !== uidFromUrl) {
 			setUidFromUrl(uid);
@@ -86,40 +82,53 @@ export default function RsvpForm({ setTab: setTab, uid }: RsvpFormProps) {
 		const trimmedAddress = guest!.address.trim();
 		let validInput = true;
 
-		if (!isValidEmail(trimmedEmail)) {
-			setEmailError('Please enter a valid email address.');
-			validInput = false;
-		} else {
-			setEmailError('');
-		}
+		const setErrorMsg = (
+			validationFn: (input: string) => boolean,
+			input: string,
+			setError: (msg: string) => void,
+			errorMsg: string
+		) => {
+			if (!validationFn(input)) {
+				setError(errorMsg);
+				validInput = false;
+			} else {
+				setError('');
+			}
+		};
 
-		if (!isValidName(trimmedFirstName)) {
-			console.log('Invalid first name:', trimmedFirstName);
-			setFirstNameError('Please enter a non-empty first name.');
-			validInput = false;
-		} else {
-			setFirstNameError('');
-		}
+		setErrorMsg(
+			isValidEmail,
+			trimmedEmail,
+			setEmailError,
+			'Please enter a valid email address.'
+		);
+		setErrorMsg(
+			isValidName,
+			trimmedFirstName,
+			setFirstNameError,
+			'Please enter a non-empty first name.'
+		);
+		setErrorMsg(
+			isValidName,
+			trimmedLastName,
+			setLastNameError,
+			'Please enter a non-empty last name.'
+		);
+		setErrorMsg(
+			isNotEmptyString,
+			trimmedAddress,
+			setAddressError,
+			'Please enter a non-empty address.'
+		);
 
-		if (!isValidName(trimmedLastName)) {
-			setLastNameError('Please enter a non-empty last name.');
-			validInput = false;
-		} else {
-			setLastNameError('');
-		}
-
-		if (!isNotEmptyString(trimmedAddress)) {
-			setAddressError('Please enter a non-empty address.');
-			validInput = false;
-		} else {
-			setAddressError('');
-		}
-
-		if (!dietTextboxHidden && !isNotEmptyString(trimmedDietDescription)) {
-			setDietDescriptionError(
+		if (!dietTextboxHidden) {
+			setErrorMsg(
+				isNotEmptyString,
+				trimmedDietDescription,
+				setDietDescriptionError,
 				'Please enter a non-empty dietary restriction if the "Dietary Restrictions" option is selected.'
 			);
-			validInput = false;
+			validInput = validInput && isNotEmptyString(trimmedDietDescription);
 		} else {
 			setDietDescriptionError('');
 		}
@@ -186,9 +195,7 @@ export default function RsvpForm({ setTab: setTab, uid }: RsvpFormProps) {
 
 	return (
 		guest && (
-			<Paper
-				sx={{ textAlign: 'center', padding: '1rem', fontFamily: 'Baskerville' }}
-			>
+			<Paper sx={{ textAlign: 'center', padding: '1rem' }}>
 				<Snackbar
 					open={showErrorAlert}
 					onClose={() => setShowErrorAlert(false)}
@@ -198,9 +205,7 @@ export default function RsvpForm({ setTab: setTab, uid }: RsvpFormProps) {
 						There was an issue with your RSVP submission. Please try again.
 					</Alert>
 				</Snackbar>
-				<Typography variant="h5" sx={{ marginBottom: '1rem' }}>
-					Event RSVP
-				</Typography>
+				<h5 style={{ marginBottom: '1rem' }}>Event RSVP</h5>
 				<RsvpAlert
 					alertMessage="Please RSVP by August 10th, 2026."
 					showPastDeadlineMessage={true}
@@ -213,7 +218,6 @@ export default function RsvpForm({ setTab: setTab, uid }: RsvpFormProps) {
 					style={{
 						display: 'flex',
 						flexDirection: 'column',
-						fontFamily: 'Baskerville',
 					}}
 				>
 					<RadioGroup
@@ -331,10 +335,8 @@ export default function RsvpForm({ setTab: setTab, uid }: RsvpFormProps) {
 							emailError !== '' ||
 							(!dietTextboxHidden && dietDescription === '')) && (
 							<Fragment>
-								{/* <Typography> */}
 								The following information must still be provided before you can
 								submit your RSVP:
-								{/* </Typography> */}
 								<ul>
 									{attending === null && <li>Attendance</li>}
 									{guest!.firstName === '' && <li>First Name</li>}

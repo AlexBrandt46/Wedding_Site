@@ -3,11 +3,7 @@ import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import { MENU_TABS, REGISTRY_LINK } from '../../types/MenuTabs';
-
-interface TabBoxProps {
-	handleChange: (event: React.SyntheticEvent, newValue: string) => void;
-	orientation?: 'horizontal' | 'vertical' | undefined;
-}
+import type { TabBoxProps } from '../../types/Props';
 
 export default function TabBox({ handleChange, orientation }: TabBoxProps) {
 	const handleChangeWithRedirect = (
@@ -54,7 +50,6 @@ export default function TabBox({ handleChange, orientation }: TabBoxProps) {
 						}
 						value={value}
 						sx={{
-							fontFamily: 'Baskerville',
 							wordWrap: 'break-word',
 							fontSize: { xs: '1.5rem', md: '1rem' },
 						}}

@@ -17,136 +17,139 @@ import TabPanels from './TabPanels';
 import type { TabListProps } from '../../types/Props';
 
 interface AppBarProps extends MuiAppBarProps {
-  open?: boolean;
+	open?: boolean;
 }
 
 const DrawerHeader = styled('div')(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
-  ...theme.mixins.toolbar,
-  justifyContent: 'flex-end',
+	display: 'flex',
+	alignItems: 'center',
+	padding: theme.spacing(0, 1),
+	// necessary for content to be below app bar
+	...theme.mixins.toolbar,
+	justifyContent: 'flex-end',
 }));
 
 const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== 'open',
+	shouldForwardProp: (prop) => prop !== 'open',
 })<AppBarProps>(({ theme }) => ({
-  transition: theme.transitions.create(['margin', 'width'], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  variants: [
-    {
-      props: ({ open }) => open,
-      style: {
-        width: `100%`,
-        transition: theme.transitions.create(['margin', 'width'], {
-          easing: theme.transitions.easing.easeOut,
-          duration: theme.transitions.duration.enteringScreen,
-        }),
-        background: 'var(--blue) !important',
-      },
-    },
-  ],
-  color: 'var(--text-color) !important',
+	transition: theme.transitions.create(['margin', 'width'], {
+		easing: theme.transitions.easing.sharp,
+		duration: theme.transitions.duration.leavingScreen,
+	}),
+	variants: [
+		{
+			props: ({ open }) => open,
+			style: {
+				width: `100%`,
+				transition: theme.transitions.create(['margin', 'width'], {
+					easing: theme.transitions.easing.easeOut,
+					duration: theme.transitions.duration.enteringScreen,
+				}),
+				background: 'var(--blue) !important',
+			},
+		},
+	],
+	color: 'var(--text-color) !important',
 }));
 
 export default function MobileTabList(props: TabListProps) {
-  const [open, setOpen] = React.useState(false);
-  const [toolbarHeader, setToolbarHeader] = React.useState('A & B');
+	const [open, setOpen] = React.useState(false);
+	const [toolbarHeader, setToolbarHeader] = React.useState('A & B');
 
-  const handleChange = (_event: React.SyntheticEvent, newValue: string) => {
-    if (newValue === '5') {
-      // Registry tab
-      window.location.href = REGISTRY_LINK;
-      return;
-    }
-    props.setTab(newValue);
-    setOpen(false);
-    setToolbarHeader(
-      MENU_TABS[newValue as keyof typeof MENU_TABS] !== 'Home'
-        ? MENU_TABS[newValue as keyof typeof MENU_TABS]
-        : 'A & B'
-    );
-  };
+	const handleChange = (_event: React.SyntheticEvent, newValue: string) => {
+		if (newValue === '5') {
+			// Registry tab
+			window.location.href = REGISTRY_LINK;
+			return;
+		}
+		props.setTab(newValue);
+		setOpen(false);
+		setToolbarHeader(
+			MENU_TABS[newValue as keyof typeof MENU_TABS] !== 'Home'
+				? MENU_TABS[newValue as keyof typeof MENU_TABS]
+				: 'A & B'
+		);
+	};
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
+	const handleDrawerOpen = () => {
+		setOpen(true);
+	};
 
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
+	const handleDrawerClose = () => {
+		setOpen(false);
+	};
 
-  return (
-    <TabContext value={props.tab}>
-      <Box
-        sx={{
-          borderBottom: 1,
-          borderColor: 'divider',
-          flexGrow: 1,
-          justifyContent: 'center',
-          backgroundColor: 'var(--blue)',
-          display: 'flex',
-        }}
-      >
-        <AppBar
-          position="fixed"
-          open={open}
-          sx={{
-            background: 'var(--blue) !important',
-          }}
-        >
-          <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              onClick={handleDrawerOpen}
-              edge="start"
-              sx={[open && { display: 'none' }]}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography
-              variant="h6"
-              component="div"
-              sx={{ justifySelf: 'center', fontSize: { xs: '1.5rem', md: '1rem' } }}
-            >
-              {toolbarHeader}
-            </Typography>
-            <IconButton disabled>
-              <Icon />
-            </IconButton>
-          </Toolbar>
-        </AppBar>
-        <Drawer
-          sx={{
-            width: '100%',
-            flexShrink: 0,
-            '& .MuiDrawer-paper': {
-              width: '100%',
-              boxSizing: 'border-box',
-              borderRight: 'none',
-            },
-          }}
-          variant="persistent"
-          anchor="left"
-          open={open}
-        >
-          <DrawerHeader
-            sx={{
-              background: 'var(--blue) !important',
-            }}
-          >
-            <IconButton onClick={handleDrawerClose}>
-              <ChevronLeftIcon sx={{ color: 'var(--text-color) !important' }} />
-            </IconButton>
-          </DrawerHeader>
-          <TabBox handleChange={handleChange} orientation="vertical" />
-        </Drawer>
-      </Box>
-      <TabPanels setTab={props.setTab} uid={props.uid} />
-    </TabContext>
-  );
+	return (
+		<TabContext value={props.tab}>
+			<Box
+				sx={{
+					borderBottom: 1,
+					borderColor: 'divider',
+					flexGrow: 1,
+					justifyContent: 'center',
+					backgroundColor: 'var(--blue)',
+					display: 'flex',
+				}}
+			>
+				<AppBar
+					position="fixed"
+					open={open}
+					sx={{
+						background: 'var(--blue) !important',
+					}}
+				>
+					<Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
+						<IconButton
+							color="inherit"
+							aria-label="open drawer"
+							onClick={handleDrawerOpen}
+							edge="start"
+							sx={[open && { display: 'none' }]}
+						>
+							<MenuIcon />
+						</IconButton>
+						<Typography
+							variant="h6"
+							component="div"
+							sx={{
+								justifySelf: 'center',
+								fontSize: { xs: '1.5rem', md: '1rem' },
+							}}
+						>
+							{toolbarHeader}
+						</Typography>
+						<IconButton disabled>
+							<Icon />
+						</IconButton>
+					</Toolbar>
+				</AppBar>
+				<Drawer
+					sx={{
+						width: '100%',
+						flexShrink: 0,
+						'& .MuiDrawer-paper': {
+							width: '100%',
+							boxSizing: 'border-box',
+							borderRight: 'none',
+						},
+					}}
+					variant="persistent"
+					anchor="left"
+					open={open}
+				>
+					<DrawerHeader
+						sx={{
+							background: 'var(--blue) !important',
+						}}
+					>
+						<IconButton onClick={handleDrawerClose}>
+							<ChevronLeftIcon sx={{ color: 'var(--text-color) !important' }} />
+						</IconButton>
+					</DrawerHeader>
+					<TabBox handleChange={handleChange} orientation="vertical" />
+				</Drawer>
+			</Box>
+			<TabPanels setTab={props.setTab} uid={props.uid} />
+		</TabContext>
+	);
 }
