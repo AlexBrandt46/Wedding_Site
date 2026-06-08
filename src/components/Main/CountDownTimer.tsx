@@ -39,7 +39,9 @@ export default function CountDownTimer() {
 					</Paper>
 				))}
 			</Stack>
-			<h6 style={{ marginTop: '1rem', textAlign: 'center' }}>Until "I Do"</h6>
+			<Typography variant="h6" align="center" sx={{ marginTop: '1rem' }}>
+				Until "I Do"
+			</Typography>
 		</Box>
 	);
 }

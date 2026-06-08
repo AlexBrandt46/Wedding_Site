@@ -27,6 +27,7 @@ import {
 } from '../../utils/rsvpValidationUtil';
 import type { ResendTemplateVar } from '../../types/ResendTemplateVar';
 import styles from './RsvpForm.module.css';
+import Typography from '@mui/material/Typography';
 
 const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
 	<Tooltip {...props} classes={{ popper: className }} />
@@ -205,7 +206,9 @@ export default function RsvpForm({ setTab: setTab, uid }: RsvpFormProps) {
 						There was an issue with your RSVP submission. Please try again.
 					</Alert>
 				</Snackbar>
-				<h5 style={{ marginBottom: '1rem' }}>Event RSVP</h5>
+				<Typography variant="h5" sx={{ marginBottom: '1rem' }}>
+					Event RSVP
+				</Typography>
 				<RsvpAlert
 					alertMessage="Please RSVP by August 10th, 2026."
 					showPastDeadlineMessage={true}
