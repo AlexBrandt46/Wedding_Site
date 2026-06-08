@@ -17,7 +17,9 @@ export default function EventInfo() {
 			}}
 			className="pagePaper"
 		>
-			<h5 style={{ marginBottom: '1rem' }}>Event Info</h5>
+			<Typography variant="h5" sx={{ marginBottom: '1rem' }}>
+				Event Info
+			</Typography>
 			<Divider sx={{ margin: '1rem 0' }} />
 			<Box
 				sx={{
@@ -27,7 +29,7 @@ export default function EventInfo() {
 					marginBottom: '1rem',
 				}}
 			>
-				<h6>RSVP Deadline</h6>
+				<Typography variant="h6">RSVP Deadline</Typography>
 				<RsvpAlert
 					alertMessage="Please RSVP by August 10th, 2026."
 					showPastDeadlineMessage={true}
@@ -37,14 +39,14 @@ export default function EventInfo() {
 			<Box
 				sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}
 			>
-				<h6>When</h6>
+				<Typography variant="h6">When</Typography>
 				<Typography variant="body1">September 12th, 4:30 PM EST</Typography>
 			</Box>
 			<Divider sx={{ margin: '1rem 0' }} />
 			<Box
 				sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}
 			>
-				<h6>Where</h6>
+				<Typography variant="h6">Where</Typography>
 				<Typography variant="body1" gutterBottom>
 					<b>The Lilley Mansion Bed and Breakfast</b>
 				</Typography>
@@ -71,7 +73,7 @@ export default function EventInfo() {
 			<Box
 				sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}
 			>
-				<h6>Dress Code</h6>
+				<Typography variant="h6">Dress Code</Typography>
 				<Typography variant="body1">
 					Garden Party/Bridgerton (be fun/colorful/creative)
 				</Typography>
@@ -80,7 +82,7 @@ export default function EventInfo() {
 			<Box
 				sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}
 			>
-				<h6>Schedule of Events</h6>
+				<Typography variant="h6">Schedule of Events</Typography>
 				<List>
 					<ListItem>
 						<Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -140,7 +142,7 @@ export default function EventInfo() {
 			<Box
 				sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}
 			>
-				<h6>Overnight Accommodations</h6>
+				<Typography variant="h6">Overnight Accommodations</Typography>
 				<Typography variant="body1" gutterBottom>
 					For those wishing to stay nearby, there are several hotels and
 					numerous AirBnbs, bed and breakfasts, and VRBOs within a short
@@ -193,7 +195,7 @@ export default function EventInfo() {
 			<Box
 				sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}
 			>
-				<h6>Age Limit</h6>
+				<Typography variant="h6">Age Limit</Typography>
 				<Typography variant="body1">
 					The event is strictly <b>18+</b> by request of the venue to keep the
 					day stress-free and fun for everyone.

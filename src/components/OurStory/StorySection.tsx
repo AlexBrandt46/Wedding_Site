@@ -15,7 +15,7 @@ export default function StorySection({
 }) {
 	return (
 		<Box>
-			<h6>{header}</h6>
+			<Typography variant="h6">{header}</Typography>
 			<Typography variant="body1" align="left">
 				<b>His:</b>
 				{hisText}
