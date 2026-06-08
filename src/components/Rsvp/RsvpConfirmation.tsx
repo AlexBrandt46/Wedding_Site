@@ -13,12 +13,8 @@ export default function RsvpConfirmation({
 	onBackToHome,
 }: RsvpConfirmationProps) {
 	return (
-		<Paper
-			sx={{ textAlign: 'center', padding: '2rem', fontFamily: 'Baskerville' }}
-		>
-			<Typography variant="h5" sx={{ marginBottom: '1rem' }}>
-				Thank You for RSVPing!
-			</Typography>
+		<Paper sx={{ textAlign: 'center', padding: '2rem' }}>
+			<h5 style={{ marginBottom: '1rem' }}>Thank You for RSVPing!</h5>
 			<Typography
 				variant="body1"
 				sx={{ marginBottom: '2rem', lineHeight: 1.6 }}

@@ -9,37 +9,37 @@ import styles from './CountDownTimer.module.css';
 const TIME_UNITS = ['weeks', 'days', 'hours', 'minutes', 'seconds'] as const;
 
 export default function CountDownTimer() {
-  const [timeLeft, setTimeLeft] = useState(getTimeDifference(new Date()));
+	const [timeLeft, setTimeLeft] = useState(getTimeDifference(new Date()));
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setTimeLeft(getTimeDifference(new Date()));
-    }, 1000); // In milliseconds (1000 ms = 1 sec)
+	useEffect(() => {
+		const interval = setInterval(() => {
+			setTimeLeft(getTimeDifference(new Date()));
+		}, 1000); // In milliseconds (1000 ms = 1 sec)
 
-    return () => clearInterval(interval);
-  }, []);
+		return () => clearInterval(interval);
+	}, []);
 
-  return (
-    <Box>
-      <Stack direction="row" className={styles.countDownStack}>
-        {TIME_UNITS.map((unit, index) => (
-          <Paper
-            key={unit}
-            className={styles.countDownPaper}
-            sx={{ marginRight: index === TIME_UNITS.length - 1 ? 0 : '1vw' }}
-          >
-            <Typography className={styles.countDownNumber}>{timeLeft[unit]}</Typography>
-            <Typography sx={{ paddingBottom: 0 }}>
-              {unit.charAt(0).toUpperCase() +
-                unit.slice(1, -1) +
-                (timeLeft[unit] === 1 ? ' ' : 's')}
-            </Typography>
-          </Paper>
-        ))}
-      </Stack>
-      <Typography variant="h6" align="center" sx={{ marginTop: '1rem' }}>
-        Until "I Do"
-      </Typography>
-    </Box>
-  );
+	return (
+		<Box>
+			<Stack direction="row" className={styles.countDownStack}>
+				{TIME_UNITS.map((unit, index) => (
+					<Paper
+						key={unit}
+						className={styles.countDownPaper}
+						sx={{ marginRight: index === TIME_UNITS.length - 1 ? 0 : '1vw' }}
+					>
+						<Typography className={styles.countDownNumber}>
+							{timeLeft[unit]}
+						</Typography>
+						<Typography sx={{ paddingBottom: 0 }}>
+							{unit.charAt(0).toUpperCase() +
+								unit.slice(1, -1) +
+								(timeLeft[unit] === 1 ? ' ' : 's')}
+						</Typography>
+					</Paper>
+				))}
+			</Stack>
+			<h6 style={{ marginTop: '1rem', textAlign: 'center' }}>Until "I Do"</h6>
+		</Box>
+	);
 }

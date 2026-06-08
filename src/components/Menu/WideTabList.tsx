@@ -15,7 +15,6 @@ export default function WideTabList(props: TabListProps) {
 			sx={{
 				top: 0,
 				justifyContent: 'center',
-				fontFamily: 'Baskerville !important',
 			}}
 		>
 			<TabContext value={props.tab}>
