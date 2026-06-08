@@ -1,5 +1,5 @@
 :root {
-	font-family: 'Butler' sans-serif !important;
+	font-family: 'Baskerville' sans-serif !important;
 	line-height: 1.5;
 	font-weight: 400;
 
@@ -26,7 +26,7 @@
 
 #root {
 	text-align: center;
-	font-family: 'Butler';
+	font-family: 'Baskerville';
 	width: 100%;
 }
 
@@ -56,7 +56,7 @@ button {
 	padding: 0.6em 1.2em;
 	font-size: 1em;
 	font-weight: 500;
-	font-family: 'Butler';
+	font-family: 'Baskerville';
 	background-color: #1a1a1a;
 	cursor: pointer;
 	transition: border-color 0.25s;
@@ -67,11 +67,11 @@ button:hover {
 }
 
 @font-face {
-	font-family: 'Butler';
+	font-family: 'Baskerville';
 	font-style: normal;
 	font-display: swap;
 	font-weight: 700;
 	src:
-		local('Butler_Medium'),
-		url('./assets/fonts/serif-keep/Butler.woff2') format('woff2');
+		local('Baskerville'),
+		url('./assets/fonts/Baskerville\ Regular.woff2') format('woff2');
 }

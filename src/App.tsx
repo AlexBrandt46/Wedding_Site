@@ -11,20 +11,20 @@ function App() {
 
 	const theme = createTheme({
 		typography: {
-			fontFamily: 'Butler',
+			fontFamily: 'Baskerville',
 		},
 		components: {
 			MuiCssBaseline: {
 				styleOverrides: `
-@font-face {
-	font-family: 'Butler';
-	font-style: normal;
-	font-display: swap;
-	font-weight: 700;
-	src:
-		local('Butler_Medium'),
-		url('./assets/fonts/serif-keep/Butler.woff2') format('woff2');
-}
+          @font-face {
+            font-family: 'Baskerville';
+            font-style: normal;
+            font-display: swap;
+            font-weight: 700;
+            src:
+              local('Baskerville'),
+              url('./assets/fonts/Baskerville\ Regular.woff2') format('woff2');
+          }
         `,
 			},
 			MuiAlert: {
@@ -74,7 +74,7 @@ function App() {
 				sx={{
 					top: 0,
 					justifyContent: 'center',
-					fontFamily: 'Butler !important',
+					fontFamily: 'Baskerville !important',
 				}}
 			>
 				{minHeaderMatch && <WideTabList tab={tab} uid={uid} setTab={setTab} />}
