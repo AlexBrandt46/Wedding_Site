@@ -6,22 +6,22 @@ import TabBox from './TabBox';
 import TabPanels from './TabPanels';
 
 export default function WideTabList(props: TabListProps) {
-  const handleChange = (_event: React.SyntheticEvent, newValue: string) => {
-    props.setTab(newValue);
-  };
+	const handleChange = (_event: React.SyntheticEvent, newValue: string) => {
+		props.setTab(newValue);
+	};
 
-  return (
-    <Box
-      sx={{
-        top: 0,
-        justifyContent: 'center',
-        fontFamily: 'Butler !important',
-      }}
-    >
-      <TabContext value={props.tab}>
-        <TabBox handleChange={handleChange} />
-        <TabPanels setTab={props.setTab} uid={props.uid} />
-      </TabContext>
-    </Box>
-  );
+	return (
+		<Box
+			sx={{
+				top: 0,
+				justifyContent: 'center',
+				fontFamily: 'Baskerville !important',
+			}}
+		>
+			<TabContext value={props.tab}>
+				<TabBox handleChange={handleChange} />
+				<TabPanels setTab={props.setTab} uid={props.uid} />
+			</TabContext>
+		</Box>
+	);
 }

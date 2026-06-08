@@ -1,20 +1,19 @@
 p {
-  margin-top: 0;
-  margin-bottom: 0;
+	margin-top: 0;
+	margin-bottom: 0;
 }
 
 .pagePanel {
-  padding: 0 !important;
-  margin-bottom: 1vh;
-  margin: 1vh auto;
-  width: 95vw;
+	padding: 0 !important;
+	margin-bottom: 1vh;
+	margin: 1vh auto;
+	width: 95vw;
 }
 
 /* Mobile */
 @media (max-width: 515px) {
-  .pagePanel {
-    top: 56px;
-    position: relative;
-  }
+	.pagePanel {
+		top: 56px;
+		position: relative;
+	}
 }
-
