@@ -1,0 +1,119 @@
+name: Build & Test
+
+on:
+  push:
+    branches: ['main', 'develop']
+  pull_request:
+    branches: ['main', 'develop']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [lts/*]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6.0.2
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node
+        uses: actions/setup-node@v6.4.0
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6.0.8
+        with:
+          version: 11.5.2
+
+      - name: Install dependencies
+        run: pnpm ci
+        continue-on-error: false
+
+      - name: Lint code
+        run: pnpm lint
+        continue-on-error: false
+
+      - name: Check for security vulnerabilities
+        run: pnpm audit --audit-level=low
+        continue-on-error: false
+
+      - name: Build application
+        run: pnpm build
+        env:
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_SECRET_KEY: ${{ secrets.VITE_SUPABASE_SECRET_KEY }}
+          VITE_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.VITE_SUPABASE_PUBLISHABLE_KEY }}
+        continue-on-error: false
+
+      - name: Run tests with coverage
+        run: pnpm test --coverage --run
+
+      - name: Check coverage threshold
+        run: |
+          # Parse coverage summary and enforce 80% minimum
+          COVERAGE_FILE="coverage/coverage-final.json"
+          if [ ! -f "$COVERAGE_FILE" ]; then
+            echo "❌ Coverage file not found at $COVERAGE_FILE"
+            exit 1
+          fi
+
+          # Extract line coverage percentage
+          LINE_COVERAGE=$(cat "$COVERAGE_FILE" | grep -o '"lines":[^}]*' | grep -o '[0-9.]*"' | head -1 | tr -d '"')
+          STATEMENT_COVERAGE=$(cat "$COVERAGE_FILE" | grep -o '"statements":[^}]*' | grep -o '[0-9.]*"' | head -1 | tr -d '"')
+          FUNCTION_COVERAGE=$(cat "$COVERAGE_FILE" | grep -o '"functions":[^}]*' | grep -o '[0-9.]*"' | head -1 | tr -d '"')
+          BRANCH_COVERAGE=$(cat "$COVERAGE_FILE" | grep -o '"branches":[^}]*' | grep -o '[0-9.]*"' | head -1 | tr -d '"')
+
+          MIN_COVERAGE=80
+
+          echo "📊 Coverage Report:"
+          echo "  Lines: ${LINE_COVERAGE}%"
+          echo "  Statements: ${STATEMENT_COVERAGE}%"
+          echo "  Functions: ${FUNCTION_COVERAGE}%"
+          echo "  Branches: ${BRANCH_COVERAGE}%"
+          echo ""
+
+          FAILED=false
+
+          if (( $(echo "$LINE_COVERAGE < $MIN_COVERAGE" | bc -l) )); then
+            echo "❌ Line coverage ${LINE_COVERAGE}% is below threshold of ${MIN_COVERAGE}%"
+            FAILED=true
+          fi
+
+          if (( $(echo "$STATEMENT_COVERAGE < $MIN_COVERAGE" | bc -l) )); then
+            echo "❌ Statement coverage ${STATEMENT_COVERAGE}% is below threshold of ${MIN_COVERAGE}%"
+            FAILED=true
+          fi
+
+          if (( $(echo "$FUNCTION_COVERAGE < $MIN_COVERAGE" | bc -l) )); then
+            echo "❌ Function coverage ${FUNCTION_COVERAGE}% is below threshold of ${MIN_COVERAGE}%"
+            FAILED=true
+          fi
+
+          if (( $(echo "$BRANCH_COVERAGE < $MIN_COVERAGE" | bc -l) )); then
+            echo "❌ Branch coverage ${BRANCH_COVERAGE}% is below threshold of ${MIN_COVERAGE}%"
+            FAILED=true
+          fi
+
+          if [ "$FAILED" = true ]; then
+            exit 1
+          fi
+
+          echo "✅ All coverage thresholds met!"
+        continue-on-error: false
+
+      - name: Upload coverage reports
+        if: always()
+        uses: codecov/codecov-action@v5
+        with:
+          files: ./coverage/coverage-final.json
+          flags: unittests
+          fail_ci_if_error: true
