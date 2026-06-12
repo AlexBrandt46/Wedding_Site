@@ -1,2 +1,9 @@
 minimumReleaseAgeExclude:
   - '@types/react@19.2.17'
+  - '@mui/core-downloads-tracker@9.1.1'
+  - '@mui/material@9.1.1'
+  - '@mui/private-theming@9.1.1'
+  - '@mui/styled-engine@9.1.1'
+  - '@mui/system@9.1.1'
+  - '@mui/types@9.1.1'
+  - '@mui/utils@9.1.1'
