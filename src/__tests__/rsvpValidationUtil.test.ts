@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { isValidEmail, isNotEmptyString, isValidName } from '../utils/rsvpValidationUtil';
+import { isValidEmail, isNotEmptyString, isValidName, isFormIncomplete } from '../utils/rsvpValidationUtil';
 
 describe('rsvpValidationUtil', () => {
   describe('isValidEmail', () => {
@@ -338,6 +338,230 @@ describe('rsvpValidationUtil', () => {
 
       it('should accept name with leading and trailing spaces after trim', () => {
         expect(isValidName('  John  ')).toBe(true);
+      });
+    });
+  });
+
+  describe('isFormIncomplete', () => {
+    const validFormState = {
+      attending: true,
+      firstName: 'John',
+      lastName: 'Doe',
+      emailAddress: 'john@example.com',
+      address: '123 Main St',
+      emailError: '',
+      dietTextboxHidden: true,
+      dietDescription: '',
+    };
+
+    describe('complete form state', () => {
+      it('should return false when all required fields are filled and valid', () => {
+        expect(
+          isFormIncomplete(
+            validFormState.attending,
+            validFormState.firstName,
+            validFormState.lastName,
+            validFormState.emailAddress,
+            validFormState.address,
+            validFormState.emailError,
+            validFormState.dietTextboxHidden,
+            validFormState.dietDescription
+          )
+        ).toBe(false);
+      });
+
+      it('should return false when attending is false but other fields are valid', () => {
+        expect(
+          isFormIncomplete(
+            false,
+            validFormState.firstName,
+            validFormState.lastName,
+            validFormState.emailAddress,
+            validFormState.address,
+            validFormState.emailError,
+            validFormState.dietTextboxHidden,
+            validFormState.dietDescription
+          )
+        ).toBe(false);
+      });
+
+      it('should return false when diet restrictions are provided and not hidden', () => {
+        expect(
+          isFormIncomplete(
+            validFormState.attending,
+            validFormState.firstName,
+            validFormState.lastName,
+            validFormState.emailAddress,
+            validFormState.address,
+            validFormState.emailError,
+            false,
+            'Gluten-free'
+          )
+        ).toBe(false);
+      });
+    });
+
+    describe('incomplete form state - missing required fields', () => {
+      it('should return true when attending is null', () => {
+        expect(
+          isFormIncomplete(
+            null,
+            validFormState.firstName,
+            validFormState.lastName,
+            validFormState.emailAddress,
+            validFormState.address,
+            validFormState.emailError,
+            validFormState.dietTextboxHidden,
+            validFormState.dietDescription
+          )
+        ).toBe(true);
+      });
+
+      it('should return true when firstName is empty', () => {
+        expect(
+          isFormIncomplete(
+            validFormState.attending,
+            '',
+            validFormState.lastName,
+            validFormState.emailAddress,
+            validFormState.address,
+            validFormState.emailError,
+            validFormState.dietTextboxHidden,
+            validFormState.dietDescription
+          )
+        ).toBe(true);
+      });
+
+      it('should return true when lastName is empty', () => {
+        expect(
+          isFormIncomplete(
+            validFormState.attending,
+            validFormState.firstName,
+            '',
+            validFormState.emailAddress,
+            validFormState.address,
+            validFormState.emailError,
+            validFormState.dietTextboxHidden,
+            validFormState.dietDescription
+          )
+        ).toBe(true);
+      });
+
+      it('should return true when emailAddress is empty', () => {
+        expect(
+          isFormIncomplete(
+            validFormState.attending,
+            validFormState.firstName,
+            validFormState.lastName,
+            '',
+            validFormState.address,
+            validFormState.emailError,
+            validFormState.dietTextboxHidden,
+            validFormState.dietDescription
+          )
+        ).toBe(true);
+      });
+
+      it('should return true when address is empty', () => {
+        expect(
+          isFormIncomplete(
+            validFormState.attending,
+            validFormState.firstName,
+            validFormState.lastName,
+            validFormState.emailAddress,
+            '',
+            validFormState.emailError,
+            validFormState.dietTextboxHidden,
+            validFormState.dietDescription
+          )
+        ).toBe(true);
+      });
+    });
+
+    describe('incomplete form state - validation errors', () => {
+      it('should return true when emailError is present', () => {
+        expect(
+          isFormIncomplete(
+            validFormState.attending,
+            validFormState.firstName,
+            validFormState.lastName,
+            validFormState.emailAddress,
+            validFormState.address,
+            'Invalid email',
+            validFormState.dietTextboxHidden,
+            validFormState.dietDescription
+          )
+        ).toBe(true);
+      });
+    });
+
+    describe('incomplete form state - diet restrictions', () => {
+      it('should return true when diet restrictions are shown but dietDescription is empty', () => {
+        expect(
+          isFormIncomplete(
+            validFormState.attending,
+            validFormState.firstName,
+            validFormState.lastName,
+            validFormState.emailAddress,
+            validFormState.address,
+            validFormState.emailError,
+            false,
+            ''
+          )
+        ).toBe(true);
+      });
+
+      it('should return false when diet restrictions are hidden regardless of dietDescription', () => {
+        expect(
+          isFormIncomplete(
+            validFormState.attending,
+            validFormState.firstName,
+            validFormState.lastName,
+            validFormState.emailAddress,
+            validFormState.address,
+            validFormState.emailError,
+            true,
+            ''
+          )
+        ).toBe(false);
+      });
+    });
+
+    describe('multiple incomplete conditions', () => {
+      it('should return true when multiple required fields are empty', () => {
+        expect(
+          isFormIncomplete(
+            null,
+            '',
+            '',
+            validFormState.emailAddress,
+            validFormState.address,
+            validFormState.emailError,
+            validFormState.dietTextboxHidden,
+            validFormState.dietDescription
+          )
+        ).toBe(true);
+      });
+
+      it('should return true when attending is null and emailError is present', () => {
+        expect(
+          isFormIncomplete(
+            null,
+            validFormState.firstName,
+            validFormState.lastName,
+            validFormState.emailAddress,
+            validFormState.address,
+            'Invalid email',
+            validFormState.dietTextboxHidden,
+            validFormState.dietDescription
+          )
+        ).toBe(true);
+      });
+
+      it('should return true when all fields are empty', () => {
+        expect(
+          isFormIncomplete(null, '', '', '', '', '', true, '')
+        ).toBe(true);
       });
     });
   });

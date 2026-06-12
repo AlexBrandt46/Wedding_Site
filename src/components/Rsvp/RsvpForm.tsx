@@ -24,6 +24,7 @@ import {
 	isNotEmptyString,
 	isValidEmail,
 	isValidName,
+	isFormIncomplete,
 } from '../../utils/rsvpValidationUtil';
 import type { ResendTemplateVar } from '../../types/ResendTemplateVar';
 import styles from './RsvpForm.module.css';
@@ -61,6 +62,17 @@ export default function RsvpForm({ setTab: setTab, uid }: RsvpFormProps) {
 	const [addressError, setAddressError] = useState('');
 
 	const pastRsvpDeadline: boolean = isDatePastRsvpDeadline(new Date());
+
+	const formIncomplete = isFormIncomplete(
+		attending,
+		guest?.firstName ?? '',
+		guest?.lastName ?? '',
+		guest?.emailAddress ?? '',
+		guest?.address ?? '',
+		emailError,
+		dietTextboxHidden,
+		dietDescription
+	);
 
 	useEffect(() => {
 		if (uidFromUrl && uidFromUrl !== '' && guest === undefined) {
@@ -244,7 +256,6 @@ export default function RsvpForm({ setTab: setTab, uid }: RsvpFormProps) {
 					</RadioGroup>
 					<TextField
 						className={styles.rsvpInput}
-						id="first-name-input"
 						required
 						label="First Name"
 						helperText={firstNameError}
@@ -257,7 +268,6 @@ export default function RsvpForm({ setTab: setTab, uid }: RsvpFormProps) {
 					/>
 					<TextField
 						className={styles.rsvpInput}
-						id="last-name-input"
 						required
 						label="Last Name"
 						value={guest.lastName}
@@ -270,7 +280,6 @@ export default function RsvpForm({ setTab: setTab, uid }: RsvpFormProps) {
 					/>
 					<TextField
 						className={styles.rsvpInput}
-						id="email-input"
 						required
 						label="Email"
 						type="email"
@@ -284,7 +293,6 @@ export default function RsvpForm({ setTab: setTab, uid }: RsvpFormProps) {
 					/>
 					<TextField
 						className={styles.rsvpInput}
-						id="address-input"
 						required
 						label="Address"
 						type="address"
@@ -298,45 +306,36 @@ export default function RsvpForm({ setTab: setTab, uid }: RsvpFormProps) {
 					/>
 					<FormControl>
 						<FormGroup>
-							<FormGroup>
-								<FormControlLabel
-									label="Dietary Restrictions"
-									control={
-										<Checkbox
-											name="diet"
-											checked={!dietTextboxHidden}
-											onChange={(e) => setDietTextboxHidden(!e.target.checked)}
-										/>
-									}
-								></FormControlLabel>
-								<TextField
-									className={styles.rsvpInput}
-									id="other-diet-input"
-									label="Please Specify"
-									required={!dietTextboxHidden}
-									disabled={dietTextboxHidden}
-									sx={{ visibility: dietTextboxHidden ? 'hidden' : 'visible' }}
-									value={dietDescription}
-									helperText={dietDescriptionError}
-									error={!!dietDescriptionError}
-									onChange={(e) => {
-										setDietDescription(e.target.value);
-										setDietDescriptionError('');
-									}}
-								/>
-							</FormGroup>
+							<FormControlLabel
+								label="Dietary Restrictions"
+								control={
+									<Checkbox
+										name="diet"
+										checked={!dietTextboxHidden}
+										onChange={(e) => setDietTextboxHidden(!e.target.checked)}
+									/>
+								}
+							></FormControlLabel>
+							<TextField
+								className={styles.rsvpInput}
+								label="Please Specify"
+								required={!dietTextboxHidden}
+								disabled={dietTextboxHidden}
+								sx={{ visibility: dietTextboxHidden ? 'hidden' : 'visible' }}
+								value={dietDescription}
+								helperText={dietDescriptionError}
+								error={!!dietDescriptionError}
+								onChange={(e) => {
+									setDietDescription(e.target.value);
+									setDietDescriptionError('');
+								}}
+							/>
 						</FormGroup>
 					</FormControl>
 				</form>
 				<HtmlTooltip
 					title={
-						(attending === null ||
-							guest!.firstName === '' ||
-							guest!.lastName === '' ||
-							guest!.emailAddress === '' ||
-							guest!.address === '' ||
-							emailError !== '' ||
-							(!dietTextboxHidden && dietDescription === '')) && (
+						formIncomplete && (
 							<Fragment>
 								The following information must still be provided before you can
 								submit your RSVP:
@@ -366,16 +365,7 @@ export default function RsvpForm({ setTab: setTab, uid }: RsvpFormProps) {
 							variant="contained"
 							sx={{ marginTop: '1vh' }}
 							onClick={submitRsvp}
-							disabled={
-								pastRsvpDeadline ||
-								attending === null ||
-								guest!.firstName === '' ||
-								guest!.lastName === '' ||
-								guest!.emailAddress === '' ||
-								guest!.address === '' ||
-								emailError !== '' ||
-								(!dietTextboxHidden && dietDescription === '')
-							}
+							disabled={pastRsvpDeadline || formIncomplete}
 						>
 							Submit RSVP
 						</Button>

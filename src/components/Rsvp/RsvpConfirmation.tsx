@@ -2,11 +2,7 @@ import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-
-interface RsvpConfirmationProps {
-	onBackToForm: () => void;
-	onBackToHome: () => void;
-}
+import type { RsvpConfirmationProps } from '../../types/Props';
 
 export default function RsvpConfirmation({
 	onBackToForm,
@@ -21,8 +17,8 @@ export default function RsvpConfirmation({
 				variant="body1"
 				sx={{ marginBottom: '2rem', lineHeight: 1.6 }}
 			>
-				An email confirmation will be sent shortly. If there are others in your
-				party you wish to RSVP for, please submit another RSVP for them.
+				Expect a confirmation email shortly. If there are others in your party
+				you wish to RSVP for, please submit another RSVP for them.
 			</Typography>
 			<Stack
 				direction="row"
@@ -33,7 +29,7 @@ export default function RsvpConfirmation({
 					Submit Another RSVP
 				</Button>
 				<Button variant="outlined" color="primary" onClick={onBackToHome}>
-					Back to Home
+					Return Home
 				</Button>
 			</Stack>
 		</Paper>

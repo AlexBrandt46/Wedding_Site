@@ -13,3 +13,8 @@ export interface TabBoxProps {
 	handleChange: (event: React.SyntheticEvent, newValue: string) => void;
 	orientation?: 'horizontal' | 'vertical' | undefined;
 }
+
+export interface RsvpConfirmationProps {
+	onBackToForm: () => void;
+	onBackToHome: () => void;
+}

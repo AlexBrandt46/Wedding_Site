@@ -12,3 +12,24 @@ export const isValidName = (name: string): boolean => {
   const nameRegex = /^[a-zA-Z\s'-]+$/;
   return isNotEmptyString(name) && nameRegex.test(name);
 };
+
+export const isFormIncomplete = (
+  attending: boolean | null,
+  firstName: string,
+  lastName: string,
+  emailAddress: string,
+  address: string,
+  emailError: string,
+  dietTextboxHidden: boolean,
+  dietDescription: string
+): boolean => {
+  return (
+    attending === null ||
+    firstName === '' ||
+    lastName === '' ||
+    emailAddress === '' ||
+    address === '' ||
+    emailError !== '' ||
+    (!dietTextboxHidden && dietDescription === '')
+  );
+};
