@@ -74,8 +74,16 @@ export default function EventInfo() {
 				sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}
 			>
 				<Typography variant="h6">Dress Code</Typography>
-				<Typography variant="body1">
-					Garden Party/Bridgerton (be fun/colorful/creative)
+				<h3>Ladies</h3>
+				<Typography variant="body1" sx={{ width: '50%' }}>
+					Dresses in summery hues and light pastels are encouraged! Satin,
+					floral patterns and textures are all welcome. The ceremony will be
+					outdoors, so please keep that in mind when selecting your footwear.
+				</Typography>
+				<h3>Gentlemen</h3>
+				<Typography variant="body1" sx={{ width: '50%' }}>
+					We encourage light-colored suits, linen, and pastels. A tie is not
+					required, but feel free to add one if you like!
 				</Typography>
 			</Box>
 			<Divider sx={{ margin: '1rem 0' }} />
