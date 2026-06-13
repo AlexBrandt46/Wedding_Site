@@ -13,6 +13,14 @@ export default function StorySection({
 	hersText: string;
 	images?: string[];
 }) {
+	const getImagePath = (src: string) => {
+		const basename = src.replace(/\.[^.]+$/, '');
+		return {
+			webp: `/Wedding_Site/${basename}.webp`,
+			jpg: `/Wedding_Site/${src}`,
+		};
+	};
+
 	return (
 		<Box>
 			<Typography variant="h6">{header}</Typography>
@@ -31,14 +39,19 @@ export default function StorySection({
 					cols={3}
 					rowHeight={164}
 				>
-					{images.map((src, index) => (
-						<img
-							key={index}
-							src={`/Wedding_Site/${src}`}
-							alt={`Story image ${index + 1}`}
-							loading="lazy"
-						/>
-					))}
+					{images.map((src, index) => {
+						const paths = getImagePath(src);
+						return (
+							<picture key={index}>
+								<source srcSet={paths.webp} type="image/webp" />
+								<img
+									src={paths.jpg}
+									alt={`Story image ${index + 1}`}
+									loading="lazy"
+								/>
+							</picture>
+						);
+					})}
 				</ImageList>
 			)}
 		</Box>
