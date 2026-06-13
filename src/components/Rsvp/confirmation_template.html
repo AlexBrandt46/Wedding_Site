@@ -10,93 +10,6 @@
 			content="telephone=no,address=no,email=no,date=no,url=no"
 			name="format-detection"
 		/>
-		<style>
-			body {
-				margin: 0;
-				padding: 0;
-				background: #f6f2ed;
-				color: #2f2416;
-				font-family: 'Baskerville', Georgia, serif;
-				-webkit-text-size-adjust: 100%;
-				-ms-text-size-adjust: 100%;
-			}
-			table {
-				border-collapse: collapse;
-			}
-			.container {
-				width: 100%;
-				max-width: 600px;
-				margin: 0 auto;
-				background: #ffffff;
-				border: 1px solid #e8dfd4;
-			}
-			.header {
-				padding: 32px 24px 16px;
-				background: #fbf1dc;
-				text-align: center;
-			}
-			.title {
-				margin: 0;
-				font-size: 28px;
-				line-height: 1.2;
-				color: #3c2d1f;
-				font-weight: 700;
-			}
-			.subtitle {
-				margin: 12px 0 0;
-				color: #8f6b40;
-				font-size: 16px;
-				line-height: 1.5;
-			}
-			.section {
-				padding: 24px;
-			}
-			.section h2 {
-				margin: 16px;
-				font-size: 20px;
-				color: #3c2d1f;
-			}
-			.section p {
-				margin: 16px;
-				font-size: 16px;
-				line-height: 1.6;
-				color: #4a3d30;
-			}
-			.detail-table td {
-				padding: 10px 0;
-				border-bottom: 1px solid #ebe2d6;
-				font-size: 15px;
-				color: #4a3d30;
-			}
-			.detail-label {
-				width: 35%;
-				font-weight: 700;
-				color: #3c2d1f;
-			}
-			.button {
-				display: inline-block;
-				padding: 14px 24px;
-				background: #c2863d;
-				color: #ffffff;
-				text-decoration: none;
-				border-radius: 8px;
-				font-weight: 700;
-			}
-			.alert {
-				margin: 20px 0 0;
-				padding: 16px;
-				border-radius: 10px;
-				background: #f7e2d9;
-				color: #7a3c33;
-				border: 1px solid #ebc3bb;
-			}
-			.footer {
-				padding: 24px;
-				text-align: center;
-				font-size: 13px;
-				color: #8a7b6e;
-			}
-		</style>
 	</head>
 	<body style="background-color: #ffffff">
 		<table
@@ -165,16 +78,43 @@
 															cellpadding="0"
 															cellspacing="0"
 															role="presentation"
-															class="container"
+															style="
+																width: 100%;
+																max-width: 600px;
+																margin: 0 auto;
+																background: #ffffff;
+																border: 1px solid #e8dfd4;
+															"
 														>
 															<tbody>
 																<tr>
 																	<td
-																		class="header"
+																		style="
+																			padding: 32px 24px 16px;
+																			background: #fbf1dc;
+																			text-align: center;
+																		"
 																		data-id="__react-email-column"
 																	>
-																		<h1 class="title">RSVP Confirmed</h1>
-																		<p class="subtitle">
+																		<h1
+																			style="
+																				margin: 0;
+																				font-size: 28px;
+																				line-height: 1.2;
+																				color: #3c2d1f;
+																				font-weight: 700;
+																			"
+																		>
+																			RSVP Confirmed
+																		</h1>
+																		<p
+																			style="
+																				margin: 12px 0 0;
+																				color: #8f6b40;
+																				font-size: 16px;
+																				line-height: 1.5;
+																			"
+																		>
 																			Thank you for letting us know - we
 																			can&#x27;t wait to celebrate with you.
 																		</p>
@@ -182,15 +122,29 @@
 																</tr>
 																<tr>
 																	<td
-																		class="section"
+																		style="padding: 24px"
 																		data-id="__react-email-column"
 																	>
-																		<p>
+																		<p
+																			style="
+																				margin: 16px;
+																				font-size: 16px;
+																				line-height: 1.6;
+																				color: #4a3d30;
+																			"
+																		>
 																			Hello
-																			<strong>{{GUEST_FIRST_NAME}}</strong>
-																			<strong>{{GUEST_LAST_NAME}}</strong>,
+																			<strong>{{{GUEST_FIRST_NAME}}}</strong>
+																			<strong>{{{GUEST_LAST_NAME}}}</strong>,
 																		</p>
-																		<p>
+																		<p
+																			style="
+																				margin: 16px;
+																				font-size: 16px;
+																				line-height: 1.6;
+																				color: #4a3d30;
+																			"
+																		>
 																			Your RSVP has been successfully received
 																			for our wedding celebration on
 																			<strong>September 12th</strong>, at
@@ -203,7 +157,6 @@
 																			cellpadding="0"
 																			cellspacing="0"
 																			role="presentation"
-																			class="detail-table"
 																			style="
 																				margin-top: 0;
 																				margin-right: 0;
@@ -218,76 +171,267 @@
 																			<tbody>
 																				<tr>
 																					<td
-																						class="detail-label"
+																						style="
+																							padding: 10px 0;
+																							border-bottom: 1px solid #ebe2d6;
+																							width: 35%;
+																							font-weight: 700;
+																							color: #3c2d1f;
+																						"
 																						data-id="__react-email-column"
 																					>
-																						<p>Attending</p>
+																						<p
+																							style="
+																								margin: 16px;
+																								font-size: 16px;
+																								line-height: 1.6;
+																								color: #4a3d30;
+																							"
+																						>
+																							Attending
+																						</p>
 																					</td>
-																					<td data-id="__react-email-column">
-																						<p>{{GUEST_IS_ATTENDING}}</p>
+																					<td
+																						style="
+																							padding: 10px 0;
+																							border-bottom: 1px solid #ebe2d6;
+																							font-size: 15px;
+																							color: #4a3d30;
+																						"
+																						data-id="__react-email-column"
+																					>
+																						<p
+																							style="
+																								margin: 16px;
+																								font-size: 16px;
+																								line-height: 1.6;
+																								color: #4a3d30;
+																							"
+																						>
+																							{{{GUEST_IS_ATTENDING}}}
+																						</p>
 																					</td>
 																				</tr>
 																				<tr>
 																					<td
-																						class="detail-label"
+																						style="
+																							padding: 10px 0;
+																							border-bottom: 1px solid #ebe2d6;
+																							width: 35%;
+																							font-weight: 700;
+																							color: #3c2d1f;
+																						"
 																						data-id="__react-email-column"
 																					>
-																						<p>Guest First Name</p>
+																						<p
+																							style="
+																								margin: 16px;
+																								font-size: 16px;
+																								line-height: 1.6;
+																								color: #4a3d30;
+																							"
+																						>
+																							Guest First Name
+																						</p>
 																					</td>
-																					<td data-id="__react-email-column">
-																						<p>{{GUEST_FIRST_NAME}}</p>
+																					<td
+																						style="
+																							padding: 10px 0;
+																							border-bottom: 1px solid #ebe2d6;
+																							font-size: 15px;
+																							color: #4a3d30;
+																						"
+																						data-id="__react-email-column"
+																					>
+																						<p
+																							style="
+																								margin: 16px;
+																								font-size: 16px;
+																								line-height: 1.6;
+																								color: #4a3d30;
+																							"
+																						>
+																							{{{GUEST_FIRST_NAME}}}
+																						</p>
 																					</td>
 																				</tr>
 																				<tr>
 																					<td
-																						class="detail-label"
+																						style="
+																							padding: 10px 0;
+																							border-bottom: 1px solid #ebe2d6;
+																							width: 35%;
+																							font-weight: 700;
+																							color: #3c2d1f;
+																						"
 																						data-id="__react-email-column"
 																					>
-																						<p>Guest Last Name</p>
+																						<p
+																							style="
+																								margin: 16px;
+																								font-size: 16px;
+																								line-height: 1.6;
+																								color: #4a3d30;
+																							"
+																						>
+																							Guest Last Name
+																						</p>
 																					</td>
-																					<td data-id="__react-email-column">
-																						<p>{{GUEST_LAST_NAME}}</p>
+																					<td
+																						style="
+																							padding: 10px 0;
+																							border-bottom: 1px solid #ebe2d6;
+																							font-size: 15px;
+																							color: #4a3d30;
+																						"
+																						data-id="__react-email-column"
+																					>
+																						<p
+																							style="
+																								margin: 16px;
+																								font-size: 16px;
+																								line-height: 1.6;
+																								color: #4a3d30;
+																							"
+																						>
+																							{{{GUEST_LAST_NAME}}}
+																						</p>
 																					</td>
 																				</tr>
 																				<tr>
 																					<td
-																						class="detail-label"
+																						style="
+																							padding: 10px 0;
+																							border-bottom: 1px solid #ebe2d6;
+																							width: 35%;
+																							font-weight: 700;
+																							color: #3c2d1f;
+																						"
 																						data-id="__react-email-column"
 																					>
-																						<p>Address</p>
+																						<p
+																							style="
+																								margin: 16px;
+																								font-size: 16px;
+																								line-height: 1.6;
+																								color: #4a3d30;
+																							"
+																						>
+																							Address
+																						</p>
 																					</td>
-																					<td data-id="__react-email-column">
-																						<p>{{GUEST_ADDRESS}}</p>
+																					<td
+																						style="
+																							padding: 10px 0;
+																							border-bottom: 1px solid #ebe2d6;
+																							font-size: 15px;
+																							color: #4a3d30;
+																						"
+																						data-id="__react-email-column"
+																					>
+																						<p
+																							style="
+																								margin: 16px;
+																								font-size: 16px;
+																								line-height: 1.6;
+																								color: #4a3d30;
+																							"
+																						>
+																							{{{GUEST_ADDRESS}}}
+																						</p>
 																					</td>
 																				</tr>
 																				<tr>
 																					<td
-																						class="detail-label"
+																						style="
+																							padding: 10px 0;
+																							border-bottom: 1px solid #ebe2d6;
+																							width: 35%;
+																							font-weight: 700;
+																							color: #3c2d1f;
+																						"
 																						data-id="__react-email-column"
 																					>
-																						<p>Dietary Restrictions</p>
+																						<p
+																							style="
+																								margin: 16px;
+																								font-size: 16px;
+																								line-height: 1.6;
+																								color: #4a3d30;
+																							"
+																						>
+																							Dietary Restrictions
+																						</p>
 																					</td>
-																					<td data-id="__react-email-column">
-																						<p>{{GUEST_DIET_RESTRICTIONS}}</p>
+																					<td
+																						style="
+																							padding: 10px 0;
+																							border-bottom: 1px solid #ebe2d6;
+																							font-size: 15px;
+																							color: #4a3d30;
+																						"
+																						data-id="__react-email-column"
+																					>
+																						<p
+																							style="
+																								margin: 16px;
+																								font-size: 16px;
+																								line-height: 1.6;
+																								color: #4a3d30;
+																							"
+																						>
+																							{{{GUEST_DIET_RESTRICTIONS}}}
+																						</p>
 																					</td>
 																				</tr>
 																			</tbody>
 																		</table>
-																		<p>
+																		<p
+																			style="
+																				margin: 16px;
+																				font-size: 16px;
+																				line-height: 1.6;
+																				color: #4a3d30;
+																			"
+																		>
 																			If anything changes before the big day,
 																			feel free to update your RSVP.
 																		</p>
 																		<p style="text-align: center">
 																			<a
-																				href="http://localhost:5173?tab=4&amp;uid={{GUEST_UID}}"
+																				href="https://alexbrandt46.github.io/Wedding_Site?tab=4&amp;uid={{{GUEST_UID}}}"
 																				rel="noopener noreferrer nofollow"
-																				class="button"
+																				style="
+																					display: inline-block;
+																					padding: 14px 24px;
+																					background: #c2863d;
+																					color: #ffffff;
+																					text-decoration: none;
+																					border-radius: 8px;
+																					font-weight: 700;
+																				"
 																				target="_blank"
 																				>Manage your RSVP</a
 																			>
 																		</p>
-																		<div class="alert">
-																			<p>
+																		<div
+																			style="
+																				margin: 20px 0 0;
+																				padding: 16px;
+																				border-radius: 10px;
+																				background: #f7e2d9;
+																				color: #7a3c33;
+																				border: 1px solid #ebc3bb;
+																			"
+																		>
+																			<p
+																				style="
+																					margin: 16px;
+																					font-size: 16px;
+																					line-height: 1.6;
+																					color: #4a3d30;
+																				"
+																			>
 																				<strong>Need help?</strong> Reply to
 																				this email or visit our RSVP page for
 																				updates and additional details.
@@ -297,14 +441,42 @@
 																</tr>
 																<tr>
 																	<td
-																		class="footer"
+																		style="
+																			padding: 24px;
+																			text-align: center;
+																			font-size: 13px;
+																			color: #8a7b6e;
+																		"
 																		data-id="__react-email-column"
 																	>
-																		<p>With love,</p>
-																		<p>
+																		<p
+																			style="
+																				margin: 16px;
+																				font-size: 16px;
+																				line-height: 1.6;
+																				color: #4a3d30;
+																			"
+																		>
+																			With love,
+																		</p>
+																		<p
+																			style="
+																				margin: 16px;
+																				font-size: 16px;
+																				line-height: 1.6;
+																				color: #4a3d30;
+																			"
+																		>
 																			<strong>Alex &amp; Bre</strong>
 																		</p>
-																		<p>
+																		<p
+																			style="
+																				margin: 16px;
+																				font-size: 16px;
+																				line-height: 1.6;
+																				color: #4a3d30;
+																			"
+																		>
 																			If this wasn&#x27;t you, please ignore
 																			this message.
 																		</p>

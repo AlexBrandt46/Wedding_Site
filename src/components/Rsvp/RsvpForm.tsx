@@ -173,6 +173,7 @@ export default function RsvpForm({ setTab: setTab, uid }: RsvpFormProps) {
 		} else {
 			setShowErrorAlert(false);
 			setIsRsvpSubmitted(true);
+			window.history.replaceState({}, '', window.location.pathname);
 			await sendEmail('confirmation', guestInputs);
 		}
 	};
