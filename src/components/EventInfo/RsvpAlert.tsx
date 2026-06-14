@@ -30,7 +30,7 @@ export default function RsvpAlert(props: RsvpAlertProps) {
 			color={alertColor}
 			sx={{
 				textAlign: 'center',
-				marginBottom: '1rem',
+				marginBottom: props.useMarginBottom ? '1rem' : '0rem',
 				fontSize: '1rem',
 				width: `fit-content`,
 				justifySelf: 'center',

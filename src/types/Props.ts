@@ -7,6 +7,7 @@ export interface TabListProps {
 export interface RsvpAlertProps {
 	alertMessage: string;
 	showPastDeadlineMessage: boolean;
+	useMarginBottom?: boolean;
 }
 
 export interface TabBoxProps {

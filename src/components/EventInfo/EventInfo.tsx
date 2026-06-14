@@ -24,7 +24,6 @@ export default function EventInfo() {
 				className={styles.eventScheduleItem}
 				sx={{
 					flexDirection: 'column',
-					marginBottom: '1rem',
 				}}
 			>
 				<Typography variant="h6">RSVP Deadline</Typography>

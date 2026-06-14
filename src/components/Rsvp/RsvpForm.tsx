@@ -196,10 +196,15 @@ export default function RsvpForm({ setTab: setTab, uid }: RsvpFormProps) {
 					<Alert severity="error">There was an issue with your RSVP submission. Please try again.</Alert>
 				</Snackbar>
 				<PageHeader title="Event RSVP" />
-				<RsvpAlert alertMessage="Please RSVP by August 10th, 2026." showPastDeadlineMessage={true} />
+				<RsvpAlert
+					alertMessage="Please RSVP by August 10th, 2026."
+					showPastDeadlineMessage={true}
+					useMarginBottom={true}
+				/>
 				<RsvpAlert
 					alertMessage="Please submit a separate RSVP for each guest in your party. You may use the same email address for each guest if needed."
 					showPastDeadlineMessage={false}
+					useMarginBottom={true}
 				/>
 				<form
 					style={{
