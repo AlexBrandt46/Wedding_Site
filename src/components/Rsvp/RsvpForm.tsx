@@ -9,10 +9,7 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import Snackbar from '@mui/material/Snackbar';
 import TextField from '@mui/material/TextField';
-import Tooltip, {
-	type TooltipProps,
-	tooltipClasses,
-} from '@mui/material/Tooltip';
+import Tooltip, { type TooltipProps, tooltipClasses } from '@mui/material/Tooltip';
 import { styled } from '@mui/material/styles';
 import { Fragment, useEffect, useState } from 'react';
 import { createGuest } from '../../types/Guest';
@@ -20,15 +17,12 @@ import { getGuest, sendEmail, supabase } from '../../utils/supabaseUtil';
 import RsvpAlert from '../EventInfo/RsvpAlert';
 import RsvpConfirmation from './RsvpConfirmation';
 import { isDatePastRsvpDeadline } from '../../utils/dateUtil';
-import {
-	isNotEmptyString,
-	isValidEmail,
-	isValidName,
-	isFormIncomplete,
-} from '../../utils/rsvpValidationUtil';
+import { isNotEmptyString, isValidEmail, isValidName, isFormIncomplete } from '../../utils/rsvpValidationUtil';
 import type { ResendTemplateVar } from '../../types/ResendTemplateVar';
 import styles from './RsvpForm.module.css';
 import Typography from '@mui/material/Typography';
+import Divider from '@mui/material/Divider';
+import PageHeader from '../PageHeader';
 
 const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
 	<Tooltip {...props} classes={{ popper: className }} />
@@ -109,30 +103,10 @@ export default function RsvpForm({ setTab: setTab, uid }: RsvpFormProps) {
 			}
 		};
 
-		setErrorMsg(
-			isValidEmail,
-			trimmedEmail,
-			setEmailError,
-			'Please enter a valid email address.'
-		);
-		setErrorMsg(
-			isValidName,
-			trimmedFirstName,
-			setFirstNameError,
-			'Please enter a non-empty first name.'
-		);
-		setErrorMsg(
-			isValidName,
-			trimmedLastName,
-			setLastNameError,
-			'Please enter a non-empty last name.'
-		);
-		setErrorMsg(
-			isNotEmptyString,
-			trimmedAddress,
-			setAddressError,
-			'Please enter a non-empty address.'
-		);
+		setErrorMsg(isValidEmail, trimmedEmail, setEmailError, 'Please enter a valid email address.');
+		setErrorMsg(isValidName, trimmedFirstName, setFirstNameError, 'Please enter a non-empty first name.');
+		setErrorMsg(isValidName, trimmedLastName, setLastNameError, 'Please enter a non-empty last name.');
+		setErrorMsg(isNotEmptyString, trimmedAddress, setAddressError, 'Please enter a non-empty address.');
 
 		if (!dietTextboxHidden) {
 			setErrorMsg(
@@ -199,33 +173,30 @@ export default function RsvpForm({ setTab: setTab, uid }: RsvpFormProps) {
 	};
 
 	if (isRsvpSubmitted) {
-		return (
-			<RsvpConfirmation
-				onBackToForm={handleBackToForm}
-				onBackToHome={handleBackToHome}
-			/>
-		);
+		return <RsvpConfirmation onBackToForm={handleBackToForm} onBackToHome={handleBackToHome} />;
 	}
 
 	return (
 		guest && (
-			<Paper sx={{ textAlign: 'center', padding: '1rem' }}>
+			<Paper
+				sx={{
+					textAlign: 'center',
+					display: 'flex',
+					flexDirection: 'column',
+					padding: '1rem',
+					alignItems: 'center',
+				}}
+				className="pagePaper"
+			>
 				<Snackbar
 					open={showErrorAlert}
 					onClose={() => setShowErrorAlert(false)}
 					anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
 				>
-					<Alert severity="error">
-						There was an issue with your RSVP submission. Please try again.
-					</Alert>
+					<Alert severity="error">There was an issue with your RSVP submission. Please try again.</Alert>
 				</Snackbar>
-				<Typography variant="h5" sx={{ marginBottom: '1rem' }}>
-					Event RSVP
-				</Typography>
-				<RsvpAlert
-					alertMessage="Please RSVP by August 10th, 2026."
-					showPastDeadlineMessage={true}
-				/>
+				<PageHeader title="Event RSVP" />
+				<RsvpAlert alertMessage="Please RSVP by August 10th, 2026." showPastDeadlineMessage={true} />
 				<RsvpAlert
 					alertMessage="Please submit a separate RSVP for each guest in your party. You may use the same email address for each guest if needed."
 					showPastDeadlineMessage={false}
@@ -234,6 +205,7 @@ export default function RsvpForm({ setTab: setTab, uid }: RsvpFormProps) {
 					style={{
 						display: 'flex',
 						flexDirection: 'column',
+						width: '100%',
 					}}
 				>
 					<RadioGroup
@@ -338,8 +310,7 @@ export default function RsvpForm({ setTab: setTab, uid }: RsvpFormProps) {
 					title={
 						formIncomplete && (
 							<Fragment>
-								The following information must still be provided before you can
-								submit your RSVP:
+								The following information must still be provided before you can submit your RSVP:
 								<ul>
 									{attending === null && <li>Attendance</li>}
 									{guest!.firstName === '' && <li>First Name</li>}
@@ -351,9 +322,7 @@ export default function RsvpForm({ setTab: setTab, uid }: RsvpFormProps) {
 									{emailError !== '' && <li>{emailError}</li>}
 									{addressError !== '' && <li>{addressError}</li>}
 									{!dietTextboxHidden && dietDescription === '' && (
-										<li>
-											Specific dietary restrictions if you checked "Other".
-										</li>
+										<li>Specific dietary restrictions if you checked "Other".</li>
 									)}
 								</ul>
 							</Fragment>

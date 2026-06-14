@@ -4,13 +4,11 @@ import Typography from '@mui/material/Typography';
 
 export default function StorySection({
 	header,
-	hisText,
-	hersText,
+	text_body,
 	images,
 }: {
 	header: string;
-	hisText: string;
-	hersText: string;
+	text_body: string;
 	images?: string[];
 }) {
 	const getImagePath = (src: string) => {
@@ -25,30 +23,17 @@ export default function StorySection({
 		<Box>
 			<Typography variant="h6">{header}</Typography>
 			<Typography variant="body1" align="left">
-				<b>His:</b>
-				{hisText}
-			</Typography>
-			<Typography variant="body1" align="left">
-				<b>Hers:</b>
-				{hersText}
+				{text_body}
 			</Typography>
 
 			{images && (
-				<ImageList
-					sx={{ width: '100%', height: 'auto' }}
-					cols={3}
-					rowHeight={164}
-				>
+				<ImageList sx={{ width: '100%', height: 'auto' }} cols={3} rowHeight={164}>
 					{images.map((src, index) => {
 						const paths = getImagePath(src);
 						return (
 							<picture key={index}>
 								<source srcSet={paths.webp} type="image/webp" />
-								<img
-									src={paths.jpg}
-									alt={`Story image ${index + 1}`}
-									loading="lazy"
-								/>
+								<img src={paths.jpg} alt={`Story image ${index + 1}`} loading="lazy" />
 							</picture>
 						);
 					})}

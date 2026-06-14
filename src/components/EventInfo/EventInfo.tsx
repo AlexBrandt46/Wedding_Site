@@ -6,6 +6,7 @@ import Paper from '@mui/material/Paper';
 import RsvpAlert from './RsvpAlert';
 import Divider from '@mui/material/Divider';
 import styles from './EventInfo.module.css';
+import PageHeader from '../PageHeader';
 
 export default function EventInfo() {
 	return (
@@ -18,10 +19,7 @@ export default function EventInfo() {
 			}}
 			className="pagePaper"
 		>
-			<Typography variant="h5" sx={{ marginBottom: '1rem' }}>
-				Event Info
-			</Typography>
-			<Divider sx={{ margin: '1rem 0' }} />
+			<PageHeader title="Event RSVP" />
 			<Box
 				className={styles.eventScheduleItem}
 				sx={{
@@ -30,10 +28,7 @@ export default function EventInfo() {
 				}}
 			>
 				<Typography variant="h6">RSVP Deadline</Typography>
-				<RsvpAlert
-					alertMessage="Please RSVP by August 10th, 2026."
-					showPastDeadlineMessage={true}
-				/>
+				<RsvpAlert alertMessage="Please RSVP by August 10th, 2026." showPastDeadlineMessage={true} />
 			</Box>
 			<Divider sx={{ margin: '1rem 0' }} />
 			<Box className={styles.eventScheduleItem} sx={{ flexDirection: 'column' }}>
@@ -70,14 +65,13 @@ export default function EventInfo() {
 				<Typography variant="h6">Dress Code</Typography>
 				<h3>Ladies</h3>
 				<Typography variant="body1" sx={{ width: '50%' }}>
-					Dresses in summery hues and light pastels are encouraged! Satin, floral patterns and
-					textures are all welcome. The ceremony will be outdoors, so please keep that in mind when
-					selecting your footwear.
+					Dresses in summery hues and light pastels are encouraged! Satin, floral patterns and textures are all welcome.
+					The ceremony will be outdoors, so please keep that in mind when selecting your footwear.
 				</Typography>
 				<h3>Gentlemen</h3>
 				<Typography variant="body1" sx={{ width: '50%' }}>
-					We encourage light-colored suits, linen, and pastels. A tie is not required, but feel free
-					to add one if you like!
+					We encourage light-colored suits, linen, and pastels. A tie is not required, but feel free to add one if you
+					like!
 				</Typography>
 			</Box>
 			<Divider sx={{ margin: '1rem 0' }} />
@@ -129,9 +123,7 @@ export default function EventInfo() {
 							<Typography variant="body1" className={styles.eventScheduleTime}>
 								9:30 PM:
 							</Typography>
-							<Typography variant="body1">
-								Post-Wedding Celebrations in Spring Lake and Grand Haven
-							</Typography>
+							<Typography variant="body1">Post-Wedding Celebrations in Spring Lake and Grand Haven</Typography>
 						</Box>
 					</ListItem>
 				</List>
@@ -140,9 +132,8 @@ export default function EventInfo() {
 			<Box className={styles.eventScheduleItem} sx={{ flexDirection: 'column' }}>
 				<Typography variant="h6">Overnight Accommodations</Typography>
 				<Typography variant="body1" gutterBottom>
-					For those wishing to stay nearby, there are several hotels and numerous AirBnbs, bed and
-					breakfasts, and VRBOs within a short distance of the venue. A few have been included
-					below!
+					For those wishing to stay nearby, there are several hotels and numerous AirBnbs, bed and breakfasts, and VRBOs
+					within a short distance of the venue. A few have been included below!
 				</Typography>
 				<Box
 					className={styles.eventScheduleItem}
@@ -190,8 +181,7 @@ export default function EventInfo() {
 			<Box className={styles.eventScheduleItem} sx={{ flexDirection: 'column' }}>
 				<Typography variant="h6">Age Limit</Typography>
 				<Typography variant="body1">
-					The event is strictly <b>18+</b> by request of the venue to keep the day stress-free and
-					fun for everyone.
+					The event is strictly <b>18+</b> by request of the venue to keep the day stress-free and fun for everyone.
 				</Typography>
 			</Box>
 		</Paper>
