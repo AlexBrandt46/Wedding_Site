@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Paper from '@mui/material/Paper';
 import StorySection from './StorySection';
 import { getStoryEntries } from '../../utils/supabaseUtil';
-import type { StoryEntry } from '../../types/SupabaseTypes';
 import PageHeader from '../PageHeader';
 import { useStoryStore } from '../../stores';
 

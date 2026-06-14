@@ -20,8 +20,6 @@ import { isDatePastRsvpDeadline } from '../../utils/dateUtil';
 import { isNotEmptyString, isValidEmail, isValidName, isFormIncomplete } from '../../utils/rsvpValidationUtil';
 import type { ResendTemplateVar } from '../../types/ResendTemplateVar';
 import styles from './RsvpForm.module.css';
-import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
 import PageHeader from '../PageHeader';
 
 const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
