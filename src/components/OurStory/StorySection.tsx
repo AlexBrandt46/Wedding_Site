@@ -27,13 +27,18 @@ export default function StorySection({
 			</Typography>
 
 			{images && (
-				<ImageList sx={{ width: '100%', height: 'auto' }} cols={3} rowHeight={164}>
+				<ImageList sx={{ width: '100%', height: 'auto' }} cols={1} rowHeight="auto">
 					{images.map((src, index) => {
 						const paths = getImagePath(src);
 						return (
 							<picture key={index}>
 								<source srcSet={paths.webp} type="image/webp" />
-								<img src={paths.jpg} alt={`Story image ${index + 1}`} loading="lazy" />
+								<img
+									src={paths.jpg}
+									alt={`Story image ${index + 1}`}
+									loading="lazy"
+									style={{ width: '100%', height: 'auto', borderRadius: '4px' }}
+								/>
 							</picture>
 						);
 					})}
