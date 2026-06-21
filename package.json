@@ -3,7 +3,7 @@
 	"private": true,
 	"version": "1.0.2",
 	"type": "module",
-	"packageManager": "pnpm@11.6.0",
+	"packageManager": "pnpm@11.8.0",
 	"scripts": {
 		"dev": "vite",
 		"optimize-images": "node scripts/optimize-images.mjs",
@@ -29,7 +29,7 @@
 	},
 	"devDependencies": {
 		"@eslint/js": "^10.0.1",
-		"@types/node": "^25.9.3",
+		"@types/node": "^26.0.0",
 		"@types/react": "^19.2.17",
 		"@types/react-dom": "^19.2.3",
 		"@vitejs/plugin-react": "^6.0.2",
@@ -38,7 +38,7 @@
 		"eslint-plugin-react": "^7.37.5",
 		"eslint-plugin-react-refresh": "^0.5.3",
 		"globals": "^17.6.0",
-		"sharp": "^0.35.1",
+		"sharp": "^0.35.2",
 		"typescript": "~6.0.3",
 		"typescript-eslint": "^8.61.1",
 		"vite": "^8.0.16",
