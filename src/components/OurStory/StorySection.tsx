@@ -37,7 +37,7 @@ export default function StorySection({
 									src={paths.jpg}
 									alt={`Story image ${index + 1}`}
 									loading="lazy"
-									style={{ width: '100%', height: 'auto', borderRadius: '4px' }}
+									style={{ width: '60%', height: 'auto', borderRadius: '4px' }}
 								/>
 							</picture>
 						);
