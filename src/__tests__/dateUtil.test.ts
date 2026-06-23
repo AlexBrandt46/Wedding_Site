@@ -31,6 +31,20 @@ describe('getTimeDifference', () => {
 			milliseconds: 0,
 		});
 	});
+
+	it('returns the correct time difference for one day before the wedding ceremony', () => {
+		const testDate = new Date(2026, 8, 11, 16, 30);
+		expect(getTimeDifference(testDate, weddingDate)).toStrictEqual({
+			years: -1,
+			months: -1,
+			weeks: 0,
+			days: 1,
+			hours: 0,
+			minutes: 0,
+			seconds: 0,
+			milliseconds: -1,
+		});
+	});
 });
 
 describe('isDatePastRsvpDeadline', () => {
