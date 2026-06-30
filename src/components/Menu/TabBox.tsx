@@ -6,10 +6,7 @@ import { MENU_TABS, REGISTRY_LINK } from '../../types/MenuTabs';
 import type { TabBoxProps } from '../../types/Props';
 
 export default function TabBox({ handleChange, orientation }: TabBoxProps) {
-	const handleChangeWithRedirect = (
-		event: React.SyntheticEvent,
-		newValue: string
-	) => {
+	const handleChangeWithRedirect = (event: React.SyntheticEvent, newValue: string) => {
 		if (newValue === '5') {
 			// Registry tab
 			window.location.href = REGISTRY_LINK;
@@ -30,11 +27,7 @@ export default function TabBox({ handleChange, orientation }: TabBoxProps) {
 				display: 'flex',
 			}}
 		>
-			<TabList
-				id="tabList"
-				onChange={handleChangeWithRedirect}
-				orientation={orientation ?? 'horizontal'}
-			>
+			<TabList id="tabList" onChange={handleChangeWithRedirect} orientation={orientation ?? 'horizontal'}>
 				{Object.entries(MENU_TABS).map(([value, label]) => (
 					<Tab
 						key={value}

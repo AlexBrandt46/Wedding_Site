@@ -8,6 +8,9 @@ import styles from './CountDownTimer.module.css';
 
 const TIME_UNITS = ['weeks', 'days', 'hours', 'minutes', 'seconds'] as const;
 
+const timeLabelStyle = { paddingBottom: 0 };
+const untilLabelStyle = { marginTop: '1rem' };
+
 export default function CountDownTimer() {
 	const [timeLeft, setTimeLeft] = useState(getTimeDifference(new Date(), weddingDate));
 
@@ -29,13 +32,13 @@ export default function CountDownTimer() {
 						sx={{ marginRight: index === TIME_UNITS.length - 1 ? 0 : '1vw' }}
 					>
 						<Typography className={styles.countDownNumber}>{timeLeft[unit]}</Typography>
-						<Typography sx={{ paddingBottom: 0 }}>
+						<Typography sx={timeLabelStyle}>
 							{unit.charAt(0).toUpperCase() + unit.slice(1, -1) + (timeLeft[unit] === 1 ? ' ' : 's')}
 						</Typography>
 					</Paper>
 				))}
 			</Stack>
-			<Typography variant="h6" align="center" sx={{ marginTop: '1rem' }}>
+			<Typography variant="h6" align="center" sx={untilLabelStyle}>
 				Until "I Do"
 			</Typography>
 		</Box>

@@ -7,7 +7,7 @@ import FormGroup from '@mui/material/FormGroup';
 import Paper from '@mui/material/Paper';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
-import Snackbar from '@mui/material/Snackbar';
+import Snackbar, { type SnackbarOrigin } from '@mui/material/Snackbar';
 import TextField from '@mui/material/TextField';
 import Tooltip, { type TooltipProps, tooltipClasses } from '@mui/material/Tooltip';
 import { styled } from '@mui/material/styles';
@@ -21,6 +21,11 @@ import { isNotEmptyString, isValidEmail, isValidName, isFormIncomplete } from '.
 import type { ResendTemplateVar } from '../../types/ResendTemplateVar';
 import styles from './RsvpForm.module.css';
 import PageHeader from '../PageHeader';
+
+const anchorOrigin: SnackbarOrigin = {
+	vertical: 'top',
+	horizontal: 'center',
+};
 
 const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
 	<Tooltip {...props} classes={{ popper: className }} />
@@ -186,11 +191,7 @@ export default function RsvpForm({ setTab: setTab, uid }: RsvpFormProps) {
 				}}
 				className="pagePaper"
 			>
-				<Snackbar
-					open={showErrorAlert}
-					onClose={() => setShowErrorAlert(false)}
-					anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-				>
+				<Snackbar open={showErrorAlert} onClose={() => setShowErrorAlert(false)} anchorOrigin={anchorOrigin}>
 					<Alert severity="error">There was an issue with your RSVP submission. Please try again.</Alert>
 				</Snackbar>
 				<PageHeader title="Event RSVP" />

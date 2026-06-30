@@ -2,6 +2,8 @@ import { ImageList } from '@mui/material';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
+const imageListStyle = { width: '100%', height: 'auto' };
+
 export default function StorySection({
 	header,
 	text_body,
@@ -27,7 +29,7 @@ export default function StorySection({
 			</Typography>
 
 			{images && (
-				<ImageList sx={{ width: '100%', height: 'auto' }} cols={1} rowHeight="auto">
+				<ImageList sx={imageListStyle} cols={1} rowHeight="auto">
 					{images.map((src, index) => {
 						const paths = getImagePath(src);
 						return (

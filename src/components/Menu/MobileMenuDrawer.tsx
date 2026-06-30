@@ -141,7 +141,7 @@ export default function MobileTabList(props: TabListProps) {
 						}}
 					>
 						<IconButton onClick={handleDrawerClose}>
-							<ChevronLeftIcon sx={{ color: 'var(--text-color) !important' }} />
+							<ChevronLeftIcon htmlColor="var(--text-color)" />
 						</IconButton>
 					</DrawerHeader>
 					<TabBox handleChange={handleChange} orientation="vertical" />
