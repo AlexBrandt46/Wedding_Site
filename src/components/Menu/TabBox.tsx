@@ -16,17 +16,7 @@ export default function TabBox({ handleChange, orientation }: TabBoxProps) {
 	};
 
 	return (
-		<Box
-			className="siteBox"
-			sx={{
-				borderBottom: 1,
-				borderColor: 'divider',
-				flexGrow: 1,
-				justifyContent: 'center',
-				backgroundColor: 'var(--blue)',
-				display: 'flex',
-			}}
-		>
+		<Box className="siteBox">
 			<TabList id="tabList" onChange={handleChangeWithRedirect} orientation={orientation ?? 'horizontal'}>
 				{Object.entries(MENU_TABS).map(([value, label]) => (
 					<Tab

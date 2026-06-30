@@ -79,16 +79,7 @@ export default function MobileTabList(props: TabListProps) {
 
 	return (
 		<TabContext value={props.tab}>
-			<Box
-				sx={{
-					borderBottom: 1,
-					borderColor: 'divider',
-					flexGrow: 1,
-					justifyContent: 'center',
-					backgroundColor: 'var(--blue)',
-					display: 'flex',
-				}}
-			>
+			<Box className="siteBox">
 				<AppBar
 					position="fixed"
 					open={open}

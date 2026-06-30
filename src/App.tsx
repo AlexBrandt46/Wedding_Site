@@ -70,12 +70,7 @@ function App() {
 
 	return (
 		<ThemeProvider theme={theme}>
-			<Box
-				sx={{
-					top: 0,
-					justifyContent: 'center',
-				}}
-			>
+			<Box className="tabBox">
 				{minHeaderMatch && <WideTabList tab={tab} uid={uid} setTab={setTab} />}
 				{!minHeaderMatch && <MobileTabList tab={tab} uid={uid} setTab={setTab} />}
 			</Box>

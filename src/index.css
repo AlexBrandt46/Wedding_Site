@@ -75,3 +75,16 @@ button:hover {
 		local('Baskerville'),
 		url('./assets/fonts/Baskerville\ Regular.woff2') format('woff2');
 }
+
+.siteBox {
+	display: flex;
+	background-color: var(--blue);
+	justify-content: center;
+	flex-grow: 1;
+	border-color: 'divider';
+	border-bottom: 1;
+}
+
+.tabBox {
+	top: 0;
+}

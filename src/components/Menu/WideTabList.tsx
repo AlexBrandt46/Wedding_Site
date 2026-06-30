@@ -11,12 +11,7 @@ export default function WideTabList(props: TabListProps) {
 	};
 
 	return (
-		<Box
-			sx={{
-				top: 0,
-				justifyContent: 'center',
-			}}
-		>
+		<Box className="tabBox">
 			<TabContext value={props.tab}>
 				<TabBox handleChange={handleChange} />
 				<TabPanels setTab={props.setTab} uid={props.uid} />
