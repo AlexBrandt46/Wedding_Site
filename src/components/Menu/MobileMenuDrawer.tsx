@@ -65,9 +65,7 @@ export default function MobileTabList(props: TabListProps) {
 		props.setTab(newValue);
 		setOpen(false);
 		setToolbarHeader(
-			MENU_TABS[newValue as keyof typeof MENU_TABS] !== 'Home'
-				? MENU_TABS[newValue as keyof typeof MENU_TABS]
-				: 'A & B'
+			MENU_TABS[newValue as keyof typeof MENU_TABS] !== 'Home' ? MENU_TABS[newValue as keyof typeof MENU_TABS] : 'A & B'
 		);
 	};
 
