@@ -75,3 +75,9 @@ export default defineConfig([
  },
 ]);
 ```
+
+# TO-DO:
+
+1. Build the app with the latest packages
+2. Update `packageManager` to `pnpm@11.17.0`
+3. See if `roboto` package can be removed
