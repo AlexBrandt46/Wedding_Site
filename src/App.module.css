@@ -10,6 +10,27 @@ p {
 	width: 95vw;
 }
 
+.appShell {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
+.footer {
+	align-items: center;
+	border-top: 1px solid rgba(0, 0, 0, 0.12);
+	display: flex;
+	justify-content: center;
+	gap: 0.75rem;
+	padding: 0.75rem 1rem;
+	width: 100%;
+}
+
+.footerVersion {
+	color: rgba(0, 0, 0, 0.6);
+	font-size: 0.875rem;
+}
+
 /* Mobile */
 @media (max-width: 515px) {
 	.pagePanel {

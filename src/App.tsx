@@ -5,6 +5,8 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import React from 'react';
 import MobileTabList from './components/Menu/MobileMenuDrawer';
 import WideTabList from './components/Menu/WideTabList';
+import Footer from './components/Footer';
+import styles from './App.module.css';
 
 function App() {
 	const minHeaderMatch = useMediaQuery('(min-width:516px)');
@@ -70,16 +72,19 @@ function App() {
 
 	return (
 		<ThemeProvider theme={theme}>
-			<Box
-				sx={{
-					top: 0,
-					justifyContent: 'center',
-				}}
-			>
-				{minHeaderMatch && <WideTabList tab={tab} uid={uid} setTab={setTab} />}
-				{!minHeaderMatch && (
-					<MobileTabList tab={tab} uid={uid} setTab={setTab} />
-				)}
+			<Box className={styles.appShell}>
+				<Box
+					sx={{
+						top: 0,
+						justifyContent: 'center',
+					}}
+				>
+					{minHeaderMatch && <WideTabList tab={tab} uid={uid} setTab={setTab} />}
+					{!minHeaderMatch && (
+						<MobileTabList tab={tab} uid={uid} setTab={setTab} />
+					)}
+				</Box>
+				<Footer />
 			</Box>
 		</ThemeProvider>
 	);
