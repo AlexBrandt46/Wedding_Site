@@ -3,7 +3,7 @@
 	"private": true,
 	"version": "1.0.3",
 	"type": "module",
-	"packageManager": "pnpm@11.9.0",
+	"packageManager": "pnpm@11.18.0",
 	"scripts": {
 		"dev": "vite",
 		"optimize-images": "node scripts/optimize-images.mjs",
