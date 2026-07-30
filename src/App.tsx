@@ -80,9 +80,7 @@ function App() {
 					}}
 				>
 					{minHeaderMatch && <WideTabList tab={tab} uid={uid} setTab={setTab} />}
-					{!minHeaderMatch && (
-						<MobileTabList tab={tab} uid={uid} setTab={setTab} />
-					)}
+					{!minHeaderMatch && <MobileTabList tab={tab} uid={uid} setTab={setTab} />}
 				</Box>
 				<Footer />
 			</Box>
