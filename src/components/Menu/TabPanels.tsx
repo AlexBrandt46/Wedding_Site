@@ -5,6 +5,7 @@ import OurStory from '../OurStory/OurStory';
 import RsvpForm from '../Rsvp/RsvpForm';
 import type { TabListProps } from '../../types/Props';
 import styles from '../../App.module.css';
+import Footer from '../Footer';
 
 // TODO: Refactor this to loop over the MENU_ITEMS and render the appropriate component based on the value. This will make it easier to add/remove menu items in the future without having to modify this component.
 export default function TabPanels({ setTab, uid }: Partial<TabListProps>) {
@@ -23,6 +24,7 @@ export default function TabPanels({ setTab, uid }: Partial<TabListProps>) {
 				<RsvpForm setTab={setTab} uid={uid} />
 			</TabPanel>
 			<TabPanel value="5" className={styles.pagePanel} />
+			<Footer />
 		</>
 	);
 }

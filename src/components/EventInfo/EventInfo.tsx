@@ -8,6 +8,11 @@ import Divider from '@mui/material/Divider';
 import styles from './EventInfo.module.css';
 import PageHeader from '../PageHeader';
 
+const dividerSx = {
+	margin: '1rem 0',
+	width: '100%',
+};
+
 export default function EventInfo() {
 	return (
 		<Paper
@@ -29,13 +34,13 @@ export default function EventInfo() {
 				<Typography variant="h6">RSVP Deadline</Typography>
 				<RsvpAlert alertMessage="Please RSVP by August 10th, 2026." showPastDeadlineMessage={true} />
 			</Box>
-			<Divider sx={{ margin: '1rem 0' }} />
-			<Box className={styles.eventScheduleItem} sx={{ flexDirection: 'column' }}>
+			<Divider sx={dividerSx} />
+			<Box className="eventScheduleItem" sx={{ flexDirection: 'column' }}>
 				<Typography variant="h6">When</Typography>
 				<Typography variant="body1">September 12th, 4:30 PM EST</Typography>
 			</Box>
-			<Divider sx={{ margin: '1rem 0' }} />
-			<Box className={styles.eventScheduleItem} sx={{ flexDirection: 'column' }}>
+			<Divider sx={dividerSx} />
+			<Box className="eventScheduleItem" sx={{ flexDirection: 'column' }}>
 				<Typography variant="h6">Where</Typography>
 				<Typography variant="body1" gutterBottom>
 					<b>The Lilley Mansion Bed and Breakfast</b>
@@ -59,7 +64,7 @@ export default function EventInfo() {
 					title="Grand Haven Map"
 				/>
 			</Box>
-			<Divider sx={{ margin: '1rem 0' }} />
+			<Divider sx={dividerSx} />
 			<Box className={styles.eventScheduleItem} sx={{ flexDirection: 'column' }}>
 				<Typography variant="h6">Dress Code</Typography>
 				<h3>Ladies</h3>
@@ -73,7 +78,7 @@ export default function EventInfo() {
 					like!
 				</Typography>
 			</Box>
-			<Divider sx={{ margin: '1rem 0' }} />
+			<Divider sx={dividerSx} />
 			<Box className={styles.eventScheduleItem} sx={{ flexDirection: 'column' }}>
 				<Typography variant="h6">Schedule of Events</Typography>
 				<List>
@@ -127,7 +132,7 @@ export default function EventInfo() {
 					</ListItem>
 				</List>
 			</Box>
-			<Divider sx={{ margin: '1rem 0' }} />
+			<Divider sx={dividerSx} />
 			<Box className={styles.eventScheduleItem} sx={{ flexDirection: 'column' }}>
 				<Typography variant="h6">Overnight Accommodations</Typography>
 				<Typography variant="body1" gutterBottom>
@@ -176,8 +181,8 @@ export default function EventInfo() {
 					</Box>
 				</Box>
 			</Box>
-			<Divider sx={{ margin: '1rem 0' }} />
-			<Box className={styles.eventScheduleItem} sx={{ flexDirection: 'column' }}>
+			<Divider sx={dividerSx} />
+			<Box className="eventScheduleItem" sx={{ flexDirection: 'column' }}>
 				<Typography variant="h6">Age Limit</Typography>
 				<Typography variant="body1">
 					The event is strictly <b>18+</b> by request of the venue to keep the day stress-free and fun for everyone.
