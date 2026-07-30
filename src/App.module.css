@@ -10,10 +10,39 @@ p {
 	width: 95vw;
 }
 
+.appShell {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
+.footer {
+	align-items: center;
+	display: flex;
+	justify-content: center;
+	gap: 0.75rem;
+	padding: 0.75rem 1rem;
+}
+
+.footerVersion {
+	color: rgba(0, 0, 0, 0.6);
+	font-size: 0.875rem;
+}
+
+.appBox {
+	top: 0;
+	justify-content: center;
+}
+
 /* Mobile */
 @media (max-width: 515px) {
 	.pagePanel {
 		top: 56px;
 		position: relative;
+	}
+
+	.footer {
+		position: relative;
+    top: 56px;
 	}
 }

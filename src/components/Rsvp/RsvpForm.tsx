@@ -213,9 +213,10 @@ export default function RsvpForm({ setTab: setTab, uid }: RsvpFormProps) {
 				>
 					<RadioGroup
 						name="attending-radio-buttons-group"
-						sx={{ justifyContent: 'center', flexDirection: 'row' }}
+						sx={{ justifyContent: 'center' }}
 						value={attending}
 						onChange={handleAttendingChange}
+						row={true}
 					>
 						<FormControlLabel
 							value="attending"

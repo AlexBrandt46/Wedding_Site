@@ -8,6 +8,15 @@ import Divider from '@mui/material/Divider';
 import styles from './EventInfo.module.css';
 import PageHeader from '../PageHeader';
 
+const dividerSx = {
+	margin: '1rem 0',
+	width: '100%',
+};
+
+const columnBoxSx = {
+	flexDirection: 'column',
+};
+
 export default function EventInfo() {
 	return (
 		<Paper
@@ -20,22 +29,17 @@ export default function EventInfo() {
 			className="pagePaper"
 		>
 			<PageHeader title="Event RSVP" />
-			<Box
-				className={styles.eventScheduleItem}
-				sx={{
-					flexDirection: 'column',
-				}}
-			>
+			<Box className="eventScheduleItem" sx={columnBoxSx}>
 				<Typography variant="h6">RSVP Deadline</Typography>
 				<RsvpAlert alertMessage="Please RSVP by August 10th, 2026." showPastDeadlineMessage={true} />
 			</Box>
-			<Divider sx={{ margin: '1rem 0' }} />
-			<Box className={styles.eventScheduleItem} sx={{ flexDirection: 'column' }}>
+			<Divider sx={dividerSx} />
+			<Box className="eventScheduleItem" sx={columnBoxSx}>
 				<Typography variant="h6">When</Typography>
 				<Typography variant="body1">September 12th, 4:30 PM EST</Typography>
 			</Box>
-			<Divider sx={{ margin: '1rem 0' }} />
-			<Box className={styles.eventScheduleItem} sx={{ flexDirection: 'column' }}>
+			<Divider sx={dividerSx} />
+			<Box className="eventScheduleItem" sx={columnBoxSx}>
 				<Typography variant="h6">Where</Typography>
 				<Typography variant="body1" gutterBottom>
 					<b>The Lilley Mansion Bed and Breakfast</b>
@@ -59,8 +63,8 @@ export default function EventInfo() {
 					title="Grand Haven Map"
 				/>
 			</Box>
-			<Divider sx={{ margin: '1rem 0' }} />
-			<Box className={styles.eventScheduleItem} sx={{ flexDirection: 'column' }}>
+			<Divider sx={dividerSx} />
+			<Box className={styles.eventScheduleItem} sx={columnBoxSx}>
 				<Typography variant="h6">Dress Code</Typography>
 				<h3>Ladies</h3>
 				<Typography variant="body1" sx={{ width: '50%' }}>
@@ -73,62 +77,62 @@ export default function EventInfo() {
 					like!
 				</Typography>
 			</Box>
-			<Divider sx={{ margin: '1rem 0' }} />
-			<Box className={styles.eventScheduleItem} sx={{ flexDirection: 'column' }}>
+			<Divider sx={dividerSx} />
+			<Box className={styles.eventScheduleItem} sx={columnBoxSx}>
 				<Typography variant="h6">Schedule of Events</Typography>
 				<List>
 					<ListItem>
 						<Box className={styles.eventScheduleItem}>
-							<Typography variant="body1" className={styles.eventScheduleTime}>
-								4:00 PM:
+							<Typography variant="body1" className="eventScheduleTime">
+								4:00 PM:&nbsp;
 							</Typography>
 							<Typography variant="body1">Pre-Ceremony Greeting Time</Typography>
 						</Box>
 					</ListItem>
 					<ListItem>
 						<Box className={styles.eventScheduleItem}>
-							<Typography variant="body1" className={styles.eventScheduleTime}>
-								4:30 PM:
+							<Typography variant="body1" className="eventScheduleTime">
+								4:30 PM:&nbsp;
 							</Typography>
 							<Typography variant="body1">Ceremony</Typography>
 						</Box>
 					</ListItem>
 					<ListItem>
 						<Box className={styles.eventScheduleItem}>
-							<Typography variant="body1" className={styles.eventScheduleTime}>
-								5:30 PM:
+							<Typography variant="body1" className="eventScheduleTime">
+								5:30 PM:&nbsp;
 							</Typography>
 							<Typography variant="body1">Cocktail Hour</Typography>
 						</Box>
 					</ListItem>
 					<ListItem>
 						<Box className={styles.eventScheduleItem}>
-							<Typography variant="body1" className={styles.eventScheduleTime}>
-								6:30 PM:
+							<Typography variant="body1" className="eventScheduleTime">
+								6:30 PM:&nbsp;
 							</Typography>
 							<Typography variant="body1">Reception</Typography>
 						</Box>
 					</ListItem>
 					<ListItem>
 						<Box className={styles.eventScheduleItem}>
-							<Typography variant="body1" className={styles.eventScheduleTime}>
-								9:00 PM:
+							<Typography variant="body1" className="eventScheduleTime">
+								9:00 PM:&nbsp;
 							</Typography>
 							<Typography variant="body1">End of Reception</Typography>
 						</Box>
 					</ListItem>
 					<ListItem>
 						<Box className={styles.eventScheduleItem}>
-							<Typography variant="body1" className={styles.eventScheduleTime}>
-								9:30 PM:
+							<Typography variant="body1" className="eventScheduleTime">
+								9:30 PM:&nbsp;
 							</Typography>
 							<Typography variant="body1">Post-Wedding Celebrations in Spring Lake and Grand Haven</Typography>
 						</Box>
 					</ListItem>
 				</List>
 			</Box>
-			<Divider sx={{ margin: '1rem 0' }} />
-			<Box className={styles.eventScheduleItem} sx={{ flexDirection: 'column' }}>
+			<Divider sx={dividerSx} />
+			<Box className={styles.eventScheduleItem} sx={columnBoxSx}>
 				<Typography variant="h6">Overnight Accommodations</Typography>
 				<Typography variant="body1" gutterBottom>
 					For those wishing to stay nearby, there are several hotels and numerous AirBnbs, bed and breakfasts, and VRBOs
@@ -176,8 +180,8 @@ export default function EventInfo() {
 					</Box>
 				</Box>
 			</Box>
-			<Divider sx={{ margin: '1rem 0' }} />
-			<Box className={styles.eventScheduleItem} sx={{ flexDirection: 'column' }}>
+			<Divider sx={dividerSx} />
+			<Box className={styles.eventScheduleItem} sx={columnBoxSx}>
 				<Typography variant="h6">Age Limit</Typography>
 				<Typography variant="body1">
 					The event is strictly <b>18+</b> by request of the venue to keep the day stress-free and fun for everyone.
