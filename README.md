@@ -1,8 +1,16 @@
 # React + TypeScript + Vite
 
-[![Made with Supabase](https://supabase.com/badge-made-with-supabase.svg)](https://supabase.com)
+**CI/CD:**
 
 [![Deployed with GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-222222?style=for-the-badge&logo=github%20Pages&logoColor=white)](https://alexbrandt46.github.io/Wedding_Site)
+
+**Frontend:**
+
+[![MUI](https://img.shields.io/badge/Material%20UI-007FFF?style=for-the-badge&logo=mui&logoColor=white)](https://mui.com)
+
+**Backend:**
+
+[![Made with Supabase](https://supabase.com/badge-made-with-supabase.svg)](https://supabase.com)
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
