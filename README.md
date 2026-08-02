@@ -4,13 +4,25 @@
 
 [![Deployed with GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-222222?style=for-the-badge&logo=github%20Pages&logoColor=white)](https://alexbrandt46.github.io/Wedding_Site)
 
+[![YAML](https://img.shields.io/badge/yaml-%23ffffff.svg?style=for-the-badge&logo=yaml&logoColor=151515)](https://yaml.org/)
+
 **Frontend:**
 
+![CSS](https://img.shields.io/badge/css-%23663399.svg?style=for-the-badge&logo=css&logoColor=white)
+
 [![MUI](https://img.shields.io/badge/Material%20UI-007FFF?style=for-the-badge&logo=mui&logoColor=white)](https://mui.com)
+
+[![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+
+[![Vite](https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E)](https://vite.dev/)
 
 **Backend:**
 
 [![Made with Supabase](https://supabase.com/badge-made-with-supabase.svg)](https://supabase.com)
+
+**Languages:**
+
+![Markdown](https://img.shields.io/badge/markdown-%23000000.svg?style=for-the-badge&logo=markdown&logoColor=white)
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
@@ -87,3 +99,4 @@ export default defineConfig([
 # TO-DO
 
 1. See if `roboto` package can be removed
+2. 
