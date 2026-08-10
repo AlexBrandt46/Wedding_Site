@@ -20,7 +20,7 @@
         "@mui/icons-material": "^9.2.0",
         "@mui/lab": "latest",
         "@mui/material": "^9.2.0",
-        "@supabase/supabase-js": "^2.112.0",
+        "@supabase/supabase-js": "^2.112.2",
         "dotenv": "^17.4.2",
         "duration-fns": "^3.0.2",
         "eslint-plugin-react-hooks": "^7.1.1",
