@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.1.15 - 2026-08-12
+
+### Misc
+
+- Update dependencies in [`package.json`](./package.json)
+
 ## 1.1.3 - 2026-08-05
 
 ### Features
