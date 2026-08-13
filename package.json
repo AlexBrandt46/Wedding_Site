@@ -1,7 +1,7 @@
 {
     "name": "wedding_site",
     "private": true,
-    "version": "1.1.4",
+    "version": "1.1.5",
     "type": "module",
     "packageManager": "pnpm@11.21.0",
     "scripts": {
@@ -20,7 +20,7 @@
         "@mui/icons-material": "^9.3.1",
         "@mui/lab": "latest",
         "@mui/material": "^9.3.1",
-        "@supabase/supabase-js": "^2.112.2",
+        "@supabase/supabase-js": "^2.112.3",
         "dotenv": "^17.4.2",
         "duration-fns": "^3.0.2",
         "eslint-plugin-react-hooks": "^7.1.1",
