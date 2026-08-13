@@ -1,7 +1,7 @@
 {
     "name": "wedding_site",
     "private": true,
-    "version": "1.1.6",
+    "version": "1.1.7",
     "type": "module",
     "packageManager": "pnpm@11.21.0",
     "scripts": {
@@ -37,7 +37,7 @@
         "@vitest/coverage-v8": "^4.1.10",
         "eslint": "^10.8.1",
         "eslint-plugin-react": "^7.37.5",
-        "eslint-plugin-react-refresh": "^0.5.3",
+        "eslint-plugin-react-refresh": "^0.5.4",
         "globals": "^17.9.0",
         "sharp": "^0.35.3",
         "typescript": "~7.0.2",
