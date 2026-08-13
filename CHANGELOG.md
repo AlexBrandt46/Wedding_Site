@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 1.2.1 - 2026-08-12
+## 1.2.2 - 2026-08-12
 
 ### Features
 
@@ -13,6 +13,7 @@
 ### Bug Fixes
 
 - Fixed two of same RSVP warning being shown when deadline was past
+- Added **Event Info** heading back to Event Info page rather than **Event RSVP**
 
 ## 1.1.3 - 2026-08-05
 

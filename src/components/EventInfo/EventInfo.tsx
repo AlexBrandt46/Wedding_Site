@@ -28,7 +28,7 @@ export default function EventInfo() {
 			}}
 			className="pagePaper"
 		>
-			<PageHeader title="Event RSVP" />
+			<PageHeader title="Event Info" />
 			<Box className="eventScheduleItem" sx={columnBoxSx}>
 				<Typography variant="h6">RSVP Deadline</Typography>
 				<RsvpAlert alertMessage="Please RSVP by August 10th, 2026." showPastDeadlineMessage={true} />
