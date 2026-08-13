@@ -19,3 +19,4 @@ minimumReleaseAgeExclude:
   - '@supabase/supabase-js@2.110.9'
   - '@types/node@26.1.2'
   - zustand@5.0.15
+  - globals@17.11.0
