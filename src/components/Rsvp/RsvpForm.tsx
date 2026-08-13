@@ -16,7 +16,6 @@ import { createGuest } from '../../types/Guest';
 import { getGuest, sendEmail, supabase } from '../../utils/supabaseUtil';
 import RsvpAlert from '../EventInfo/RsvpAlert';
 import RsvpConfirmation from './RsvpConfirmation';
-import { isDatePastRsvpDeadline } from '../../utils/dateUtil';
 import { isNotEmptyString, isValidEmail, isValidName, isFormIncomplete } from '../../utils/rsvpValidationUtil';
 import type { ResendTemplateVar } from '../../types/ResendTemplateVar';
 import styles from './RsvpForm.module.css';
@@ -52,8 +51,6 @@ export default function RsvpForm({ setTab: setTab, uid }: RsvpFormProps) {
 	const [dietDescriptionError, setDietDescriptionError] = useState('');
 	const [isRsvpSubmitted, setIsRsvpSubmitted] = useState(false);
 	const [addressError, setAddressError] = useState('');
-
-	const pastRsvpDeadline: boolean = isDatePastRsvpDeadline(new Date());
 
 	const formIncomplete = isFormIncomplete(
 		attending,
@@ -339,7 +336,7 @@ export default function RsvpForm({ setTab: setTab, uid }: RsvpFormProps) {
 							variant="contained"
 							sx={{ marginTop: '1vh' }}
 							onClick={submitRsvp}
-							disabled={pastRsvpDeadline || formIncomplete}
+							disabled={formIncomplete}
 						>
 							Submit RSVP
 						</Button>

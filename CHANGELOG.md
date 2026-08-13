@@ -1,10 +1,18 @@
 # CHANGELOG
 
-## 1.1.15 - 2026-08-12
+## 1.2.1 - 2026-08-12
+
+### Features
+
+- Re-enabled RSVP form after deadline with a slightly different warning message
 
 ### Misc
 
 - Update dependencies in [`package.json`](./package.json)
+
+### Bug Fixes
+
+- Fixed two of same RSVP warning being shown when deadline was past
 
 ## 1.1.3 - 2026-08-05
 

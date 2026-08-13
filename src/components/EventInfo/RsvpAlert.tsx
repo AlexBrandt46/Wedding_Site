@@ -16,8 +16,9 @@ export default function RsvpAlert(props: RsvpAlertProps) {
 		<WarningAmberOutlinedIcon htmlColor="var(--dark-salmon)" />
 	);
 
-	if (isPastDeadline) {
-		alertMessage = 'The RSVP deadline has passed. Please contact us directly if you would like to attend.';
+	if (isPastDeadline && props.showPastDeadlineMessage) {
+		alertMessage =
+			'The RSVP deadline has passed. You may still submit your RSVP, but please contact us to let us know if you are attending.';
 		alertSeverity = 'error';
 		alertColor = 'error';
 	}
