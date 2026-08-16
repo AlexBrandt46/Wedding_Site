@@ -7,6 +7,7 @@ import RsvpAlert from './RsvpAlert';
 import Divider from '@mui/material/Divider';
 import styles from './EventInfo.module.css';
 import PageHeader from '../PageHeader';
+import Link from '@mui/material/Link';
 
 const dividerSx = {
 	margin: '1rem 0',
@@ -86,7 +87,7 @@ export default function EventInfo() {
 							<Typography variant="body1" className="eventScheduleTime">
 								4:00 PM:&nbsp;
 							</Typography>
-							<Typography variant="body1">Pre-Ceremony Greeting Time</Typography>
+							<Typography variant="body1">Guest Arrival</Typography>
 						</Box>
 					</ListItem>
 					<ListItem>
@@ -100,15 +101,7 @@ export default function EventInfo() {
 					<ListItem>
 						<Box className={styles.eventScheduleItem}>
 							<Typography variant="body1" className="eventScheduleTime">
-								5:30 PM:&nbsp;
-							</Typography>
-							<Typography variant="body1">Cocktail Hour</Typography>
-						</Box>
-					</ListItem>
-					<ListItem>
-						<Box className={styles.eventScheduleItem}>
-							<Typography variant="body1" className="eventScheduleTime">
-								6:30 PM:&nbsp;
+								5:00 PM:&nbsp;
 							</Typography>
 							<Typography variant="body1">Reception</Typography>
 						</Box>
@@ -124,9 +117,14 @@ export default function EventInfo() {
 					<ListItem>
 						<Box className={styles.eventScheduleItem}>
 							<Typography variant="body1" className="eventScheduleTime">
-								9:30 PM:&nbsp;
+								9:15 PM:&nbsp;
 							</Typography>
-							<Typography variant="body1">Post-Wedding Celebrations in Spring Lake and Grand Haven</Typography>
+							<Typography variant="body1">
+								Post-Wedding Celebrations at&nbsp;
+								<Link href="https://maps.app.goo.gl/XFv82ehY6vKGBnAbA" target="_blank" rel="noopener noreferrer">
+									Stan's Bar
+								</Link>
+							</Typography>
 						</Box>
 					</ListItem>
 				</List>
