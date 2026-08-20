@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.3.0 - 2026-08-15
+
+### Features
+
+- Added more up to date info regarding schedule
+
 ## 1.2.2 - 2026-08-12
 
 ### Features
