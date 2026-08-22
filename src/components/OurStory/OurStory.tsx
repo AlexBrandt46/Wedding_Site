@@ -17,8 +17,8 @@ export default function OurStory() {
 			.then((updatedStoryEntries) => {
 				updateStoryEntries(updatedStoryEntries);
 			})
-			.catch((error) => {
-				console.error('Unable to load story entries:', error);
+			.catch((_e) => {
+				console.error('Unable to load story entries');
 			});
 	}, []);
 

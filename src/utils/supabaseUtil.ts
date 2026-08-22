@@ -15,11 +15,11 @@ const emailRoutes = {
 export async function getGuest(uid: string): Promise<Guest> {
 	const { data, error } = await supabase
 		.from('guests')
-		.select('*')
+		.select()
 		.eq('uid', uid);
 
 	if (error) {
-		console.error('Error fetching guest entries:', error);
+		console.error('Error fetching guest entries');
 		return createGuest();
 	}
 
@@ -34,11 +34,11 @@ export async function getGuest(uid: string): Promise<Guest> {
 export async function getStoryEntries(): Promise<StoryEntry[]> {
 	const { data, error } = await supabase
 		.from('story_entries')
-		.select('*')
+		.select()
 		.order('id', { ascending: true });
 
 	if (error) {
-		console.error('Error fetching story entries:', error);
+		console.error('Error fetching story entries');
 		return [];
 	}
 
@@ -58,6 +58,6 @@ export async function sendEmail(
 	});
 
 	if (error) {
-		console.error('Error sending email:', error);
+		console.error('Error sending email');
 	}
 }
