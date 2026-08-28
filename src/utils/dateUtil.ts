@@ -9,8 +9,6 @@ const MINS_TO_HRS = SECS_TO_MINS * 60;
 const HRS_TO_DAYS = MINS_TO_HRS * 24;
 const DAYS_TO_WKS = HRS_TO_DAYS * 7;
 
-// TODO: Create unit tests for this function to verify that it is calculating the correct time difference
-// TODO: Clean this up
 export function getTimeDifference(date: Date, weddingDate: Date): Duration {
 	if (date >= weddingDate) {
 		return {
@@ -25,40 +23,24 @@ export function getTimeDifference(date: Date, weddingDate: Date): Duration {
 		};
 	}
 
-	// Calculate difference in milliseconds
-	const diffInMs = weddingDate.getTime() - date.getTime();
-
-	// Convert to days (1000ms * 60s * 60m * 24h)
-	const actualDaysUntil = diffInMs / HRS_TO_DAYS; // There is a remainder with this
-	const wholeDaysUntil = Math.floor(actualDaysUntil);
-	const actualWeeksUntil = Math.floor(diffInMs / DAYS_TO_WKS);
-
-	const actualHoursUntil = diffInMs / MINS_TO_HRS;
-	const wholeHoursUntil = Math.floor(actualHoursUntil);
-
-	const actualMinutesUntil = diffInMs / SECS_TO_MINS;
-	const wholeMinutesUntil = Math.floor(actualMinutesUntil);
-	const minutes = wholeMinutesUntil % 60;
-
-	const secUntil = diffInMs / MS_TO_SECS;
-	const wholeSecUntil = Math.ceil(secUntil);
-	let secs = wholeSecUntil % 60;
-
-	if (secs === 60) {
-		secs = 0;
-	}
-
-	const days = wholeDaysUntil % 7;
-	const hours = wholeHoursUntil % 24;
+	let remainingMs = weddingDate.getTime() - date.getTime();
+	const weeks = Math.floor(remainingMs / DAYS_TO_WKS);
+	remainingMs %= DAYS_TO_WKS;
+	const days = Math.floor(remainingMs / HRS_TO_DAYS);
+	remainingMs %= HRS_TO_DAYS;
+	const hours = Math.floor(remainingMs / MINS_TO_HRS);
+	remainingMs %= MINS_TO_HRS;
+	const minutes = Math.floor(remainingMs / SECS_TO_MINS);
+	const seconds = Math.ceil((remainingMs % SECS_TO_MINS) / MS_TO_SECS) % 60;
 
 	return {
 		years: -1,
 		months: -1,
-		weeks: actualWeeksUntil,
+		weeks,
 		days: days,
 		hours: hours,
 		minutes: minutes,
-		seconds: secs,
+		seconds,
 		milliseconds: -1,
 	};
 }

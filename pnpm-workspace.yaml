@@ -1,16 +1,13 @@
-allowBuilds:
-  cwebp-bin: set this to true or false
-  mozjpeg: set this to true or false
 minimumReleaseAgeExclude:
   - '@types/react@19.2.17'
-  - '@mui/core-downloads-tracker@9.1.1'
-  - '@mui/material@9.1.1'
-  - '@mui/private-theming@9.1.1'
-  - '@mui/styled-engine@9.1.1'
-  - '@mui/system@9.1.1'
-  - '@mui/types@9.1.1'
-  - '@mui/utils@9.1.1'
-  - '@mui/icons-material@9.1.1'
+  - '@mui/core-downloads-tracker@9.4.0'
+  - '@mui/material@9.4.0'
+  - '@mui/private-theming@9.4.0'
+  - '@mui/styled-engine@9.4.0'
+  - '@mui/system@9.4.0'
+  - '@mui/types@9.4.0'
+  - '@mui/utils@9.4.0'
+  - '@mui/icons-material@9.4.0'
   - '@supabase/auth-js@2.110.9'
   - '@supabase/functions-js@2.110.9'
   - '@supabase/postgrest-js@2.110.9'

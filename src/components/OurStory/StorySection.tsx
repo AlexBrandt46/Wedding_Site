@@ -27,7 +27,7 @@ export default function StorySection({
 			</Typography>
 
 			{images && (
-				<ImageList sx={{ width: '100%', height: 'auto' }} cols={1} rowHeight="auto">
+				<ImageList cols={1} rowHeight="auto">
 					{images.map((src, index) => {
 						const paths = getImagePath(src);
 						return (
