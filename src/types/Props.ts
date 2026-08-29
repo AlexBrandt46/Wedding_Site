@@ -19,3 +19,8 @@ export interface RsvpConfirmationProps {
 	onBackToForm: () => void;
 	onBackToHome: () => void;
 }
+
+export interface EventScheduleItemProps {
+  time: string;
+  event: string;
+}

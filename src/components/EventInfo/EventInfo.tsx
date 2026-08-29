@@ -8,6 +8,8 @@ import Divider from '@mui/material/Divider';
 import styles from './EventInfo.module.css';
 import PageHeader from '../PageHeader';
 import Link from '@mui/material/Link';
+import type { EventScheduleItemProps } from '../../types/Props';
+import EventScheduleItem from './EventScheduleItem';
 
 const dividerSx = {
 	margin: '1rem 0',
@@ -17,6 +19,14 @@ const dividerSx = {
 const columnBoxSx = {
 	flexDirection: 'column',
 };
+
+const scheduleItems: EventScheduleItemProps[] = [
+	{ time: '4:00 PM', event: 'Guest Arrival' },
+	{ time: '4:30 PM', event: 'Ceremony' },
+	{ time: '5:00 PM', event: 'Reception' },
+	{ time: '9:00 PM', event: 'End of Reception' },
+	// { time: '9:15 PM', event: "Celebrations at Stan's Bar" },
+];
 
 export default function EventInfo() {
 	return (
@@ -82,41 +92,12 @@ export default function EventInfo() {
 			<Box className={styles.eventScheduleItem} sx={columnBoxSx}>
 				<Typography variant="h6">Schedule of Events</Typography>
 				<List>
-					<ListItem>
+					{scheduleItems.map((scheduleItem, index) => (
+						<EventScheduleItem key={index} time={scheduleItem.time} event={scheduleItem.event} />
+					))}
+					{/* <ListItem>
 						<Box className={styles.eventScheduleItem}>
-							<Typography variant="body1" className="eventScheduleTime">
-								4:00 PM:&nbsp;
-							</Typography>
-							<Typography variant="body1">Guest Arrival</Typography>
-						</Box>
-					</ListItem>
-					<ListItem>
-						<Box className={styles.eventScheduleItem}>
-							<Typography variant="body1" className="eventScheduleTime">
-								4:30 PM:&nbsp;
-							</Typography>
-							<Typography variant="body1">Ceremony</Typography>
-						</Box>
-					</ListItem>
-					<ListItem>
-						<Box className={styles.eventScheduleItem}>
-							<Typography variant="body1" className="eventScheduleTime">
-								5:00 PM:&nbsp;
-							</Typography>
-							<Typography variant="body1">Reception</Typography>
-						</Box>
-					</ListItem>
-					<ListItem>
-						<Box className={styles.eventScheduleItem}>
-							<Typography variant="body1" className="eventScheduleTime">
-								9:00 PM:&nbsp;
-							</Typography>
-							<Typography variant="body1">End of Reception</Typography>
-						</Box>
-					</ListItem>
-					<ListItem>
-						<Box className={styles.eventScheduleItem}>
-							<Typography variant="body1" className="eventScheduleTime">
+							<Typography variant="body1" className={styles.eventScheduleTime}>
 								9:15 PM:&nbsp;
 							</Typography>
 							<Typography variant="body1">
@@ -126,7 +107,7 @@ export default function EventInfo() {
 								</Link>
 							</Typography>
 						</Box>
-					</ListItem>
+					</ListItem> */}
 				</List>
 			</Box>
 			<Divider sx={dividerSx} />
