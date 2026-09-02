@@ -1,9 +1,9 @@
 {
     "name": "wedding_site",
     "private": true,
-    "version": "1.3.5",
+    "version": "1.3.6",
     "type": "module",
-    "packageManager": "pnpm@11.24.0",
+    "packageManager": "pnpm@11.25.0",
     "scripts": {
         "dev": "vite",
         "optimize-images": "node scripts/optimize-images.mjs",
@@ -30,7 +30,7 @@
     },
     "devDependencies": {
         "@eslint/js": "^10.0.1",
-        "@types/node": "^26.4.0",
+        "@types/node": "^26.4.1",
         "@types/react": "^19.2.18",
         "@types/react-dom": "^19.2.5",
         "@vitejs/plugin-react": "^6.1.1",
@@ -38,10 +38,10 @@
         "eslint": "^10.9.1",
         "eslint-plugin-react": "^7.37.5",
         "eslint-plugin-react-refresh": "^0.5.5",
-        "globals": "^17.11.0",
+        "globals": "^17.12.0",
         "sharp": "^0.35.4",
         "typescript": "^7.0.2",
-        "typescript-eslint": "^8.68.0",
+        "typescript-eslint": "^8.69.0",
         "vite": "^8.2.2",
         "vitest": "^4.1.11"
     }
