@@ -1,6 +1,8 @@
 .pagePaper {
   padding: 1rem;
   min-height: 1vh;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Desktop */

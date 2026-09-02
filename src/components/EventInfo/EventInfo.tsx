@@ -8,6 +8,7 @@ import Divider from '@mui/material/Divider';
 import styles from './EventInfo.module.css';
 import PageHeader from '../PageHeader';
 import Link from '@mui/material/Link';
+import pagePaperStyles from '../Main/Main.module.css';
 
 const dividerSx = {
 	margin: '1rem 0',
@@ -23,24 +24,21 @@ export default function EventInfo() {
 		<Paper
 			sx={{
 				textAlign: 'center',
-				display: 'flex',
-				flexDirection: 'column',
-				padding: '1rem',
 			}}
-			className="pagePaper"
+			className={pagePaperStyles.pagePaper}
 		>
 			<PageHeader title="Event Info" />
-			<Box className="eventScheduleItem" sx={columnBoxSx}>
+			<Box className={styles.eventScheduleItem} sx={columnBoxSx}>
 				<Typography variant="h6">RSVP Deadline</Typography>
 				<RsvpAlert alertMessage="Please RSVP by August 10th, 2026." showPastDeadlineMessage={true} />
 			</Box>
 			<Divider sx={dividerSx} />
-			<Box className="eventScheduleItem" sx={columnBoxSx}>
+			<Box className={styles.eventScheduleItem} sx={columnBoxSx}>
 				<Typography variant="h6">When</Typography>
 				<Typography variant="body1">September 12th, 4:30 PM EST</Typography>
 			</Box>
 			<Divider sx={dividerSx} />
-			<Box className="eventScheduleItem" sx={columnBoxSx}>
+			<Box className={styles.eventScheduleItem} sx={columnBoxSx}>
 				<Typography variant="h6">Where</Typography>
 				<Typography variant="body1" gutterBottom>
 					<b>The Lilley Mansion Bed and Breakfast</b>

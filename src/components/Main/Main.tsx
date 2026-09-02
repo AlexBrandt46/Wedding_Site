@@ -6,7 +6,7 @@ import proposalBanner from '../../assets/images/proposal_banner.jpg';
 
 export default function Main() {
 	return (
-		<Paper className={styles.pagePaper} sx={{ display: 'flex', flexDirection: 'column' }}>
+		<Paper className={styles.pagePaper}>
 			<CountDownTimer />
 			<div style={{ display: 'block' }}>
 				<img className={styles.usImage} style={{ marginTop: '1rem', borderRadius: '4px' }} src={proposalBanner} />

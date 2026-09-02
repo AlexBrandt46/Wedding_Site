@@ -20,6 +20,7 @@ import { isNotEmptyString, isValidEmail, isValidName, isFormIncomplete } from '.
 import type { ResendTemplateVar } from '../../types/ResendTemplateVar';
 import styles from './RsvpForm.module.css';
 import PageHeader from '../PageHeader';
+import pagePaperStyles from '../Main/Main.module.css';
 
 const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
 	<Tooltip {...props} classes={{ popper: className }} />
@@ -176,12 +177,9 @@ export default function RsvpForm({ setTab: setTab, uid }: RsvpFormProps) {
 			<Paper
 				sx={{
 					textAlign: 'center',
-					display: 'flex',
-					flexDirection: 'column',
-					padding: '1rem',
 					alignItems: 'center',
 				}}
-				className="pagePaper"
+				className={pagePaperStyles.pagePaper}
 			>
 				<Snackbar
 					open={showErrorAlert}

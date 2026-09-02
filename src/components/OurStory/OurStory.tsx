@@ -4,6 +4,7 @@ import StorySection from './StorySection';
 import { getStoryEntries } from '../../utils/supabaseUtil';
 import PageHeader from '../PageHeader';
 import { useStoryStore } from '../../stores';
+import pagePaperStyles from '../Main/Main.module.css';
 
 export default function OurStory() {
 	const storyEntries = useStoryStore((state) => state.storyEntries);
@@ -26,11 +27,8 @@ export default function OurStory() {
 		<Paper
 			sx={{
 				textAlign: 'center',
-				display: 'flex',
-				flexDirection: 'column',
-				padding: '1rem',
 			}}
-			className="pagePaper"
+			className={pagePaperStyles.pagePaper}
 		>
 			<PageHeader title="Our Love Story" />
 			{Array.from(storyEntries.values()).map((entry) => (
