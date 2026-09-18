@@ -99,4 +99,4 @@ export default defineConfig([
 # TO-DO
 
 1. See if `roboto` package can be removed
-2. 
+2. Refer to the [Vitest Coverage Report](https://github.com/marketplace/actions/vitest-coverage-report) GitHub Action to generate a coverage report as part of a PR
